@@ -75,17 +75,33 @@ ApplicationWindow {
                 Item {
                     SplitView.preferredWidth: dbView.width / 3
 
-                    Rectangle {
+                    ListModel {
+                        id: albumsModel
+                        ListElement {value: "album 1"}
+                        ListElement {value: "album 2"}
+                        ListElement {value: "album 3"}
+                    }
+
+                    ListView {
                         anchors.fill: parent
-                        color: "#00ff00"
+                        model: albumsModel
+                        delegate: dlg
                     }
                 }
 
                 Item {
 
-                    Rectangle {
+                    ListModel {
+                        id: songsModel
+                        ListElement {value: "song 1"}
+                        ListElement {value: "song 2"}
+                        ListElement {value: "song 3"}
+                    }
+
+                    ListView {
                         anchors.fill: parent
-                        color: "#0000ff"
+                        model: songsModel
+                        delegate: dlg
                     }
 
                 }
@@ -93,10 +109,20 @@ ApplicationWindow {
         }
 
         Item {
-            Rectangle {
-                anchors.fill: parent
-                color: "#aa0cdd"
+
+            ListModel {
+                id: playlistModel
+                ListElement {value: "song 1"}
+                ListElement {value: "song 2"}
+                ListElement {value: "song 3"}
             }
+
+            ListView {
+                anchors.fill: parent
+                model: playlistModel
+                delegate: dlg
+            }
+
         }
     }
 }

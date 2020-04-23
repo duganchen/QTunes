@@ -4,6 +4,5 @@
         <file>Connection.qml</file>
         <file>ConnectionForm.qml</file>
         <file>images/bars-solid.svg</file>
-        <file>ListsDelegate.qml</file>
     </qresource>
 </RCC>
