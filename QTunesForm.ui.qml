@@ -6,27 +6,27 @@ Item {
     width: 400
     height: 400
 
-    GridLayout {
-        id: connectionLayout
-        anchors.rightMargin: 5
-        anchors.leftMargin: 5
-        anchors.bottomMargin: 5
-        anchors.topMargin: 5
-        rows: 2
-        columns: 2
-        columnSpacing: 5
-        rowSpacing: 5
+    ColumnLayout {
+        id: connectionColumn
         anchors.fill: parent
 
         Label {
             id: hostLabel
             text: qsTr("Host")
+            Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
         }
+
 
         TextField {
             id: hostText
             text: qsTr("localhost")
             Layout.fillWidth: true
+        }
+
+
+        Label {
+            id: hostValidationLabel
+            text: qsTr("Host validation message")
         }
 
         Label {
@@ -39,14 +39,36 @@ Item {
             text: qsTr("6600")
             Layout.fillWidth: true
         }
+
+
+        Label {
+            id: portValidationLabel
+            text: qsTr("Port validation message")
+        }
+
+
+        RowLayout {
+            id: connectRow
+            width: 100
+            height: 100
+
+
+            Button {
+                id: connectButton
+                text: qsTr("Connect")
+            }
+
+            BusyIndicator {
+                id: connectBusy
+            }
+        }
+
+
     }
-
 }
-
 
 /*##^##
 Designer {
-    D{i:1;anchors_height:100;anchors_width:100;anchors_x:126;anchors_y:23}
+    D{i:1;anchors_height:100;anchors_width:100;anchors_x:5;anchors_y:136}
 }
 ##^##*/
-
