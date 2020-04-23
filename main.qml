@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.12
 
 ApplicationWindow {
     visible: true
-    width: 640
+    width: 800
     height: 480
     title: qsTr("QTunes")
 
@@ -57,6 +57,22 @@ ApplicationWindow {
                 hoverEnabled: true
                 ToolTip.text: qsTr("Next")
                 ToolTip.visible: hovered
+            }
+
+            CheckBox {
+                id: randomCheck
+                text: "Random"
+            }
+
+
+            CheckBox {
+                id: repeatCheck
+                text: "Repeat"
+            }
+
+            CheckBox {
+                id: singleCheck
+                text: "Single"
             }
         }
     }
