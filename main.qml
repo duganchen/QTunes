@@ -9,8 +9,7 @@ Window {
 
     QTunes {
         id: qTunes
-        x: 55
-        y: 26
+        anchors.fill: parent
     }
 }
 

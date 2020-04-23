@@ -1,53 +1,52 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.13
+import QtQuick.Layouts 1.3
 
 Item {
     width: 400
     height: 400
 
-    Grid {
-        id: grid
-        anchors.fill: parent
+    GridLayout {
+        id: connectionLayout
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
+        anchors.bottomMargin: 5
+        anchors.topMargin: 5
         rows: 2
         columns: 2
+        columnSpacing: 5
+        rowSpacing: 5
+        anchors.fill: parent
+
+        Label {
+            id: hostLabel
+            text: qsTr("Host")
+        }
+
+        TextField {
+            id: hostText
+            text: qsTr("localhost")
+            Layout.fillWidth: true
+        }
+
+        Label {
+            id: portLabel
+            text: qsTr("Port")
+        }
+
+        TextField {
+            id: portText
+            text: qsTr("6600")
+            Layout.fillWidth: true
+        }
     }
 
-    Label {
-        id: hostLabel
-        x: 69
-        y: 74
-        text: qsTr("Host")
-    }
-
-    TextField {
-        id: hostText
-        x: 138
-        y: 63
-        width: 254
-        height: 40
-        text: qsTr("localhost")
-    }
-
-    Label {
-        id: portLabel
-        x: 69
-        y: 129
-        text: qsTr("Port")
-    }
-
-    TextField {
-        id: portText
-        x: 138
-        y: 118
-        width: 254
-        height: 40
-        text: qsTr("6600")
-    }
 }
+
 
 /*##^##
 Designer {
-    D{i:1;anchors_height:400;anchors_width:400;anchors_x:0;anchors_y:0}D{i:5;anchors_x:138;anchors_y:118}
+    D{i:1;anchors_height:100;anchors_width:100;anchors_x:126;anchors_y:23}
 }
 ##^##*/
 
