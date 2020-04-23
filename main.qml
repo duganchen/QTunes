@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.13
-
+import QtQuick.Layouts 1.12
 
 ApplicationWindow {
     visible: true
@@ -9,20 +9,55 @@ ApplicationWindow {
     title: qsTr("QTunes")
 
     header: ToolBar {
-        ToolButton {
-            id: connectDrawerButton
-            icon.source: "images/bars-solid.svg"
-            onClicked: {
-                if (connectDrawer.visible) {
-                    connectDrawer.close()
-                } else {
-                    connectDrawer.open()
+        RowLayout {
+            ToolButton {
+                id: connectDrawerButton
+                icon.source: "images/bars-solid.svg"
+                onClicked: {
+                    if (connectDrawer.visible) {
+                        connectDrawer.close()
+                    } else {
+                        connectDrawer.open()
+                    }
                 }
+
+                hoverEnabled: true
+                ToolTip.text: qsTr("Connection settings")
+                ToolTip.visible: hovered
             }
 
-            hoverEnabled: true
-            ToolTip.text: qsTr("Connection settings")
-            ToolTip.visible: hovered
+            ToolButton {
+                id: playButton
+                icon.source: "images/play-solid.svg"
+                hoverEnabled: true
+                ToolTip.text: qsTr("Play")
+                ToolTip.visible: hovered
+            }
+
+            ToolButton {
+                id: pauseButton
+                icon.source: "images/pause-solid.svg"
+                hoverEnabled: true
+                ToolTip.text: qsTr("Pause")
+                ToolTip.visible: hovered
+            }
+
+
+            ToolButton {
+                id: prevButton
+                icon.source: "images/step-backward-solid.svg"
+                hoverEnabled: true
+                ToolTip.text: qsTr("Previous")
+                ToolTip.visible: hovered
+            }
+
+            ToolButton {
+                id: nextButton
+                icon.source: "images/step-forward-solid.svg"
+                hoverEnabled: true
+                ToolTip.text: qsTr("Next")
+                ToolTip.visible: hovered
+            }
         }
     }
 

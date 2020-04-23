@@ -4,5 +4,9 @@
         <file>Connection.qml</file>
         <file>ConnectionForm.qml</file>
         <file>images/bars-solid.svg</file>
+        <file>images/play-solid.svg</file>
+        <file>images/pause-solid.svg</file>
+        <file>images/step-backward-solid.svg</file>
+        <file>images/step-forward-solid.svg</file>
     </qresource>
 </RCC>
