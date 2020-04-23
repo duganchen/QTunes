@@ -16,11 +16,7 @@ find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(LIBMPDCLIENT REQUIRED IMPORTED_TARGET libmpdclient)
 
-if(ANDROID)
-    add_library(qtunes SHARED main.cpp qml.qrc)
-else()
-    add_executable(qtunes main.cpp qml.qrc)
-endif()
+add_executable(qtunes qtunes.cpp qml.qrc)
 
 target_include_directories(qtunes PRIVATE ${LIBMPDCLIENT_INCLUDE_DIRS})
 
