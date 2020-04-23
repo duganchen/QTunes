@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.13
 
+
 ApplicationWindow {
     visible: true
     width: 640
@@ -42,6 +43,8 @@ ApplicationWindow {
         Item {
             SplitView.preferredHeight: listsView.height / 2
 
+
+
             SplitView {
                 anchors.fill: parent
                 id: dbView
@@ -49,9 +52,19 @@ ApplicationWindow {
                 Item {
                     SplitView.preferredWidth: dbView.width / 3
 
-                    Rectangle {
+                    ListView {
                         anchors.fill: parent
-                        color: "#ff0000"
+                        model: ["artist1", "artist2", "artist3"]
+                        delegate: Rectangle {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            height: txt.contentHeight
+
+                            Text {
+                                id: txt
+                                text: modelData
+                            }
+                        }
                     }
                 }
 
