@@ -26,6 +26,7 @@ ApplicationWindow {
         }
     }
 
+
     Drawer {
         y: header.height
         id: connectDrawer
@@ -43,8 +44,6 @@ ApplicationWindow {
         Item {
             SplitView.preferredHeight: listsView.height / 2
 
-
-
             SplitView {
                 anchors.fill: parent
                 id: dbView
@@ -52,19 +51,24 @@ ApplicationWindow {
                 Item {
                     SplitView.preferredWidth: dbView.width / 3
 
+                    ListModel {
+                        id: artistsModel
+                        ListElement {value: "artist 1"}
+                        ListElement {value: "artist 2"}
+                        ListElement {value: "artist 3"}
+                    }
+
+                    Component {
+                        id: dlg
+                        Text {
+                            text: value
+                        }
+                    }
+
                     ListView {
                         anchors.fill: parent
-                        model: ["artist1", "artist2", "artist3"]
-                        delegate: Rectangle {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            height: txt.contentHeight
-
-                            Text {
-                                id: txt
-                                text: modelData
-                            }
-                        }
+                        model: artistsModel
+                        delegate: dlg
                     }
                 }
 
