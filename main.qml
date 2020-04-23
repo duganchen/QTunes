@@ -18,13 +18,17 @@ ApplicationWindow {
                     connectDrawer.open()
                 }
             }
+
+            hoverEnabled: true
+            ToolTip.text: qsTr("Connection settings")
+            ToolTip.visible: hovered
         }
     }
 
     Drawer {
         y: header.height
         id: connectDrawer
-        QTunes {
+        Connection {
             id: qTunes
             anchors.fill: parent
         }

@@ -1,8 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>QTunes.qml</file>
-        <file>QTunesForm.ui.qml</file>
+        <file>Connection.qml</file>
+        <file>ConnectionForm.qml</file>
         <file>images/bars-solid.svg</file>
     </qresource>
 </RCC>
