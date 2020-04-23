@@ -9,70 +9,81 @@ ApplicationWindow {
     title: qsTr("QTunes")
 
     header: ToolBar {
-        RowLayout {
-            ToolButton {
-                id: connectDrawerButton
-                icon.source: "images/bars-solid.svg"
-                onClicked: {
-                    if (connectDrawer.visible) {
-                        connectDrawer.close()
-                    } else {
-                        connectDrawer.open()
+
+        ColumnLayout {
+            anchors.fill: parent
+
+            RowLayout {
+                Layout.fillWidth: true
+                ToolButton {
+                    id: connectDrawerButton
+                    icon.source: "images/bars-solid.svg"
+                    onClicked: {
+                        if (connectDrawer.visible) {
+                            connectDrawer.close()
+                        } else {
+                            connectDrawer.open()
+                        }
                     }
+
+                    hoverEnabled: true
+                    ToolTip.text: qsTr("Connection settings")
+                    ToolTip.visible: hovered
                 }
 
-                hoverEnabled: true
-                ToolTip.text: qsTr("Connection settings")
-                ToolTip.visible: hovered
+                ToolButton {
+                    id: playButton
+                    icon.source: "images/play-solid.svg"
+                    hoverEnabled: true
+                    ToolTip.text: qsTr("Play")
+                    ToolTip.visible: hovered
+                }
+
+                ToolButton {
+                    id: pauseButton
+                    icon.source: "images/pause-solid.svg"
+                    hoverEnabled: true
+                    ToolTip.text: qsTr("Pause")
+                    ToolTip.visible: hovered
+                }
+
+
+                ToolButton {
+                    id: prevButton
+                    icon.source: "images/step-backward-solid.svg"
+                    hoverEnabled: true
+                    ToolTip.text: qsTr("Previous")
+                    ToolTip.visible: hovered
+                }
+
+                ToolButton {
+                    id: nextButton
+                    icon.source: "images/step-forward-solid.svg"
+                    hoverEnabled: true
+                    ToolTip.text: qsTr("Next")
+                    ToolTip.visible: hovered
+                }
+
+                CheckBox {
+                    id: randomCheck
+                    text: "Random"
+                }
+
+
+                CheckBox {
+                    id: repeatCheck
+                    text: "Repeat"
+                }
+
+                CheckBox {
+                    id: singleCheck
+                    text: "Single"
+                }
             }
 
-            ToolButton {
-                id: playButton
-                icon.source: "images/play-solid.svg"
-                hoverEnabled: true
-                ToolTip.text: qsTr("Play")
-                ToolTip.visible: hovered
-            }
-
-            ToolButton {
-                id: pauseButton
-                icon.source: "images/pause-solid.svg"
-                hoverEnabled: true
-                ToolTip.text: qsTr("Pause")
-                ToolTip.visible: hovered
-            }
-
-
-            ToolButton {
-                id: prevButton
-                icon.source: "images/step-backward-solid.svg"
-                hoverEnabled: true
-                ToolTip.text: qsTr("Previous")
-                ToolTip.visible: hovered
-            }
-
-            ToolButton {
-                id: nextButton
-                icon.source: "images/step-forward-solid.svg"
-                hoverEnabled: true
-                ToolTip.text: qsTr("Next")
-                ToolTip.visible: hovered
-            }
-
-            CheckBox {
-                id: randomCheck
-                text: "Random"
-            }
-
-
-            CheckBox {
-                id: repeatCheck
-                text: "Repeat"
-            }
-
-            CheckBox {
-                id: singleCheck
-                text: "Single"
+            Slider {
+                id: songSlider
+                Layout.fillWidth: true
             }
         }
     }
