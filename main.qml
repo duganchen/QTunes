@@ -7,6 +7,14 @@ ApplicationWindow {
     height: 480
     title: qsTr("QTunes")
 
+    header: ToolBar {
+        ToolButton {
+            id: connectDrawerButton
+            icon.source: "images/bars-solid.svg"
+        }
+    }
+
+
     QTunes {
         id: qTunes
         anchors.fill: parent
