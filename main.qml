@@ -33,6 +33,55 @@ ApplicationWindow {
             anchors.fill: parent
         }
     }
+
+    SplitView {
+        orientation: "Vertical"
+        id: listsView
+        anchors.fill: parent
+
+        Item {
+            SplitView.preferredHeight: listsView.height / 2
+
+            SplitView {
+                anchors.fill: parent
+                id: dbView
+
+                Item {
+                    SplitView.preferredWidth: dbView.width / 3
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "#ff0000"
+                    }
+                }
+
+                Item {
+                    SplitView.preferredWidth: dbView.width / 3
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "#00ff00"
+                    }
+                }
+
+                Item {
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "#0000ff"
+                    }
+
+                }
+            }
+        }
+
+        Item {
+            Rectangle {
+                anchors.fill: parent
+                color: "#aa0cdd"
+            }
+        }
+    }
 }
 
 /*##^##
