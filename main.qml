@@ -11,13 +11,23 @@ ApplicationWindow {
         ToolButton {
             id: connectDrawerButton
             icon.source: "images/bars-solid.svg"
+            onClicked: {
+                if (connectDrawer.visible) {
+                    connectDrawer.close()
+                } else {
+                    connectDrawer.open()
+                }
+            }
         }
     }
 
-
-    QTunes {
-        id: qTunes
-        anchors.fill: parent
+    Drawer {
+        y: header.height
+        id: connectDrawer
+        QTunes {
+            id: qTunes
+            anchors.fill: parent
+        }
     }
 }
 
