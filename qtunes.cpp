@@ -2,15 +2,19 @@
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 
+#include <QDebug>
+
 int main(int argc, char *argv[])
 {
-    QQuickStyle::setStyle("Fusion");
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
 
+    QQuickStyle::setStyle("Universal");
+
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/qtunes.qml"));
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
