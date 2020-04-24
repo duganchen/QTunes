@@ -7,5 +7,12 @@
         <file>images/skip_previous-24px.svg</file>
         <file>images/stop-24px.svg</file>
         <file>images/pause-24px.svg</file>
+        <file>images/save-24px.svg</file>
+        <file>images/delete-24px.svg</file>
+        <file>images/shuffle-24px.svg</file>
+        <file>images/clear-24px.svg</file>
+        <file>images/add-24px.svg</file>
+        <file>images/remove-24px.svg</file>
+        <file>images/edit-24px.svg</file>
     </qresource>
 </RCC>

@@ -235,6 +235,21 @@ ApplicationWindow {
                         anchors.fill: parent
                         model: songsModel
                         delegate: dlg
+
+                        header: ToolBar {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            RowLayout {
+                                ToolButton {
+                                    id: addButton
+                                    icon.source: "images/add-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Adds the selected song to the playlist")
+                                    ToolTip.visible: hovered
+                                }
+                            }
+                        }
+
                     }
 
                 }
@@ -258,6 +273,30 @@ ApplicationWindow {
                         anchors.fill: parent
                         model: playlistsModel
                         delegate: dlg
+
+                        header: ToolBar {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+
+                            RowLayout {
+                                ToolButton {
+                                    id: rmButton
+                                    icon.source: "images/delete-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Remove selected playlist")
+                                    ToolTip.visible: hovered
+                                }
+
+                                ToolButton {
+                                    id: renameButton
+                                    icon.source: "images/edit-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Rename selected playlist")
+                                    ToolTip.visible: hovered
+                                }
+                            }
+                        }
+
                     }
 
                 }
@@ -274,6 +313,41 @@ ApplicationWindow {
                         anchors.fill: parent
                         model: playlistModel
                         delegate: dlg
+
+                        header: ToolBar {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            RowLayout {
+                                ToolButton {
+                                    id: saveButton
+                                    icon.source: "images/save-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Save queue")
+                                    ToolTip.visible: hovered
+                                }
+                                ToolButton {
+                                    id: shuffleButton
+                                    icon.source: "images/shuffle-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Shuffle queue")
+                                    ToolTip.visible: hovered
+                                }
+                                ToolButton {
+                                    id: clearButton
+                                    icon.source: "images/clear-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Clears the queue")
+                                    ToolTip.visible: hovered
+                                }
+                                ToolButton {
+                                    id: removeButton
+                                    icon.source: "images/remove-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Deletes the selected song from the playlist")
+                                    ToolTip.visible: hovered
+                                }
+                            }
+                        }
                     }
                 }
             }
