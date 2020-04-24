@@ -3,6 +3,7 @@ import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.12
 
 ApplicationWindow {
+    id: window
     visible: true
     width: 800
     height: 480
@@ -92,9 +93,70 @@ ApplicationWindow {
     Drawer {
         y: header.height
         id: connectDrawer
-        Connection {
-            id: qTunes
-            anchors.fill: parent
+        height: window.height - header.height
+        width: window.width / 3
+        Rectangle {
+            anchors.fill: parent;
+
+            ColumnLayout {
+                id: connectionColumn
+                anchors.fill: parent
+                opacity: 1
+
+                Label {
+                    id: hostLabel
+                    text: qsTr("Host")
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
+                }
+
+
+                TextField {
+                    id: hostText
+                    text: qsTr("localhost")
+                    Layout.fillWidth: true
+                }
+
+
+                Label {
+                    id: hostValidationLabel
+                    text: qsTr("Host validation message")
+                }
+
+                Label {
+                    id: portLabel
+                    text: qsTr("Port")
+                }
+
+                TextField {
+                    id: portText
+                    text: qsTr("6600")
+                    Layout.fillWidth: true
+                }
+
+
+                Label {
+                    id: portValidationLabel
+                    text: qsTr("Port validation message")
+                }
+
+
+                RowLayout {
+                    id: connectRow
+                    width: 100
+                    height: 100
+
+
+                    Button {
+                        id: connectButton
+                        text: qsTr("Connect")
+                    }
+
+                    BusyIndicator {
+                        id: connectBusy
+                    }
+                }
+
+            }
         }
     }
 
