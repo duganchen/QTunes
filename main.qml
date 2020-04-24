@@ -243,18 +243,42 @@ ApplicationWindow {
 
         Item {
 
-            ListModel {
-                id: playlistModel
-                ListElement {value: "song 1"}
-                ListElement {value: "song 2"}
-                ListElement {value: "song 3"}
+            SplitView {
+                anchors.fill: parent
+                Item {
+                    SplitView.preferredWidth: dbView.width / 3
+                    ListModel {
+                        id: playlistsModel
+                        ListElement {value: "playlist 1"}
+                        ListElement {value: "playlist 2"}
+                        ListElement {value: "playlist 3"}
+                    }
+
+                    ListView {
+                        anchors.fill: parent
+                        model: playlistsModel
+                        delegate: dlg
+                    }
+
+                }
+
+                Item {
+                    ListModel {
+                        id: playlistModel
+                        ListElement {value: "song 1"}
+                        ListElement {value: "song 2"}
+                        ListElement {value: "song 3"}
+                    }
+
+                    ListView {
+                        anchors.fill: parent
+                        model: playlistModel
+                        delegate: dlg
+                    }
+                }
             }
 
-            ListView {
-                anchors.fill: parent
-                model: playlistModel
-                delegate: dlg
-            }
+
 
         }
     }
