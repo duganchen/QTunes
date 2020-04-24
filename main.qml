@@ -18,7 +18,7 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 ToolButton {
                     id: connectDrawerButton
-                    icon.source: "images/bars-solid.svg"
+                    icon.source: "images/menu-24px.svg"
                     onClicked: {
                         if (connectDrawer.visible) {
                             connectDrawer.close()
@@ -34,7 +34,7 @@ ApplicationWindow {
 
                 ToolButton {
                     id: playButton
-                    icon.source: "images/play-solid.svg"
+                    icon.source: "images/play_arrow-24px.svg"
                     hoverEnabled: true
                     ToolTip.text: qsTr("Play")
                     ToolTip.visible: hovered
@@ -42,16 +42,25 @@ ApplicationWindow {
 
                 ToolButton {
                     id: pauseButton
-                    icon.source: "images/pause-solid.svg"
+                    icon.source: "images/pause-24px.svg"
                     hoverEnabled: true
                     ToolTip.text: qsTr("Pause")
                     ToolTip.visible: hovered
                 }
 
+                ToolButton {
+                    id: stopButton
+                    icon.source: "images/stop-24px.svg"
+                    hoverEnabled: true
+                    ToolTip.text: qsTr("Stop")
+                    ToolTip.visible: hovered
+                }
+
+
 
                 ToolButton {
                     id: prevButton
-                    icon.source: "images/step-backward-solid.svg"
+                    icon.source: "images/skip_previous-24px.svg"
                     hoverEnabled: true
                     ToolTip.text: qsTr("Previous")
                     ToolTip.visible: hovered
@@ -59,7 +68,7 @@ ApplicationWindow {
 
                 ToolButton {
                     id: nextButton
-                    icon.source: "images/step-forward-solid.svg"
+                    icon.source: "images/skip_next-24px.svg"
                     hoverEnabled: true
                     ToolTip.text: qsTr("Next")
                     ToolTip.visible: hovered

@@ -1,10 +1,11 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>images/bars-solid.svg</file>
-        <file>images/play-solid.svg</file>
-        <file>images/pause-solid.svg</file>
-        <file>images/step-backward-solid.svg</file>
-        <file>images/step-forward-solid.svg</file>
+        <file>images/menu-24px.svg</file>
+        <file>images/play_arrow-24px.svg</file>
+        <file>images/skip_next-24px.svg</file>
+        <file>images/skip_previous-24px.svg</file>
+        <file>images/stop-24px.svg</file>
+        <file>images/pause-24px.svg</file>
     </qresource>
 </RCC>
