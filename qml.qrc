@@ -14,5 +14,6 @@
         <file>images/add-24px.svg</file>
         <file>images/remove-24px.svg</file>
         <file>images/edit-24px.svg</file>
+        <file>ListDelegate.qml</file>
     </qresource>
 </RCC>

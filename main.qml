@@ -9,6 +9,10 @@ ApplicationWindow {
     height: 480
     title: qsTr("QTunes")
 
+    ListDelegate {
+        id: dlg
+    }
+
     header: ToolBar {
 
         ColumnLayout {
@@ -189,13 +193,6 @@ ApplicationWindow {
                         ListElement {value: "artist 1"}
                         ListElement {value: "artist 2"}
                         ListElement {value: "artist 3"}
-                    }
-
-                    Component {
-                        id: dlg
-                        Text {
-                            text: value
-                        }
                     }
 
                     ListView {
