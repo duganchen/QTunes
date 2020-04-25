@@ -198,6 +198,26 @@ ApplicationWindow {
                         anchors.fill: parent
                         model: ArtistModel {}
                         delegate: dlg
+
+                        header: ToolBar {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            RowLayout {
+                                ComboBox {
+                                    model: ListModel {
+                                        ListElement {
+                                            text: "artist"
+                                        }
+                                        ListElement {
+                                            text: "albumartist"
+                                        }
+                                        ListElement {
+                                            text: "composer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -209,6 +229,11 @@ ApplicationWindow {
 
                         model: AlbumModel {}
                         delegate: dlg
+
+                        header: ToolBar {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                        }
                     }
                 }
 
