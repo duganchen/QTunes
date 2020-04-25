@@ -4,12 +4,17 @@
 
 #include <QDebug>
 
+#include "listmodel.h"
+
 int main(int argc, char *argv[])
 {
+    qDebug() << "Ya";
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+
+    qmlRegisterType<MPDModel>("MPD", 1, 0, "MPDModel");
 
     QQuickStyle::setStyle("Universal");
 

@@ -2,6 +2,8 @@ import QtQuick 2.12
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.12
 
+import MPD 1.0
+
 ApplicationWindow {
     id: window
     visible: true
@@ -188,16 +190,17 @@ ApplicationWindow {
                 Item {
                     SplitView.preferredWidth: dbView.width / 3
 
-                    ListModel {
-                        id: artistsModel
-                        ListElement {value: "artist 1"}
-                        ListElement {value: "artist 2"}
-                        ListElement {value: "artist 3"}
-                    }
+//                    ListModel {
+//                        id: artistsModel
+//                        ListElement {value: "artist 1"}
+//                        ListElement {value: "artist 2"}
+//                        ListElement {value: "artist 3"}
+//                    }
 
                     ListView {
                         anchors.fill: parent
-                        model: artistsModel
+//                        model: artistsModel
+                        model: MPDModel {}
                         delegate: dlg
                     }
                 }
