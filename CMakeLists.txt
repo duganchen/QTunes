@@ -16,7 +16,16 @@ find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(LIBMPDCLIENT REQUIRED IMPORTED_TARGET libmpdclient)
 
-add_executable(qtunes listmodel.cpp qtunes.cpp qml.qrc)
+add_executable(
+    qtunes
+    albummodel.cpp
+    artistmodel.cpp
+    playlistmodel.cpp
+    qtunes.cpp
+    queuemodel.cpp
+    songmodel.cpp
+    qml.qrc
+)
 
 target_include_directories(qtunes PRIVATE ${LIBMPDCLIENT_INCLUDE_DIRS})
 

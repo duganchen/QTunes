@@ -2,19 +2,23 @@
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 
-#include <QDebug>
-
-#include "listmodel.h"
+#include "artistmodel.h"
+#include "albummodel.h"
+#include "songmodel.h"
+#include "playlistmodel.h"
+#include "queuemodel.h"
 
 int main(int argc, char *argv[])
 {
-    qDebug() << "Ya";
-
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<MPDModel>("MPD", 1, 0, "MPDModel");
+    qmlRegisterType<ArtistModel>("Artist", 1, 0, "ArtistModel");
+    qmlRegisterType<AlbumModel>("Album", 1, 0, "AlbumModel");
+    qmlRegisterType<SongModel>("Song", 1, 0, "SongModel");
+    qmlRegisterType<PlaylistModel>("Playlist", 1, 0, "PlaylistModel");
+    qmlRegisterType<QueueModel>("Queue", 1, 0, "QueueModel");
 
     QQuickStyle::setStyle("Universal");
 

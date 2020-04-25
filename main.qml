@@ -2,7 +2,11 @@ import QtQuick 2.12
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.12
 
-import MPD 1.0
+import Artist 1.0
+import Album 1.0
+import Song 1.0
+import Playlist 1.0
+import Queue 1.0
 
 ApplicationWindow {
     id: window
@@ -190,17 +194,9 @@ ApplicationWindow {
                 Item {
                     SplitView.preferredWidth: dbView.width / 3
 
-//                    ListModel {
-//                        id: artistsModel
-//                        ListElement {value: "artist 1"}
-//                        ListElement {value: "artist 2"}
-//                        ListElement {value: "artist 3"}
-//                    }
-
                     ListView {
                         anchors.fill: parent
-//                        model: artistsModel
-                        model: MPDModel {}
+                        model: ArtistModel {}
                         delegate: dlg
                     }
                 }
@@ -208,32 +204,18 @@ ApplicationWindow {
                 Item {
                     SplitView.preferredWidth: dbView.width / 3
 
-                    ListModel {
-                        id: albumsModel
-                        ListElement {value: "album 1"}
-                        ListElement {value: "album 2"}
-                        ListElement {value: "album 3"}
-                    }
-
                     ListView {
                         anchors.fill: parent
-                        model: albumsModel
+
+                        model: AlbumModel {}
                         delegate: dlg
                     }
                 }
 
                 Item {
-
-                    ListModel {
-                        id: songsModel
-                        ListElement {value: "song 1"}
-                        ListElement {value: "song 2"}
-                        ListElement {value: "song 3"}
-                    }
-
                     ListView {
                         anchors.fill: parent
-                        model: songsModel
+                        model: SongModel {}
                         delegate: dlg
 
                         header: ToolBar {
@@ -249,9 +231,7 @@ ApplicationWindow {
                                 }
                             }
                         }
-
                     }
-
                 }
             }
         }
@@ -262,16 +242,10 @@ ApplicationWindow {
                 anchors.fill: parent
                 Item {
                     SplitView.preferredWidth: dbView.width / 3
-                    ListModel {
-                        id: playlistsModel
-                        ListElement {value: "playlist 1"}
-                        ListElement {value: "playlist 2"}
-                        ListElement {value: "playlist 3"}
-                    }
 
                     ListView {
                         anchors.fill: parent
-                        model: playlistsModel
+                        model: PlaylistModel {}
                         delegate: dlg
 
                         header: ToolBar {
@@ -302,16 +276,10 @@ ApplicationWindow {
                 }
 
                 Item {
-                    ListModel {
-                        id: playlistModel
-                        ListElement {value: "song 1"}
-                        ListElement {value: "song 2"}
-                        ListElement {value: "song 3"}
-                    }
 
                     ListView {
                         anchors.fill: parent
-                        model: playlistModel
+                        model: QueueModel {}
                         delegate: dlg
 
                         header: ToolBar {
@@ -351,9 +319,6 @@ ApplicationWindow {
                     }
                 }
             }
-
-
-
         }
     }
 }

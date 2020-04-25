@@ -1,16 +1,11 @@
-#include "listmodel.h"
+#include "artistmodel.h"
 
-MPDModel::MPDModel(QObject *parent)
+ArtistModel::ArtistModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    QVector<QString> m_items {
-        "artist 1",
-        "artist 2",
-        "artist 3"
-    };
 }
 
-int MPDModel::rowCount(const QModelIndex &parent) const
+int ArtistModel::rowCount(const QModelIndex &parent) const
 {
     // For list models only the root node (an invalid parent) should return the list's size. For all
     // other (valid) parents, rowCount() should return 0 so that it does not become a tree model.
@@ -20,7 +15,7 @@ int MPDModel::rowCount(const QModelIndex &parent) const
     return 3;
 }
 
-QVariant MPDModel::data(const QModelIndex &index, int role) const
+QVariant ArtistModel::data(const QModelIndex &index, int role) const
 {
     Q_UNUSED(role);
 
@@ -32,11 +27,11 @@ QVariant MPDModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    return "artist " + QString::number(index.row() + 1);
+    return "artist__ " + QString::number(index.row() + 1);
 }
 
 
-QHash<int, QByteArray> MPDModel::roleNames() const
+QHash<int, QByteArray> ArtistModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[Qt::DisplayRole] = "value";
