@@ -127,6 +127,11 @@ ApplicationWindow {
                 TextField {
                     id: hostText
                     text: qsTr("localhost")
+                    validator: RegExpValidator {
+                        // https://stackoverflow.com/a/106223/240515
+                        regExp: /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/
+                    }
+
                     Layout.fillWidth: true
                 }
 
@@ -145,6 +150,11 @@ ApplicationWindow {
                     id: portText
                     text: qsTr("6600")
                     Layout.fillWidth: true
+                    validator: IntValidator {
+                        bottom: 1024
+                        top: 65535
+
+                    }
                 }
 
 
@@ -348,7 +358,8 @@ ApplicationWindow {
                                     id: bubbleDownButton
                                     icon.source: "images/arrow_downward-24px.svg"
                                     hoverEnabled: true
-                                    ToolTip.text: qsTr("Move the selected song down in the down in the queue.")
+                                    ToolTip.text: qsTr("Move the selected song down in the down in the queue
+.")
                                     ToolTip.visible: hovered
                                 }
                             }
