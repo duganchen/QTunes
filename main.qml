@@ -143,12 +143,12 @@ ApplicationWindow {
 
                 Label {
                     id: portLabel
-                    text: controller.port
+                    text: qsTr("Port")
                 }
 
                 TextField {
                     id: portText
-                    text: qsTr("6600")
+                    text: controller.port
                     Layout.fillWidth: true
                     validator: IntValidator {
                         bottom: 1024
