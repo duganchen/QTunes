@@ -336,6 +336,21 @@ ApplicationWindow {
                                     ToolTip.text: qsTr("Deletes the selected song from the playlist")
                                     ToolTip.visible: hovered
                                 }
+
+                                ToolButton {
+                                    id: bubbleUpButton
+                                    icon.source: "images/arrow_upward-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Move the selected song up in the queue.")
+                                    ToolTip.visible: hovered
+                                }
+                                ToolButton {
+                                    id: bubbleDownButton
+                                    icon.source: "images/arrow_downward-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Move the selected song down in the down in the queue.")
+                                    ToolTip.visible: hovered
+                                }
                             }
                         }
                     }
