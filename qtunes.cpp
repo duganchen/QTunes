@@ -1,12 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QQuickStyle>
 
-#include "artistmodel.h"
-#include "albummodel.h"
-#include "songmodel.h"
-#include "playlistmodel.h"
-#include "queuemodel.h"
+#include "panemodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,15 +11,36 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<ArtistModel>("Artist", 1, 0, "ArtistModel");
-    qmlRegisterType<AlbumModel>("Album", 1, 0, "AlbumModel");
-    qmlRegisterType<SongModel>("Song", 1, 0, "SongModel");
-    qmlRegisterType<PlaylistModel>("Playlist", 1, 0, "PlaylistModel");
-    qmlRegisterType<QueueModel>("Queue", 1, 0, "QueueModel");
-
     QQuickStyle::setStyle("Universal");
 
     QQmlApplicationEngine engine;
+
+    QVector<QString> artists {"artist 1", "artist 2", "artist 3"};
+    PaneModel artistModel;
+    artistModel.setList(artists);
+    engine.rootContext()->setContextProperty("artistModel", &artistModel);
+
+    QVector<QString> albums {"album 1", "album 2", "album 3"};
+    PaneModel albumModel;
+    albumModel.setList(albums);
+    engine.rootContext()->setContextProperty("albumModel", &albumModel);
+
+    QVector<QString> songs {"song 1", "song 2", "song 3"};
+    PaneModel songModel;
+    songModel.setList(songs);
+    engine.rootContext()->setContextProperty("songModel", &songModel);
+
+    QVector<QString> playlists {"playlist 1", "playlist 2", "playlist 3"};
+    PaneModel playlistModel;
+    playlistModel.setList(playlists);
+    engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
+
+    QVector<QString> queue {"queued song 1", "queued song 2", "queued song 3"};
+    PaneModel queueModel;
+    queueModel.setList(queue);
+    engine.rootContext()->setContextProperty("queueModel", &queueModel);
+
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

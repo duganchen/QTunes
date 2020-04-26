@@ -2,11 +2,6 @@ import QtQuick 2.12
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.12
 
-import Artist 1.0
-import Album 1.0
-import Song 1.0
-import Playlist 1.0
-import Queue 1.0
 
 ApplicationWindow {
     id: window
@@ -196,7 +191,9 @@ ApplicationWindow {
 
                     ListView {
                         anchors.fill: parent
-                        model: ArtistModel {}
+                        // model: ArtistModel {}
+                        // model: PaneModel {}
+                        model: artistModel
                         delegate: dlg
 
                         header: ToolBar {
@@ -227,7 +224,7 @@ ApplicationWindow {
                     ListView {
                         anchors.fill: parent
 
-                        model: AlbumModel {}
+                        model: albumModel
                         delegate: dlg
 
                         header: ToolBar {
@@ -240,7 +237,7 @@ ApplicationWindow {
                 Item {
                     ListView {
                         anchors.fill: parent
-                        model: SongModel {}
+                        model: songModel
                         delegate: dlg
 
                         header: ToolBar {
@@ -270,7 +267,7 @@ ApplicationWindow {
 
                     ListView {
                         anchors.fill: parent
-                        model: PlaylistModel {}
+                        model: playlistModel
                         delegate: dlg
 
                         header: ToolBar {
@@ -304,7 +301,7 @@ ApplicationWindow {
 
                     ListView {
                         anchors.fill: parent
-                        model: QueueModel {}
+                        model: queueModel
                         delegate: dlg
 
                         header: ToolBar {

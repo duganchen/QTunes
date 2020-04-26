@@ -18,12 +18,8 @@ pkg_check_modules(LIBMPDCLIENT REQUIRED IMPORTED_TARGET libmpdclient)
 
 add_executable(
     qtunes
-    albummodel.cpp
-    artistmodel.cpp
-    playlistmodel.cpp
+    panemodel.cpp
     qtunes.cpp
-    queuemodel.cpp
-    songmodel.cpp
     qml.qrc
 )
 
