@@ -18,6 +18,7 @@ pkg_check_modules(LIBMPDCLIENT REQUIRED IMPORTED_TARGET libmpdclient)
 
 add_executable(
     qtunes
+    controller.cpp
     panemodel.cpp
     qtunes.cpp
     qml.qrc

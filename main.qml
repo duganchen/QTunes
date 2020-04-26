@@ -126,7 +126,7 @@ ApplicationWindow {
 
                 TextField {
                     id: hostText
-                    text: qsTr("localhost")
+                    text: controller.host
                     validator: RegExpValidator {
                         // https://stackoverflow.com/a/106223/240515
                         regExp: /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/
@@ -143,7 +143,7 @@ ApplicationWindow {
 
                 Label {
                     id: portLabel
-                    text: qsTr("Port")
+                    text: controller.port
                 }
 
                 TextField {

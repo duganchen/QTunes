@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QQuickStyle>
 
+#include "controller.h"
 #include "panemodel.h"
 
 int main(int argc, char *argv[])
@@ -39,6 +40,9 @@ int main(int argc, char *argv[])
     PaneModel queueModel;
     queueModel.setList(queue);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
+
+    Controller controller;
+    engine.rootContext()->setContextProperty("controller", &controller);
 
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
