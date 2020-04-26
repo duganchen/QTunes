@@ -1,9 +1,11 @@
 #include "controller.h"
+#include <QDebug>
 
 Controller::Controller(QObject *parent) :
     QObject(parent),
     m_host("localhost"),
-    m_port("6600")
+    m_port("6600"),
+    m_connectEnabled(true)
 {
 }
 
@@ -12,13 +14,14 @@ QString Controller::host() const
     return m_host;
 }
 
-void Controller::setHost(QString host)
+void Controller::setHost(QString value)
 {
-    bool changed = m_host == host ? false : true;
-    m_host = host;
-    if (changed)
+    if (m_host != value)
     {
-        emit hostChanged();
+        m_host = value;
+        emit hostChanged(value);
+
+        setConnectEnabled(this->host().length() && this->port().length());
     }
 }
 
@@ -27,12 +30,27 @@ QString Controller::port() const
     return m_port;
 }
 
-void Controller::setPort(QString port)
+void Controller::setPort(QString value)
 {
-    bool changed = m_port == port ? false : true;
-    m_port = port;
-    if (changed)
+    if (m_port != value)
     {
-        emit portChanged();
+        m_port = value;
+        emit portChanged(value);
+
+        setConnectEnabled(this->host().length() && this->port().length());
+    }
+}
+
+bool Controller::connectEnabled() const
+{
+    return m_connectEnabled;
+}
+
+void Controller::setConnectEnabled(bool value)
+{
+    if (m_connectEnabled != value)
+    {
+        m_connectEnabled = value;
+        emit connectEnabledChanged(value);
     }
 }

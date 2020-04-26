@@ -132,6 +132,10 @@ ApplicationWindow {
                         regExp: /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/
                     }
 
+                    onTextChanged: {
+                        controller.host = hostText.text
+                    }
+
                     Layout.fillWidth: true
                 }
 
@@ -155,6 +159,9 @@ ApplicationWindow {
                         top: 65535
 
                     }
+                    onTextChanged: {
+                        controller.port = portText.text
+                    }
                 }
 
 
@@ -173,6 +180,7 @@ ApplicationWindow {
                     Button {
                         id: connectButton
                         text: qsTr("Connect")
+                        enabled: controller.connectEnabled;
                     }
 
                     BusyIndicator {
