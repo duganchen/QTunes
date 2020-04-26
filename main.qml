@@ -189,6 +189,7 @@ ApplicationWindow {
 
                     BusyIndicator {
                         id: connectBusy
+                        visible: controller.isConnecting;
                     }
                 }
 
@@ -213,8 +214,6 @@ ApplicationWindow {
 
                     ListView {
                         anchors.fill: parent
-                        // model: ArtistModel {}
-                        // model: PaneModel {}
                         model: artistModel
                         delegate: dlg
 

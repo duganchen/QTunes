@@ -5,7 +5,8 @@ Controller::Controller(QObject *parent) :
     QObject(parent),
     m_host("localhost"),
     m_port("6600"),
-    m_connectEnabled(true)
+    m_connectEnabled(true),
+    m_isConnecting(false)
 {
 }
 
@@ -46,6 +47,11 @@ bool Controller::connectEnabled() const
     return m_connectEnabled;
 }
 
+bool Controller::isConnecting() const
+{
+    return m_isConnecting;
+}
+
 void Controller::setConnectEnabled(bool value)
 {
     if (m_connectEnabled != value)
@@ -59,4 +65,13 @@ void Controller::setConnectEnabled(bool value)
 void Controller::connect()
 {
     qDebug() << "Connect clicked";
+}
+
+void Controller::setConnecting(bool value)
+{
+    if (m_isConnecting != value)
+    {
+        m_isConnecting = value;
+        emit connectingChanged(value);
+    }
 }
