@@ -11,12 +11,12 @@ class Controller : public QObject
     Q_PROPERTY(bool connectEnabled READ connectEnabled WRITE setConnectEnabled NOTIFY connectEnabledChanged)
 public:
     explicit Controller(QObject *parent = nullptr);
-
     QString host() const;
-    void setHost(QString);
     QString port() const;
-    void setPort(QString);
     bool connectEnabled() const;
+public slots:
+    void setHost(QString);
+    void setPort(QString);
     void setConnectEnabled(bool);
 signals:
     void hostChanged(QString);
