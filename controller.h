@@ -18,6 +18,7 @@ public slots:
     void setHost(QString);
     void setPort(QString);
     void setConnectEnabled(bool);
+    void connect();
 signals:
     void hostChanged(QString);
     void portChanged(QString);

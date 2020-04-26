@@ -54,3 +54,9 @@ void Controller::setConnectEnabled(bool value)
         emit connectEnabledChanged(value);
     }
 }
+
+
+void Controller::connect()
+{
+    qDebug() << "Connect clicked";
+}

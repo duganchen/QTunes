@@ -181,6 +181,10 @@ ApplicationWindow {
                         id: connectButton
                         text: qsTr("Connect")
                         enabled: controller.connectEnabled;
+
+                        onClicked: {
+                            controller.connect()
+                        }
                     }
 
                     BusyIndicator {
