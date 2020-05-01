@@ -1,12 +1,13 @@
 #include "viewmodel.h"
 #include <QDebug>
 
-ViewModel::ViewModel(QObject *parent) :
+ViewModel::ViewModel(AbstractHostInfo *hostInfo, QObject *parent) :
     QObject(parent),
     m_host("localhost"),
     m_port("6600"),
     m_connectEnabled(true),
-    m_isConnecting(false)
+    m_isConnecting(false),
+    m_hostInfo(hostInfo)
 {
 }
 

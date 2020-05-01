@@ -2,6 +2,7 @@
 #define VIEWMODEL_H
 
 #include <QObject>
+#include "abstracthostinfo.h"
 
 class ViewModel : public QObject
 {
@@ -11,7 +12,7 @@ class ViewModel : public QObject
     Q_PROPERTY(bool connectEnabled READ connectEnabled WRITE setConnectEnabled NOTIFY connectEnabledChanged)
     Q_PROPERTY(bool isConnecting READ isConnecting WRITE setConnecting NOTIFY connectingChanged)
 public:
-    explicit ViewModel(QObject *parent = nullptr);
+    explicit ViewModel(AbstractHostInfo *hostInfo, QObject *parent = nullptr);
     QString host() const;
     QString port() const;
     bool connectEnabled() const;
@@ -32,6 +33,7 @@ private:
     QString m_port;
     bool m_connectEnabled;
     bool m_isConnecting;
+    AbstractHostInfo *m_hostInfo;
 };
 
 #endif // VIEWMODEL_H

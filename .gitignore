@@ -4,7 +4,8 @@ Makefile
 *.o
 *.stash
 src/QTunes
-*moc*
+moc_*
+*.moc
 target_wrapper.sh
 qrc_qml.cpp
 tests/tests

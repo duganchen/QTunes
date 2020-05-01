@@ -1,6 +1,7 @@
 #include <QtTest>
 #include <QCoreApplication>
 #include "../src/viewmodel.h"
+#include "mockhostinfo.h"
 
 // add necessary includes here
 
@@ -41,7 +42,8 @@ void TestViewModel::cleanupTestCase()
 
 void TestViewModel::test_case1()
 {
-    ViewModel viewmodel;
+    MockHostInfo hostInfo;
+    ViewModel viewmodel(&hostInfo);
     QCOMPARE(viewmodel.isConnecting(), false);
 }
 
