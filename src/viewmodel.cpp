@@ -7,7 +7,9 @@ ViewModel::ViewModel(AbstractHostInfo *hostInfo, QObject *parent) :
     m_port("6600"),
     m_connectEnabled(true),
     m_isConnecting(false),
-    m_hostInfo(hostInfo)
+    m_hostInfo(hostInfo),
+    m_hostErrorString(""),
+    m_portErrorString("")
 {
 }
 
@@ -53,6 +55,16 @@ bool ViewModel::isConnecting() const
     return m_isConnecting;
 }
 
+QString ViewModel::hostErrorString() const
+{
+    return m_hostErrorString;
+}
+
+QString ViewModel::portErrorString() const
+{
+    return m_portErrorString;
+}
+
 void ViewModel::setConnectEnabled(bool value)
 {
     if (m_connectEnabled != value)
@@ -74,5 +86,23 @@ void ViewModel::setConnecting(bool value)
     {
         m_isConnecting = value;
         emit connectingChanged(value);
+    }
+}
+
+void ViewModel::setHostErrorString(QString value)
+{
+    if (m_hostErrorString != value)
+    {
+        m_hostErrorString = value;
+        emit hostErrorStringChanged(value);
+    }
+}
+
+void ViewModel::setPortErrorString(QString value)
+{
+    if (m_portErrorString != value)
+    {
+        m_portErrorString = value;
+        emit portErrorStringChanged(value);
     }
 }

@@ -142,7 +142,7 @@ ApplicationWindow {
 
                 Label {
                     id: hostValidationLabel
-                    text: qsTr("Host validation message")
+                    text: viewmodel.hostErrorString
                 }
 
                 Label {
@@ -167,7 +167,7 @@ ApplicationWindow {
 
                 Label {
                     id: portValidationLabel
-                    text: qsTr("Port validation message")
+                    text: viewmodel.portErrorString
                 }
 
 
