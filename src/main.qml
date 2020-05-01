@@ -128,12 +128,8 @@ ApplicationWindow {
                     id: hostText
                     text: viewmodel.host
                     validator: RegExpValidator {
-                        // https://stackoverflow.com/a/106223/240515
-                        regExp: /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/
-                    }
-
-                    onTextChanged: {
-                        viewmodel.host = hostText.text
+                        // My attempt at a hostname regex. Probably not perfect, but still helpful.
+                        regExp: /^[^\s!\\@#$%^&*()+={}\[\]|/:;"';<,>,?-][^\s!\\@#$%^&*()+={}\[\]|/:;"';<,>,?]+$/
                     }
 
                     Layout.fillWidth: true
@@ -158,9 +154,6 @@ ApplicationWindow {
                         bottom: 1024
                         top: 65535
 
-                    }
-                    onTextChanged: {
-                        viewmodel.port = portText.text
                     }
                 }
 

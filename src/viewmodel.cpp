@@ -1,5 +1,4 @@
 #include "viewmodel.h"
-#include <QDebug>
 
 ViewModel::ViewModel(AbstractHostInfo *hostInfo, QObject *parent) :
     QObject(parent),
@@ -77,7 +76,6 @@ void ViewModel::setConnectEnabled(bool value)
 
 void ViewModel::connect()
 {
-    qDebug() << "Connect clicked";
 }
 
 void ViewModel::setConnecting(bool value)
