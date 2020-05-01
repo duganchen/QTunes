@@ -4,6 +4,10 @@
 #include <QObject>
 #include "abstracthostinfo.h"
 
+enum ConnectionState {
+  DISCONNECTED, CONNECTING, CONNECTED
+};
+
 class ViewModel : public QObject
 {
     Q_OBJECT
@@ -16,6 +20,8 @@ class ViewModel : public QObject
 
     Q_PROPERTY(QString hostErrorString READ hostErrorString WRITE setHostErrorString NOTIFY hostErrorStringChanged)
     Q_PROPERTY(QString portErrorString READ portErrorString WRITE setPortErrorString NOTIFY portErrorStringChanged)
+
+    Q_PROPERTY(ConnectionState connectionState READ connectionState WRITE setConnectionState NOTIFY connectionStateChanged);
 public:
     explicit ViewModel(AbstractHostInfo *hostInfo, QObject *parent = nullptr);
     QString host() const;
@@ -24,6 +30,7 @@ public:
     bool isConnecting() const;
     QString hostErrorString() const;
     QString portErrorString() const;
+    ConnectionState connectionState() const;
 public slots:
     void setHost(QString);
     void setPort(QString);
@@ -32,6 +39,7 @@ public slots:
     void setConnecting(bool);
     void setHostErrorString (QString);
     void setPortErrorString(QString);
+    void setConnectionState(ConnectionState);
 signals:
     void hostChanged(QString);
     void portChanged(QString);
@@ -39,6 +47,7 @@ signals:
     void connectingChanged(bool);
     void portErrorStringChanged(QString);
     void hostErrorStringChanged(QString);
+    void connectionStateChanged(ConnectionState);
 private:
     QString m_host;
     QString m_port;
@@ -47,6 +56,7 @@ private:
     AbstractHostInfo *m_hostInfo;
     QString m_hostErrorString;
     QString m_portErrorString;
+    ConnectionState m_connectionState;
 };
 
 #endif // VIEWMODEL_H
