@@ -1,7 +1,7 @@
-#include "controller.h"
+#include "viewmodel.h"
 #include <QDebug>
 
-Controller::Controller(QObject *parent) :
+ViewModel::ViewModel(QObject *parent) :
     QObject(parent),
     m_host("localhost"),
     m_port("6600"),
@@ -10,12 +10,12 @@ Controller::Controller(QObject *parent) :
 {
 }
 
-QString Controller::host() const
+QString ViewModel::host() const
 {
     return m_host;
 }
 
-void Controller::setHost(QString value)
+void ViewModel::setHost(QString value)
 {
     if (m_host != value)
     {
@@ -26,12 +26,12 @@ void Controller::setHost(QString value)
     }
 }
 
-QString Controller::port() const
+QString ViewModel::port() const
 {
     return m_port;
 }
 
-void Controller::setPort(QString value)
+void ViewModel::setPort(QString value)
 {
     if (m_port != value)
     {
@@ -42,17 +42,17 @@ void Controller::setPort(QString value)
     }
 }
 
-bool Controller::connectEnabled() const
+bool ViewModel::connectEnabled() const
 {
     return m_connectEnabled;
 }
 
-bool Controller::isConnecting() const
+bool ViewModel::isConnecting() const
 {
     return m_isConnecting;
 }
 
-void Controller::setConnectEnabled(bool value)
+void ViewModel::setConnectEnabled(bool value)
 {
     if (m_connectEnabled != value)
     {
@@ -62,12 +62,12 @@ void Controller::setConnectEnabled(bool value)
 }
 
 
-void Controller::connect()
+void ViewModel::connect()
 {
     qDebug() << "Connect clicked";
 }
 
-void Controller::setConnecting(bool value)
+void ViewModel::setConnecting(bool value)
 {
     if (m_isConnecting != value)
     {

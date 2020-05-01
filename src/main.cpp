@@ -3,7 +3,7 @@
 #include <QQmlContext>
 #include <QQuickStyle>
 
-#include "controller.h"
+#include "viewmodel.h"
 #include "panemodel.h"
 
 int main(int argc, char *argv[])
@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
-    Controller controller;
+    ViewModel viewmodel;
 
     QQmlApplicationEngine engine;
 
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     queueModel.setList(queue);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
 
-    engine.rootContext()->setContextProperty("controller", &controller);
+    engine.rootContext()->setContextProperty("viewmodel", &viewmodel);
 
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));

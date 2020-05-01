@@ -1,9 +1,9 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#ifndef VIEWMODEL_H
+#define VIEWMODEL_H
 
 #include <QObject>
 
-class Controller : public QObject
+class ViewModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged)
@@ -11,7 +11,7 @@ class Controller : public QObject
     Q_PROPERTY(bool connectEnabled READ connectEnabled WRITE setConnectEnabled NOTIFY connectEnabledChanged)
     Q_PROPERTY(bool isConnecting READ isConnecting WRITE setConnecting NOTIFY connectingChanged)
 public:
-    explicit Controller(QObject *parent = nullptr);
+    explicit ViewModel(QObject *parent = nullptr);
     QString host() const;
     QString port() const;
     bool connectEnabled() const;
@@ -34,4 +34,4 @@ private:
     bool m_isConnecting;
 };
 
-#endif // CONTROLLER_H
+#endif // VIEWMODEL_H

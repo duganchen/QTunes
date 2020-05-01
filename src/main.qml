@@ -126,14 +126,14 @@ ApplicationWindow {
 
                 TextField {
                     id: hostText
-                    text: controller.host
+                    text: viewmodel.host
                     validator: RegExpValidator {
                         // https://stackoverflow.com/a/106223/240515
                         regExp: /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/
                     }
 
                     onTextChanged: {
-                        controller.host = hostText.text
+                        viewmodel.host = hostText.text
                     }
 
                     Layout.fillWidth: true
@@ -152,7 +152,7 @@ ApplicationWindow {
 
                 TextField {
                     id: portText
-                    text: controller.port
+                    text: viewmodel.port
                     Layout.fillWidth: true
                     validator: IntValidator {
                         bottom: 1024
@@ -160,7 +160,7 @@ ApplicationWindow {
 
                     }
                     onTextChanged: {
-                        controller.port = portText.text
+                        viewmodel.port = portText.text
                     }
                 }
 
@@ -180,16 +180,16 @@ ApplicationWindow {
                     Button {
                         id: connectButton
                         text: qsTr("Connect")
-                        enabled: controller.connectEnabled;
+                        enabled: viewmodel.connectEnabled;
 
                         onClicked: {
-                            controller.connect()
+                            viewmodel.connect()
                         }
                     }
 
                     BusyIndicator {
                         id: connectBusy
-                        visible: controller.isConnecting;
+                        visible: viewmodel.isConnecting;
                     }
                 }
 

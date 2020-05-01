@@ -7,3 +7,4 @@ src/QTunes
 *moc*
 target_wrapper.sh
 qrc_qml.cpp
+tests/tests
