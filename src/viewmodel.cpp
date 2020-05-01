@@ -1,4 +1,5 @@
 #include "viewmodel.h"
+#include <QDebug>
 
 ViewModel::ViewModel(AbstractHostInfo *hostInfo, QObject *parent) :
     QObject(parent),
@@ -10,6 +11,10 @@ ViewModel::ViewModel(AbstractHostInfo *hostInfo, QObject *parent) :
     m_hostErrorString(""),
     m_portErrorString("")
 {
+
+    connect(hostInfo, &AbstractHostInfo::errorString, [=](QString errorString) {
+        setHostErrorString(errorString);
+    });
 }
 
 QString ViewModel::host() const
@@ -74,8 +79,14 @@ void ViewModel::setConnectEnabled(bool value)
 }
 
 
-void ViewModel::connect()
+void ViewModel::connectToMPD(QString host, QString port)
 {
+    Q_UNUSED(port);
+
+    if (host != "localhost")
+    {
+        m_hostInfo->lookupHost(host);
+    }
 }
 
 void ViewModel::setConnecting(bool value)

@@ -176,7 +176,7 @@ ApplicationWindow {
                         enabled: viewmodel.connectEnabled;
 
                         onClicked: {
-                            viewmodel.connect()
+                            viewmodel.connectToMPD(hostText.text, portText.text)
                         }
                     }
 

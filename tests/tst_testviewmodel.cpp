@@ -3,7 +3,8 @@
 #include "../src/viewmodel.h"
 #include "mockhostinfo.h"
 
-// add necessary includes here
+// Note: The error message for a host not being found is
+// Host not found
 
 class TestViewModel : public QObject
 {

@@ -28,7 +28,7 @@ public slots:
     void setHost(QString);
     void setPort(QString);
     void setConnectEnabled(bool);
-    void connect();
+    void connectToMPD(QString, QString);
     void setConnecting(bool);
     void setHostErrorString (QString);
     void setPortErrorString(QString);

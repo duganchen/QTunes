@@ -3,8 +3,6 @@
 #include <QQmlContext>
 #include <QQuickStyle>
 
-#include <QDebug>
-
 #include "hostinfo.h"
 #include "viewmodel.h"
 #include "panemodel.h"
@@ -19,8 +17,6 @@ int main(int argc, char *argv[])
 
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
-
-    qDebug() << "Ya";
 
     HostInfo hostInfo;
     ViewModel viewmodel(&hostInfo);
