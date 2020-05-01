@@ -1,5 +1,5 @@
-#ifndef VIEWMODEL_H
-#define VIEWMODEL_H
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
 
 #include <QObject>
 #include "abstracthostinfo.h"
@@ -8,7 +8,7 @@ enum ConnectionState {
   DISCONNECTED, CONNECTING, CONNECTED
 };
 
-class ViewModel : public QObject
+class Controller : public QObject
 {
     Q_OBJECT
 
@@ -23,7 +23,7 @@ class ViewModel : public QObject
 
     Q_PROPERTY(ConnectionState connectionState READ connectionState WRITE setConnectionState NOTIFY connectionStateChanged);
 public:
-    explicit ViewModel(AbstractHostInfo *hostInfo, QObject *parent = nullptr);
+    explicit Controller(AbstractHostInfo *hostInfo, QObject *parent = nullptr);
     QString host() const;
     QString port() const;
     bool connectEnabled() const;

@@ -4,7 +4,7 @@
 #include <QQuickStyle>
 
 #include "hostinfo.h"
-#include "viewmodel.h"
+#include "controller.h"
 #include "panemodel.h"
 
 int main(int argc, char *argv[])
@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
 
     HostInfo hostInfo;
-    ViewModel viewmodel(&hostInfo);
+    Controller controller(&hostInfo);
 
     QQmlApplicationEngine engine;
 
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     queueModel.setList(queue);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
 
-    engine.rootContext()->setContextProperty("viewmodel", &viewmodel);
+    engine.rootContext()->setContextProperty("controller", &controller);
 
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));

@@ -17,8 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         abstracthostinfo.cpp \
+        controller.cpp \
         hostinfo.cpp \
-        viewmodel.cpp \
         main.cpp \
         panemodel.cpp
 
@@ -37,8 +37,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     abstracthostinfo.h \
+    controller.h \
     hostinfo.h \
-    viewmodel.h \
     panemodel.h
 
 DISTFILES += \

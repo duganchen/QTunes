@@ -1,7 +1,7 @@
-#include "viewmodel.h"
+#include "controller.h"
 #include <QDebug>
 
-ViewModel::ViewModel(AbstractHostInfo *hostInfo, QObject *parent) :
+Controller::Controller(AbstractHostInfo *hostInfo, QObject *parent) :
     QObject(parent),
     m_host("localhost"),
     m_port("6600"),
@@ -18,12 +18,12 @@ ViewModel::ViewModel(AbstractHostInfo *hostInfo, QObject *parent) :
     });
 }
 
-QString ViewModel::host() const
+QString Controller::host() const
 {
     return m_host;
 }
 
-void ViewModel::setHost(QString value)
+void Controller::setHost(QString value)
 {
     if (m_host != value)
     {
@@ -34,12 +34,12 @@ void ViewModel::setHost(QString value)
     }
 }
 
-QString ViewModel::port() const
+QString Controller::port() const
 {
     return m_port;
 }
 
-void ViewModel::setPort(QString value)
+void Controller::setPort(QString value)
 {
     if (m_port != value)
     {
@@ -50,32 +50,32 @@ void ViewModel::setPort(QString value)
     }
 }
 
-bool ViewModel::connectEnabled() const
+bool Controller::connectEnabled() const
 {
     return m_connectEnabled;
 }
 
-bool ViewModel::isConnecting() const
+bool Controller::isConnecting() const
 {
     return m_isConnecting;
 }
 
-QString ViewModel::hostErrorString() const
+QString Controller::hostErrorString() const
 {
     return m_hostErrorString;
 }
 
-QString ViewModel::portErrorString() const
+QString Controller::portErrorString() const
 {
     return m_portErrorString;
 }
 
-ConnectionState ViewModel::connectionState() const
+ConnectionState Controller::connectionState() const
 {
     return m_connectionState;
 }
 
-void ViewModel::setConnectEnabled(bool value)
+void Controller::setConnectEnabled(bool value)
 {
     if (m_connectEnabled != value)
     {
@@ -85,7 +85,7 @@ void ViewModel::setConnectEnabled(bool value)
 }
 
 
-void ViewModel::connectToMPD(QString host, QString port)
+void Controller::connectToMPD(QString host, QString port)
 {
     Q_UNUSED(port);
 
@@ -95,7 +95,7 @@ void ViewModel::connectToMPD(QString host, QString port)
     }
 }
 
-void ViewModel::setConnecting(bool value)
+void Controller::setConnecting(bool value)
 {
     if (m_isConnecting != value)
     {
@@ -104,7 +104,7 @@ void ViewModel::setConnecting(bool value)
     }
 }
 
-void ViewModel::setHostErrorString(QString value)
+void Controller::setHostErrorString(QString value)
 {
     if (m_hostErrorString != value)
     {
@@ -113,7 +113,7 @@ void ViewModel::setHostErrorString(QString value)
     }
 }
 
-void ViewModel::setPortErrorString(QString value)
+void Controller::setPortErrorString(QString value)
 {
     if (m_portErrorString != value)
     {
@@ -122,7 +122,7 @@ void ViewModel::setPortErrorString(QString value)
     }
 }
 
-void ViewModel::setConnectionState(ConnectionState connectionState)
+void Controller::setConnectionState(ConnectionState connectionState)
 {
     if (connectionState != m_connectionState)
     {

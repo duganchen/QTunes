@@ -4,12 +4,13 @@ CONFIG += qt warn_on depend_includepath testcase
 
 TEMPLATE = app
 
-SOURCES +=  tst_testviewmodel.cpp \
+SOURCES +=  \
     ../src/abstracthostinfo.cpp \
-    ../src/viewmodel.cpp \
-    mockhostinfo.cpp
+    ../src/controller.cpp \
+    mockhostinfo.cpp \
+    tst_testcontroller.cpp
 
 HEADERS += \
     ../src/abstracthostinfo.h \
-    ../src/viewmodel.h \
+    ../src/controller.h \
     mockhostinfo.h

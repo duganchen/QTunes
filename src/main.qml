@@ -126,7 +126,7 @@ ApplicationWindow {
 
                 TextField {
                     id: hostText
-                    text: viewmodel.host
+                    text: controller.host
                     validator: RegExpValidator {
                         // My attempt at a hostname regex. Probably not perfect, but still helpful.
                         regExp: /^[^\s!\\@#$%^&*()+={}\[\]|/:;"';<,>,?-][^\s!\\@#$%^&*()+={}\[\]|/:;"';<,>,?]+$/
@@ -138,7 +138,7 @@ ApplicationWindow {
 
                 Label {
                     id: hostValidationLabel
-                    text: viewmodel.hostErrorString
+                    text: controller.hostErrorString
                 }
 
                 Label {
@@ -148,7 +148,7 @@ ApplicationWindow {
 
                 TextField {
                     id: portText
-                    text: viewmodel.port
+                    text: controller.port
                     Layout.fillWidth: true
                     validator: IntValidator {
                         bottom: 1024
@@ -160,7 +160,7 @@ ApplicationWindow {
 
                 Label {
                     id: portValidationLabel
-                    text: viewmodel.portErrorString
+                    text: controller.portErrorString
                 }
 
 
@@ -173,16 +173,16 @@ ApplicationWindow {
                     Button {
                         id: connectButton
                         text: qsTr("Connect")
-                        enabled: viewmodel.connectEnabled;
+                        enabled: controller.connectEnabled;
 
                         onClicked: {
-                            viewmodel.connectToMPD(hostText.text, portText.text)
+                            controller.connectToMPD(hostText.text, portText.text)
                         }
                     }
 
                     BusyIndicator {
                         id: connectBusy
-                        visible: viewmodel.isConnecting;
+                        visible: controller.isConnecting;
                     }
                 }
 
