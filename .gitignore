@@ -1,2 +1,9 @@
+*.user
 build
-CMakeLists.txt.*
+Makefile
+*.o
+*.stash
+src/QTunes
+*moc*
+target_wrapper.sh
+qrc_qml.cpp

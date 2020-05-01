@@ -1,20 +1,21 @@
 #include <QtTest>
 #include <QCoreApplication>
+#include "../src/controller.h"
 
 // add necessary includes here
 
 class TestController : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	TestController();
-	~TestController();
+    TestController();
+    ~TestController();
 
 private slots:
-	void initTestCase();
-	void cleanupTestCase();
-	void test_case1();
+    void initTestCase();
+    void cleanupTestCase();
+    void test_case1();
 
 };
 
@@ -40,7 +41,8 @@ void TestController::cleanupTestCase()
 
 void TestController::test_case1()
 {
-
+    Controller controller;
+    QCOMPARE(controller.isConnecting(), false);
 }
 
 QTEST_MAIN(TestController)

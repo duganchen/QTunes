@@ -14,6 +14,10 @@ int main(int argc, char *argv[])
 
     QQuickStyle::setStyle("Universal");
 
+    // Create context property objects before the engine. See:
+    // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
+    Controller controller;
+
     QQmlApplicationEngine engine;
 
     QVector<QString> artists {"artist 1", "artist 2", "artist 3"};
@@ -41,7 +45,6 @@ int main(int argc, char *argv[])
     queueModel.setList(queue);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
 
-    Controller controller;
     engine.rootContext()->setContextProperty("controller", &controller);
 
 
