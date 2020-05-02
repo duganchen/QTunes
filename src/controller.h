@@ -4,7 +4,7 @@
 #include <QObject>
 #include "abstracthostinfo.h"
 
-enum ConnectionState {
+enum class ConnectionState {
   DISCONNECTED, CONNECTING, CONNECTED
 };
 
