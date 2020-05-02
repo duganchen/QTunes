@@ -7,8 +7,13 @@
 #include "controller.h"
 #include "panemodel.h"
 
+#include <mpd/client.h>
+
 int main(int argc, char *argv[])
 {
+    auto mpd = mpd_connection_new("localhost", 6600, 0);
+    mpd_connection_free(mpd);
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);

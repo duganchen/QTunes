@@ -43,3 +43,5 @@ HEADERS += \
 
 DISTFILES += \
     ListDelegate.qml
+
+unix:!macx: LIBS += -lmpdclient
