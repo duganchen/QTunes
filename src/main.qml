@@ -265,6 +265,14 @@ ApplicationWindow {
                                     ToolTip.text: qsTr("Adds the selected song to the playlist")
                                     ToolTip.visible: hovered
                                 }
+
+                                ToolButton {
+                                    id: playQueuedButton
+                                    icon.source: "images/play_arrow-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Play the selected song")
+                                    ToolTip.visible: hovered
+                                }
                             }
                         }
                     }
@@ -364,6 +372,14 @@ ApplicationWindow {
                                     hoverEnabled: true
                                     ToolTip.text: qsTr("Move the selected song down in the down in the queue
 .")
+                                    ToolTip.visible: hovered
+                                }
+
+                                ToolButton {
+                                    id: playQueuedButton
+                                    icon.source: "images/play_arrow-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Play the selected queued song")
                                     ToolTip.visible: hovered
                                 }
                             }
