@@ -3,11 +3,6 @@
 
 #include <QObject>
 #include "abstracthostinfo.h"
-// #include "enums.h"
-
-//enum class ConnectionState0 {
-//    Disconnected, Connecting, Connected
-//};
 
 class Controller : public QObject
 {

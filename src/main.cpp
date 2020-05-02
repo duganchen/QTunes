@@ -9,7 +9,6 @@
 
 #include <mpd/client.h>
 
-#include "enums.h"
 #include <QDebug>
 
 int main(int argc, char *argv[])
