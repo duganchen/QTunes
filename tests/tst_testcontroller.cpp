@@ -6,6 +6,9 @@
 // Note: The error message for a host not being found is
 // Host not found
 
+// The error message from MPD the connection is lost is:
+// Connection closed by the server
+
 class TestController : public QObject
 {
     Q_OBJECT
