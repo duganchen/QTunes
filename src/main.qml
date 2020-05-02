@@ -173,7 +173,7 @@ ApplicationWindow {
                     Button {
                         id: connectButton
                         text: qsTr("Connect")
-                        enabled: controller.connectEnabled;
+                        enabled: hostText.text && portText.text
 
                         onClicked: {
                             controller.connectToMPD(hostText.text, portText.text)

@@ -5,7 +5,6 @@ Controller::Controller(AbstractHostInfo *hostInfo, QObject *parent) :
     QObject(parent),
     m_host("localhost"),
     m_port("6600"),
-    m_connectEnabled(true),
     m_isConnecting(false),
     m_hostInfo(hostInfo),
     m_hostErrorString(""),
@@ -29,8 +28,6 @@ void Controller::setHost(QString value)
     {
         m_host = value;
         emit hostChanged(value);
-
-        setConnectEnabled(this->host().length() && this->port().length());
     }
 }
 
@@ -45,14 +42,7 @@ void Controller::setPort(QString value)
     {
         m_port = value;
         emit portChanged(value);
-
-        setConnectEnabled(this->host().length() && this->port().length());
     }
-}
-
-bool Controller::connectEnabled() const
-{
-    return m_connectEnabled;
 }
 
 bool Controller::isConnecting() const
@@ -74,16 +64,6 @@ ConnectionState Controller::connectionState() const
 {
     return m_connectionState;
 }
-
-void Controller::setConnectEnabled(bool value)
-{
-    if (m_connectEnabled != value)
-    {
-        m_connectEnabled = value;
-        emit connectEnabledChanged(value);
-    }
-}
-
 
 void Controller::connectToMPD(QString host, QString port)
 {
