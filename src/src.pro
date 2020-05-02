@@ -39,7 +39,8 @@ HEADERS += \
     abstracthostinfo.h \
     controller.h \
     hostinfo.h \
-    panemodel.h
+    panemodel.h \
+    enums.h
 
 DISTFILES += \
     ListDelegate.qml

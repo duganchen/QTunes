@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.12
-
+import QTunes 1.0
 
 ApplicationWindow {
     id: window
@@ -25,6 +25,10 @@ ApplicationWindow {
                     id: connectDrawerButton
                     icon.source: "images/menu-24px.svg"
                     onClicked: {
+
+                        // Confirm that the enum binding works
+                        console.log(Controller.Connecting);
+
                         if (connectDrawer.visible) {
                             connectDrawer.close()
                         } else {

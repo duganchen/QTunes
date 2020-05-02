@@ -3,10 +3,11 @@
 
 #include <QObject>
 #include "abstracthostinfo.h"
+// #include "enums.h"
 
-enum class ConnectionState {
-  DISCONNECTED, CONNECTING, CONNECTED
-};
+//enum class ConnectionState0 {
+//    Disconnected, Connecting, Connected
+//};
 
 class Controller : public QObject
 {
@@ -22,6 +23,10 @@ class Controller : public QObject
 
     Q_PROPERTY(ConnectionState connectionState READ connectionState WRITE setConnectionState NOTIFY connectionStateChanged);
 public:
+
+    enum ConnectionState {Disconnected, Connecting, Connected};
+    Q_ENUM(ConnectionState)
+
     explicit Controller(AbstractHostInfo *hostInfo, QObject *parent = nullptr);
     QString host() const;
     QString port() const;
@@ -30,6 +35,7 @@ public:
     QString portErrorString() const;
     ConnectionState connectionState() const;
 public slots:
+    ConnectionState state() const;
     void setHost(QString);
     void setPort(QString);
     void connectToMPD(QString, QString);

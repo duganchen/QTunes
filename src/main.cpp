@@ -9,6 +9,9 @@
 
 #include <mpd/client.h>
 
+#include "enums.h"
+#include <QDebug>
+
 int main(int argc, char *argv[])
 {
     auto mpd = mpd_connection_new("localhost", 6600, 0);
@@ -19,6 +22,10 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQuickStyle::setStyle("Universal");
+
+    qmlRegisterUncreatableType<Controller>("QTunes", 1, 0, "Controller", "Not creatable as it is an enum type");
+
+    // qmlRegisterUncreatableMetaObject(ConnectionState::staticMetaObject, "QTunes", 1, 0, "CS", "Error: cannot create an enum");
 
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7

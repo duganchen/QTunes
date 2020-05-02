@@ -9,7 +9,7 @@ Controller::Controller(AbstractHostInfo *hostInfo, QObject *parent) :
     m_hostInfo(hostInfo),
     m_hostErrorString(""),
     m_portErrorString(""),
-    m_connectionState(ConnectionState::DISCONNECTED)
+    m_connectionState(ConnectionState::Disconnected)
 {
 
     connect(hostInfo, &AbstractHostInfo::errorString, [=](QString errorString) {
@@ -60,7 +60,7 @@ QString Controller::portErrorString() const
     return m_portErrorString;
 }
 
-ConnectionState Controller::connectionState() const
+Controller::ConnectionState Controller::connectionState() const
 {
     return m_connectionState;
 }
@@ -109,4 +109,9 @@ void Controller::setConnectionState(ConnectionState connectionState)
         m_connectionState = connectionState;
         emit connectionStateChanged(connectionState);
     }
+}
+
+Controller::ConnectionState Controller::state() const
+{
+    return ConnectionState::Disconnected;
 }
