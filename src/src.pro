@@ -45,3 +45,6 @@ DISTFILES += \
     ListDelegate.qml
 
 unix:!macx: LIBS += -lmpdclient
+
+macx: INCLUDEPATH += /usr/local/Cellar/libmpdclient/2.18/include
+macx: LIBS += -lmpdclient.2 -L/usr/local/Cellar/libmpdclient/2.18/lib
