@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
 
-	qmlRegisterUncreatableType<Controller::ConnectionState>("QTunes", 1, 0, "ConnectionState", "Not creatable as it is an enum type");
+    qmlRegisterUncreatableType<Controller>("QTunes", 1, 0, "ConnectionState", "You can't create a Controller sorry");
 
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
