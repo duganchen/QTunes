@@ -26,9 +26,6 @@ ApplicationWindow {
                     icon.source: "images/menu-24px.svg"
                     onClicked: {
 
-                        // Confirm that the enum binding works
-                        console.log(Controller.Connecting);
-
                         if (connectDrawer.visible) {
                             connectDrawer.close()
                         } else {
@@ -392,6 +389,10 @@ ApplicationWindow {
                 }
             }
         }
+    }
+
+    Component.onCompleted: {
+        console.log('Completed')
     }
 }
 
