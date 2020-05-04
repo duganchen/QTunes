@@ -13,4 +13,5 @@ SOURCES +=  \
 HEADERS += \
     ../src/abstracthostinfo.h \
     ../src/controller.h \
-    mockhostinfo.h
+    mockhostinfo.h \
+    mockmpdsettings.h
