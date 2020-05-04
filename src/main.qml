@@ -268,7 +268,7 @@ ApplicationWindow {
                                 }
 
                                 ToolButton {
-                                    id: playQueuedButton
+                                    id: playSelectedButton
                                     icon.source: "images/play_arrow-24px.svg"
                                     hoverEnabled: true
                                     ToolTip.text: qsTr("Play the selected song")
