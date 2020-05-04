@@ -3,6 +3,7 @@
 #include "../src/controller.h"
 #include "mockhostinfo.h"
 #include "mockmpdsettings.h"
+#include "mockmpdsettingsfactory.h"
 
 // Note: The error message for a host not being found is
 // Host not found
@@ -22,8 +23,8 @@ public:
 private slots:
     void initTestCase();
     void cleanupTestCase();
-    void test_case1();
-	void test_case2();
+    void test_mockSettings();
+    void test_mockSettingsFactory();
 };
 
 TestController::TestController()
@@ -46,19 +47,19 @@ void TestController::cleanupTestCase()
 
 }
 
-void TestController::test_case1()
+
+void TestController::test_mockSettings()
 {
-    MockHostInfo hostInfo;
-    Controller viewmodel(&hostInfo);
-    QCOMPARE(viewmodel.isConnecting(), false);
+    MockMPDSettings settings(nullptr, 0, 0, nullptr, nullptr);
+    QCOMPARE("localhost", settings.host());
 }
 
-void TestController::test_case2()
+void TestController::test_mockSettingsFactory()
 {
-	// Qt Creator isn't executing this. But "make check" works.
-	QSharedPointer<MPDSettings> settings_data(new MPDSettings());
-	MockMPDSettings settings(settings_data);
-	QCOMPARE(settings.host(), "localhost");
+    MockMPDSettingsFactory settingsFactory;
+    auto settings = settingsFactory.createSettings(nullptr, 0, 0, nullptr, nullptr, nullptr);
+    QCOMPARE(settings->host(), "localhost");
+    delete settings;
 }
 
 QTEST_MAIN(TestController)

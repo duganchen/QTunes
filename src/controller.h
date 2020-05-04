@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include "abstracthostinfo.h"
+#include "abstractmpdsettingsfactory.h"
+
 
 class Controller : public QObject
 {
@@ -22,7 +24,7 @@ public:
     enum ConnectionState {Disconnected, Connecting, Connected};
     Q_ENUM(ConnectionState)
 
-    explicit Controller(AbstractHostInfo *hostInfo, QObject *parent = nullptr);
+    explicit Controller(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory, QObject *parent = nullptr);
     QString host() const;
     QString port() const;
     bool isConnecting() const;
@@ -53,6 +55,7 @@ private:
     QString m_hostErrorString;
     QString m_portErrorString;
     ConnectionState m_connectionState;
+    AbstractMPDSettingsFactory *m_mpdSettingsFactory;
 };
 
 #endif // VIEWMODEL_H

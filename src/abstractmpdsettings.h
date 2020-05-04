@@ -1,18 +1,19 @@
 #ifndef ABSTRACTMPDSETTINGS_H
 #define ABSTRACTMPDSETTINGS_H
 
-#include <QSharedPointer>
+#include <QObject>
 
-template <typename T> class AbstractMPDSettings
+class AbstractMPDSettings : public QObject
 {
+    Q_OBJECT
+
 public:
-	AbstractMPDSettings(QSharedPointer<T> settings): m_settings(settings) {}
-	virtual const char *host() const = 0;
-	virtual unsigned port() const = 0;
-	virtual unsigned timeout_ms() const = 0;
-	virtual const char *password() const = 0;
-private:
-	QSharedPointer<T> m_settings;
+    explicit AbstractMPDSettings(const char *host, unsigned port, unsigned timeout_ms, const char *reserved, const char *password, QObject *parent = nullptr);
+
+    virtual const char *host() = 0;
+    virtual unsigned port() = 0;
+    virtual unsigned timeout_ms() = 0;
+    virtual const char *password() = 0;
 };
 
 #endif // ABSTRACTMPDSETTINGS_H

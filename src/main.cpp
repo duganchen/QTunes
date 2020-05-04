@@ -5,6 +5,7 @@
 #include "hostinfo.h"
 #include "controller.h"
 #include "panemodel.h"
+#include "mpdsettingsfactory.h"
 
 #include <mpd/client.h>
 
@@ -26,7 +27,8 @@ int main(int argc, char *argv[])
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
 
     HostInfo hostInfo;
-    Controller controller(&hostInfo);
+    MPDSettingsFactory mpdSettingsFactory;
+    Controller controller(&hostInfo, &mpdSettingsFactory);
 
     QQmlApplicationEngine engine;
 

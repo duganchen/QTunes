@@ -1,7 +1,7 @@
 #include "controller.h"
 #include <QDebug>
 
-Controller::Controller(AbstractHostInfo *hostInfo, QObject *parent) :
+Controller::Controller(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory, QObject *parent) :
     QObject(parent),
     m_host("localhost"),
     m_port("6600"),
@@ -9,7 +9,8 @@ Controller::Controller(AbstractHostInfo *hostInfo, QObject *parent) :
     m_hostInfo(hostInfo),
     m_hostErrorString(""),
     m_portErrorString(""),
-    m_connectionState(ConnectionState::Disconnected)
+    m_connectionState(ConnectionState::Disconnected),
+    m_mpdSettingsFactory(mpdSettingsFactory)
 {
 
     connect(hostInfo, &AbstractHostInfo::errorString, [=](QString errorString) {

@@ -17,9 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         abstracthostinfo.cpp \
+        abstractmpdsettings.cpp \
+        abstractmpdsettingsfactory.cpp \
         controller.cpp \
         hostinfo.cpp \
         main.cpp \
+        mpdsettings.cpp \
+        mpdsettingsfactory.cpp \
         panemodel.cpp
 
 RESOURCES += qml.qrc
@@ -38,8 +42,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     abstracthostinfo.h \
     abstractmpdsettings.h \
+    abstractmpdsettingsfactory.h \
     controller.h \
     hostinfo.h \
+    mpdsettings.h \
+    mpdsettingsfactory.h \
     panemodel.h
 
 DISTFILES += \

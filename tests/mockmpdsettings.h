@@ -3,32 +3,16 @@
 
 #include "../src/abstractmpdsettings.h"
 
-// Mock *mpd_settings struct.
-struct MPDSettings
-{
-};
-
-class MockMPDSettings: AbstractMPDSettings<MPDSettings>
+class MockMPDSettings : public AbstractMPDSettings
 {
 public:
-	MockMPDSettings(QSharedPointer<MPDSettings> settings): AbstractMPDSettings<MPDSettings>(settings) {}
-	virtual const char *host() const override
-	{
-		return "localhost";
-	}
-	virtual unsigned port() const override
-	{
-		return 6600;
-	}
-	virtual unsigned int timeout_ms() const override
-	{
-		return 0;
-	}
+    explicit MockMPDSettings(const char *host, unsigned port, unsigned timeout_ms, const char *reserved, const char *password, QObject *parent = nullptr);
 
-	virtual const char *password() const override
-	{
-		return "";
-	}
+    virtual const char *host();
+    virtual unsigned port();
+    virtual unsigned timeout_ms();
+    virtual const char *password();
 };
+
 
 #endif // MOCKMPDSETTINGS_H
