@@ -4,6 +4,7 @@
 #include "mockhostinfo.h"
 #include "mockmpdsettings.h"
 #include "mockmpdsettingsfactory.h"
+#include "mockmpdconnectionfactory.h"
 
 // Note: The error message for a host not being found is
 // Host not found
@@ -67,7 +68,8 @@ void TestController::test_controller()
 {
     MockHostInfo hostInfo;
     MockMPDSettingsFactory settingsFactory;
-    Controller controller(&hostInfo, &settingsFactory);
+    MockMPDConnectionFactory connectionFactory;
+    Controller controller(&hostInfo, &settingsFactory, &connectionFactory);
     QVERIFY(true);
 }
 

@@ -17,11 +17,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         abstracthostinfo.cpp \
+        abstractmpdconnection.cpp \
+        abstractmpdconnectionfactory.cpp \
         abstractmpdsettings.cpp \
         abstractmpdsettingsfactory.cpp \
         controller.cpp \
         hostinfo.cpp \
         main.cpp \
+        mpdconnection.cpp \
+        mpdconnectionfactory.cpp \
         mpdsettings.cpp \
         mpdsettingsfactory.cpp \
         panemodel.cpp
@@ -41,10 +45,14 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     abstracthostinfo.h \
+    abstractmpdconnection.h \
+    abstractmpdconnectionfactory.h \
     abstractmpdsettings.h \
     abstractmpdsettingsfactory.h \
     controller.h \
     hostinfo.h \
+    mpdconnection.h \
+    mpdconnectionfactory.h \
     mpdsettings.h \
     mpdsettingsfactory.h \
     panemodel.h

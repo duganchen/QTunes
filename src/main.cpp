@@ -6,6 +6,7 @@
 #include "controller.h"
 #include "panemodel.h"
 #include "mpdsettingsfactory.h"
+#include "mpdconnectionfactory.h"
 
 #include <mpd/client.h>
 
@@ -28,7 +29,14 @@ int main(int argc, char *argv[])
 
     HostInfo hostInfo;
     MPDSettingsFactory mpdSettingsFactory;
-    Controller controller(&hostInfo, &mpdSettingsFactory);
+    MPDConnectionFactory mpdConnectionFactory;
+    Controller controller(&hostInfo, &mpdSettingsFactory, &mpdConnectionFactory);
+
+    // Not sure if this is needed, but I'm going to be extra-paranoid for now.
+    hostInfo.setParent(&controller);
+    mpdSettingsFactory.setParent(&controller);
+    mpdConnectionFactory.setParent(&controller);
+
 
     QQmlApplicationEngine engine;
 
