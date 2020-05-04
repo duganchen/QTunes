@@ -23,6 +23,7 @@ public:
 private slots:
     void initTestCase();
     void cleanupTestCase();
+    void test_controller();
     void test_mockSettings();
     void test_mockSettingsFactory();
 };
@@ -60,6 +61,14 @@ void TestController::test_mockSettingsFactory()
     auto settings = settingsFactory.createSettings(nullptr, 0, 0, nullptr, nullptr, nullptr);
     QCOMPARE(settings->host(), "localhost");
     delete settings;
+}
+
+void TestController::test_controller()
+{
+    MockHostInfo hostInfo;
+    MockMPDSettingsFactory settingsFactory;
+    Controller controller(&hostInfo, &settingsFactory);
+    QVERIFY(true);
 }
 
 QTEST_MAIN(TestController)
