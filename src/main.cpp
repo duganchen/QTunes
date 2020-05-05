@@ -32,12 +32,6 @@ int main(int argc, char *argv[])
     MPDConnectionFactory mpdConnectionFactory;
     Controller controller(&hostInfo, &mpdSettingsFactory, &mpdConnectionFactory);
 
-    // Not sure if this is needed, but I'm going to be extra-paranoid for now.
-    hostInfo.setParent(&controller);
-    mpdSettingsFactory.setParent(&controller);
-    mpdConnectionFactory.setParent(&controller);
-
-
     QQmlApplicationEngine engine;
 
     QVector<QString> artists {"artist 1", "artist 2", "artist 3"};
