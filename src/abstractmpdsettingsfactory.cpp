@@ -2,5 +2,4 @@
 
 AbstractMPDSettingsFactory::AbstractMPDSettingsFactory(QObject *parent) : QObject(parent)
 {
-
 }

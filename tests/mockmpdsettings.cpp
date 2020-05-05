@@ -1,6 +1,8 @@
 #include "mockmpdsettings.h"
 
-MockMPDSettings::MockMPDSettings(const char *host, unsigned port, unsigned timeout_ms, const char *reserved, const char *password, QObject *parent): AbstractMPDSettings(host, port, timeout_ms, reserved, password, parent)
+MockMPDSettings::MockMPDSettings(const char *host, unsigned port, unsigned timeout_ms, const char *reserved,
+                                 const char *password, QObject *parent)
+    : AbstractMPDSettings(host, port, timeout_ms, reserved, password, parent)
 {
     Q_UNUSED(host)
     Q_UNUSED(port)

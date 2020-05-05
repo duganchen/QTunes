@@ -1,17 +1,16 @@
-#include <QtTest>
-#include <QCoreApplication>
 #include "../src/controller.h"
 #include "mockhostinfo.h"
+#include "mockmpdconnectionfactory.h"
 #include "mockmpdsettings.h"
 #include "mockmpdsettingsfactory.h"
-#include "mockmpdconnectionfactory.h"
+#include <QCoreApplication>
+#include <QtTest>
 
 // Note: The error message for a host not being found is
 // Host not found
 
 // The error message from MPD the connection is lost is:
 // Connection closed by the server
-
 
 class TestController : public QObject
 {
@@ -31,24 +30,19 @@ private slots:
 
 TestController::TestController()
 {
-
 }
 
 TestController::~TestController()
 {
-
 }
 
 void TestController::initTestCase()
 {
-
 }
 
 void TestController::cleanupTestCase()
 {
-
 }
-
 
 void TestController::test_mockSettings()
 {

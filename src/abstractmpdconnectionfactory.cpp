@@ -2,5 +2,4 @@
 
 AbstractMPDConnectionFactory::AbstractMPDConnectionFactory(QObject *parent) : QObject(parent)
 {
-
 }

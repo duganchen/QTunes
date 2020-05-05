@@ -1,7 +1,6 @@
 #include "panemodel.h"
 
-PaneModel::PaneModel(QObject *parent)
-    : QAbstractListModel(parent)
+PaneModel::PaneModel(QObject *parent) : QAbstractListModel(parent)
 {
 }
 
@@ -32,19 +31,15 @@ QVariant PaneModel::data(const QModelIndex &index, int role) const
     return m_list[index.row()];
 }
 
-
-
 QVector<QString> PaneModel::list() const
 {
     return m_list;
 }
 
-
 void PaneModel::setList(QVector<QString> list)
 {
     m_list = list;
 }
-
 
 QHash<int, QByteArray> PaneModel::roleNames() const
 {

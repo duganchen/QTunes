@@ -2,5 +2,4 @@
 
 AbstractHostInfo::AbstractHostInfo(QObject *parent) : QObject(parent)
 {
-
 }

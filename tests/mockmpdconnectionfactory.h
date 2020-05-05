@@ -3,11 +3,11 @@
 
 #include "../src/abstractmpdconnectionfactory.h"
 
-class MockMPDConnectionFactory: public AbstractMPDConnectionFactory
+class MockMPDConnectionFactory : public AbstractMPDConnectionFactory
 {
 public:
     explicit MockMPDConnectionFactory(QObject *parent = nullptr);
-    virtual AbstractMPDConnection *createMPDConnection(const char *host, unsigned port, unsigned timeout_ms, QObject *parent = nullptr);
+    virtual AbstractMPDConnection *createMPDConnection(QObject *parent = nullptr);
 };
 
 #endif // MOCKMPDCONNECTIONFACTORY_H

@@ -1,9 +1,8 @@
 #include "mockhostinfo.h"
 
-MockHostInfo::MockHostInfo(QObject *parent): AbstractHostInfo(parent), m_errorStr("")
+MockHostInfo::MockHostInfo(QObject *parent) : AbstractHostInfo(parent), m_errorStr("")
 {
 }
-
 
 void MockHostInfo::lookupHost(QString name)
 {

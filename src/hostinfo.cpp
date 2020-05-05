@@ -1,11 +1,9 @@
-#include <QtNetwork/QHostInfo>
 #include "hostinfo.h"
+#include <QtNetwork/QHostInfo>
 
-
-HostInfo::HostInfo(QObject *parent): AbstractHostInfo(parent)
+HostInfo::HostInfo(QObject *parent) : AbstractHostInfo(parent)
 {
 }
-
 
 void HostInfo::lookupHost(QString name)
 {

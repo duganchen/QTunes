@@ -6,9 +6,9 @@
 class AbstractMPDSettings : public QObject
 {
     Q_OBJECT
-
 public:
-    explicit AbstractMPDSettings(const char *host, unsigned port, unsigned timeout_ms, const char *reserved, const char *password, QObject *parent = nullptr);
+    explicit AbstractMPDSettings(const char *host, unsigned port, unsigned timeout_ms, const char *reserved,
+                                 const char *password, QObject *parent = nullptr);
 
     virtual const char *host() = 0;
     virtual unsigned port() = 0;

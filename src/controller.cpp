@@ -1,22 +1,14 @@
 #include "controller.h"
 #include <QDebug>
 
-Controller::Controller(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnectionFactory *mpdConnectionFactory, QObject *parent) :
-    QObject(parent),
-    m_host("localhost"),
-    m_port("6600"),
-    m_isConnecting(false),
-    m_hostInfo(hostInfo),
-    m_hostErrorString(""),
-    m_portErrorString(""),
-    m_connectionState(ConnectionState::Disconnected),
-    m_mpdSettingsFactory(mpdSettingsFactory),
-    m_mpdConnectionFactory(mpdConnectionFactory)
+Controller::Controller(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory,
+                       AbstractMPDConnectionFactory *mpdConnectionFactory, QObject *parent)
+    : QObject(parent), m_host("localhost"), m_port("6600"), m_isConnecting(false), m_hostInfo(hostInfo),
+      m_hostErrorString(""), m_portErrorString(""), m_connectionState(ConnectionState::Disconnected),
+      m_mpdSettingsFactory(mpdSettingsFactory), m_mpdConnectionFactory(mpdConnectionFactory)
 {
 
-    connect(hostInfo, &AbstractHostInfo::errorString, [=](QString errorString) {
-        setHostErrorString(errorString);
-    });
+    connect(hostInfo, &AbstractHostInfo::errorString, [=](QString errorString) { setHostErrorString(errorString); });
 }
 
 QString Controller::host() const

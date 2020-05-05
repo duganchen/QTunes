@@ -3,14 +3,15 @@
 
 #include "../src/abstracthostinfo.h"
 
-class MockHostInfo: public AbstractHostInfo
+class MockHostInfo : public AbstractHostInfo
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     MockHostInfo(QObject *parent = nullptr);
     virtual void lookupHost(QString);
 public slots:
     void setErrorString(QString);
+
 private:
     QString m_errorStr;
 };

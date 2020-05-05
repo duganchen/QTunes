@@ -3,7 +3,7 @@
 
 #include "abstracthostinfo.h"
 
-class HostInfo: public AbstractHostInfo
+class HostInfo : public AbstractHostInfo
 {
     Q_OBJECT
 public:

@@ -26,7 +26,6 @@ signals:
     void listChanged();
 
 private:
-
     QVector<QString> m_list;
 };
 

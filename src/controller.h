@@ -1,10 +1,10 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <QObject>
 #include "abstracthostinfo.h"
-#include "abstractmpdsettingsfactory.h"
 #include "abstractmpdconnectionfactory.h"
+#include "abstractmpdsettingsfactory.h"
+#include <QObject>
 
 class Controller : public QObject
 {
@@ -18,13 +18,20 @@ class Controller : public QObject
     Q_PROPERTY(QString hostErrorString READ hostErrorString WRITE setHostErrorString NOTIFY hostErrorStringChanged)
     Q_PROPERTY(QString portErrorString READ portErrorString WRITE setPortErrorString NOTIFY portErrorStringChanged)
 
-    Q_PROPERTY(ConnectionState connectionState READ connectionState WRITE setConnectionState NOTIFY connectionStateChanged);
-public:
+    Q_PROPERTY(
+        ConnectionState connectionState READ connectionState WRITE setConnectionState NOTIFY connectionStateChanged);
 
-    enum ConnectionState {Disconnected, Connecting, Connected};
+public:
+    enum ConnectionState
+    {
+        Disconnected,
+        Connecting,
+        Connected
+    };
     Q_ENUM(ConnectionState)
 
-    explicit Controller(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnectionFactory *connectionFactory, QObject *parent = nullptr);
+    explicit Controller(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory,
+                        AbstractMPDConnectionFactory *connectionFactory, QObject *parent = nullptr);
     QString host() const;
     QString port() const;
     bool isConnecting() const;
@@ -37,7 +44,7 @@ public slots:
     void setPort(QString);
     void connectToMPD(QString, QString);
     void setConnecting(bool);
-    void setHostErrorString (QString);
+    void setHostErrorString(QString);
     void setPortErrorString(QString);
     void setConnectionState(ConnectionState);
 signals:
@@ -47,6 +54,7 @@ signals:
     void portErrorStringChanged(QString);
     void hostErrorStringChanged(QString);
     void connectionStateChanged(ConnectionState);
+
 private:
     QString m_host;
     QString m_port;
