@@ -110,6 +110,7 @@ ApplicationWindow {
         id: connectDrawer
         height: window.height - header.height
         width: window.width / 3
+        visible: true
         Rectangle {
             anchors.fill: parent;
 
