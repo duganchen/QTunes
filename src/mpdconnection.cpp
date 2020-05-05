@@ -93,7 +93,10 @@ void MPDConnection::recvIdle()
 
     if (changed_systems == 0)
     {
+        m_state = ConnectionState::Disconnected;
         emit disconnected();
+        m_socketNotifier->deleteLater();
+        // Note: m_mpd_connection is left alone so that we can retrieve error message from it.
         return;
     }
 
