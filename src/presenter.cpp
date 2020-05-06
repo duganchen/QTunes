@@ -1,14 +1,11 @@
 #include "presenter.h"
 #include <QDebug>
 
-Presenter::Presenter(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory,
-                     AbstractMPDConnection *mpd, QObject *parent)
-    : QObject(parent), m_host("localhost"), m_port("6600"), m_isConnecting(false), m_hostInfo(hostInfo),
-      m_hostErrorString(""), m_portErrorString(""), m_connectionState(ConnectionState::Disconnected),
-      m_mpdSettingsFactory(mpdSettingsFactory), m_mpd(mpd)
+Presenter::Presenter(AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnection *mpd, QObject *parent)
+    : QObject(parent), m_host("localhost"), m_port("6600"), m_isConnecting(false), m_hostErrorString(""),
+      m_portErrorString(""), m_connectionState(ConnectionState::Disconnected), m_mpdSettingsFactory(mpdSettingsFactory),
+      m_mpd(mpd)
 {
-
-    connect(hostInfo, &AbstractHostInfo::errorString, [=](QString errorString) { setHostErrorString(errorString); });
 }
 
 QString Presenter::host() const
@@ -62,11 +59,7 @@ Presenter::ConnectionState Presenter::connectionState() const
 void Presenter::connectToMPD(QString host, QString port)
 {
     Q_UNUSED(port);
-
-    if (host != "localhost")
-    {
-        m_hostInfo->lookupHost(host);
-    }
+    Q_UNUSED(host);
 }
 
 void Presenter::setConnecting(bool value)

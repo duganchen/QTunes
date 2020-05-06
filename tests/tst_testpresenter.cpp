@@ -1,5 +1,4 @@
 #include "../src/presenter.h"
-#include "mockhostinfo.h"
 #include "mockmpdconnection.h"
 #include "mockmpdsettings.h"
 #include "mockmpdsettingsfactory.h"
@@ -60,10 +59,9 @@ void TestPresenter::test_mockSettingsFactory()
 
 void TestPresenter::test_controller()
 {
-    MockHostInfo hostInfo;
     MockMPDSettingsFactory settingsFactory;
     MockMPDConnection mpd;
-    Presenter controller(&hostInfo, &settingsFactory, &mpd);
+    Presenter controller(&settingsFactory, &mpd);
     QVERIFY(true);
 }
 

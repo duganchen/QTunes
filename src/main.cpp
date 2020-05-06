@@ -2,7 +2,6 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "hostinfo.h"
 #include "mpdconnection.h"
 #include "mpdsettingsfactory.h"
 #include "panemodel.h"
@@ -23,10 +22,9 @@ int main(int argc, char *argv[])
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
 
-    HostInfo hostInfo;
     MPDSettingsFactory mpdSettingsFactory;
     MPDConnection mpd;
-    Presenter controller(&hostInfo, &mpdSettingsFactory, &mpd);
+    Presenter controller(&mpdSettingsFactory, &mpd);
 
     QQmlApplicationEngine engine;
 

@@ -1,7 +1,6 @@
 #ifndef PRESENTER_H
 #define PRESENTER_H
 
-#include "abstracthostinfo.h"
 #include "abstractmpdconnection.h"
 #include "abstractmpdsettingsfactory.h"
 #include <QObject>
@@ -30,8 +29,8 @@ public:
     };
     Q_ENUM(ConnectionState)
 
-    explicit Presenter(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory,
-                       AbstractMPDConnection *mpd, QObject *parent = nullptr);
+    explicit Presenter(AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnection *mpd,
+                       QObject *parent = nullptr);
     QString host() const;
     QString port() const;
     bool isConnecting() const;
@@ -59,7 +58,6 @@ private:
     QString m_host;
     QString m_port;
     bool m_isConnecting;
-    AbstractHostInfo *m_hostInfo;
     QString m_hostErrorString;
     QString m_portErrorString;
     ConnectionState m_connectionState;
