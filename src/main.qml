@@ -159,7 +159,7 @@ ApplicationWindow {
                     Button {
                         id: connectButton
                         text: qsTr("Connect")
-                        enabled: hostText.text && portText.text
+                        enabled: presenter.connectionState === Presenter.Disconnected
 
                         onClicked: {
                             presenter.connectToMPD(hostText.text, portText.text)
@@ -168,7 +168,7 @@ ApplicationWindow {
 
                     BusyIndicator {
                         id: connectBusy
-                        visible: presenter.isConnecting;
+                        visible: presenter.connectionState === Presenter.Connecting;
                     }
                 }
 
