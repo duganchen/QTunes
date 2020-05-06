@@ -2,38 +2,9 @@
 #include <QDebug>
 
 Presenter::Presenter(AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnection *mpd, QObject *parent)
-    : QObject(parent), m_host("localhost"), m_port("6600"), m_isConnecting(false), m_hostErrorString(""),
-      m_portErrorString(""), m_connectionState(ConnectionState::Disconnected), m_mpdSettingsFactory(mpdSettingsFactory),
-      m_mpd(mpd)
+    : QObject(parent), m_isConnecting(false), m_hostErrorString(""), m_portErrorString(""),
+      m_connectionState(ConnectionState::Disconnected), m_mpdSettingsFactory(mpdSettingsFactory), m_mpd(mpd)
 {
-}
-
-QString Presenter::host() const
-{
-    return m_host;
-}
-
-void Presenter::setHost(QString value)
-{
-    if (m_host != value)
-    {
-        m_host = value;
-        emit hostChanged(value);
-    }
-}
-
-QString Presenter::port() const
-{
-    return m_port;
-}
-
-void Presenter::setPort(QString value)
-{
-    if (m_port != value)
-    {
-        m_port = value;
-        emit portChanged(value);
-    }
 }
 
 bool Presenter::isConnecting() const

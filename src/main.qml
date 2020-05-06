@@ -128,7 +128,7 @@ ApplicationWindow {
 
                 TextField {
                     id: hostText
-                    text: controller.host
+                    text: "localhost"
                     validator: RegExpValidator {
                         // My attempt at a hostname regex. Probably not perfect, but still helpful.
                         regExp: /^[^\s!\\@#$%^&*()+={}\[\]|/:;"';<,>,?-][^\s!\\@#$%^&*()+={}\[\]|/:;"';<,>,?]+$/
@@ -150,7 +150,7 @@ ApplicationWindow {
 
                 TextField {
                     id: portText
-                    text: controller.port
+                    text: "6600"
                     Layout.fillWidth: true
                     validator: IntValidator {
                         bottom: 1024
