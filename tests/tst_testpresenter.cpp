@@ -1,6 +1,6 @@
 #include "../src/presenter.h"
 #include "mockhostinfo.h"
-#include "mockmpdconnectionfactory.h"
+#include "mockmpdconnection.h"
 #include "mockmpdsettings.h"
 #include "mockmpdsettingsfactory.h"
 #include <QCoreApplication>
@@ -62,8 +62,8 @@ void TestPresenter::test_controller()
 {
     MockHostInfo hostInfo;
     MockMPDSettingsFactory settingsFactory;
-    MockMPDConnectionFactory connectionFactory;
-    Presenter controller(&hostInfo, &settingsFactory, &connectionFactory);
+    MockMPDConnection mpd;
+    Presenter controller(&hostInfo, &settingsFactory, &mpd);
     QVERIFY(true);
 }
 

@@ -2,10 +2,10 @@
 #include <QDebug>
 
 Presenter::Presenter(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory,
-                     AbstractMPDConnectionFactory *mpdConnectionFactory, QObject *parent)
+                     AbstractMPDConnection *mpd, QObject *parent)
     : QObject(parent), m_host("localhost"), m_port("6600"), m_isConnecting(false), m_hostInfo(hostInfo),
       m_hostErrorString(""), m_portErrorString(""), m_connectionState(ConnectionState::Disconnected),
-      m_mpdSettingsFactory(mpdSettingsFactory), m_mpdConnectionFactory(mpdConnectionFactory)
+      m_mpdSettingsFactory(mpdSettingsFactory), m_mpd(mpd)
 {
 
     connect(hostInfo, &AbstractHostInfo::errorString, [=](QString errorString) { setHostErrorString(errorString); });

@@ -2,11 +2,11 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "presenter.h"
 #include "hostinfo.h"
-#include "mpdconnectionfactory.h"
+#include "mpdconnection.h"
 #include "mpdsettingsfactory.h"
 #include "panemodel.h"
+#include "presenter.h"
 
 #include <mpd/client.h>
 
@@ -14,9 +14,6 @@
 
 int main(int argc, char *argv[])
 {
-    auto mpd = mpd_connection_new("localhost", 6600, 0);
-    mpd_connection_free(mpd);
-
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
@@ -28,8 +25,8 @@ int main(int argc, char *argv[])
 
     HostInfo hostInfo;
     MPDSettingsFactory mpdSettingsFactory;
-    MPDConnectionFactory mpdConnectionFactory;
-    Presenter controller(&hostInfo, &mpdSettingsFactory, &mpdConnectionFactory);
+    MPDConnection mpd;
+    Presenter controller(&hostInfo, &mpdSettingsFactory, &mpd);
 
     QQmlApplicationEngine engine;
 
