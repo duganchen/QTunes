@@ -385,6 +385,8 @@ ApplicationWindow {
 
         console.log(presenter.connectionState)
         console.log(Presenter.Connected)
+
+        presenter.connectToMPD()
     }
 }
 
