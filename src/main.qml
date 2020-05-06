@@ -94,7 +94,7 @@ ApplicationWindow {
         id: connectDrawer
         height: window.height - header.height
         width: window.width / 3
-        visible: true
+        visible: presenter.connectionState === Presenter.Disconnected
         Rectangle {
             anchors.fill: parent;
 
@@ -124,7 +124,7 @@ ApplicationWindow {
 
                 Label {
                     id: hostValidationLabel
-                    text: controller.hostErrorString
+                    text: presenter.hostErrorString
                 }
 
                 Label {
@@ -146,7 +146,7 @@ ApplicationWindow {
 
                 Label {
                     id: portValidationLabel
-                    text: controller.portErrorString
+                    text: presenter.portErrorString
                 }
 
 
@@ -162,13 +162,13 @@ ApplicationWindow {
                         enabled: hostText.text && portText.text
 
                         onClicked: {
-                            controller.connectToMPD(hostText.text, portText.text)
+                            presenter.connectToMPD(hostText.text, portText.text)
                         }
                     }
 
                     BusyIndicator {
                         id: connectBusy
-                        visible: controller.isConnecting;
+                        visible: presenter.isConnecting;
                     }
                 }
 
@@ -378,10 +378,13 @@ ApplicationWindow {
 
     Component.onCompleted: {
         console.log('Completed')
-        console.log(controller.host)
-        console.log(controller.port)
-        console.log(controller.timeout_ms)
-        console.log(controller.password)
+        console.log(presenter.host)
+        console.log(presenter.port)
+        console.log(presenter.timeout_ms)
+        console.log(presenter.password)
+
+        console.log(presenter.connectionState)
+        console.log(Presenter.Connected)
     }
 }
 
