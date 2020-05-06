@@ -3,6 +3,7 @@
 
 #include "abstractmpdconnection.h"
 #include "abstractmpdsettingsfactory.h"
+#include "mpdsettings.h"
 #include <QObject>
 
 class Presenter : public QObject
@@ -13,6 +14,9 @@ class Presenter : public QObject
 
     Q_PROPERTY(QString hostErrorString READ hostErrorString WRITE setHostErrorString NOTIFY hostErrorStringChanged)
     Q_PROPERTY(QString portErrorString READ portErrorString WRITE setPortErrorString NOTIFY portErrorStringChanged)
+
+    Q_PROPERTY(QString defaultHost READ defaultHost);
+    Q_PROPERTY(QString defaultPort READ defaultPort);
 
     Q_PROPERTY(
         ConnectionState connectionState READ connectionState WRITE setConnectionState NOTIFY connectionStateChanged);
@@ -32,6 +36,9 @@ public:
     QString hostErrorString() const;
     QString portErrorString() const;
     ConnectionState connectionState() const;
+
+    QString defaultHost() const;
+    QString defaultPort() const;
 public slots:
     ConnectionState state() const;
     void connectToMPD(QString, QString);
@@ -50,8 +57,8 @@ private:
     QString m_hostErrorString;
     QString m_portErrorString;
     ConnectionState m_connectionState;
-    AbstractMPDSettingsFactory *m_mpdSettingsFactory;
     AbstractMPDConnection *m_mpd;
+    AbstractMPDSettings *m_settings;
 };
 
 #endif // PRESENTER_H

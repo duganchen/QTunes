@@ -3,8 +3,9 @@
 
 Presenter::Presenter(AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnection *mpd, QObject *parent)
     : QObject(parent), m_isConnecting(false), m_hostErrorString(""), m_portErrorString(""),
-      m_connectionState(ConnectionState::Disconnected), m_mpdSettingsFactory(mpdSettingsFactory), m_mpd(mpd)
+      m_connectionState(ConnectionState::Disconnected), m_mpd(mpd), m_settings(nullptr)
 {
+    m_settings = mpdSettingsFactory->createSettings(nullptr, 0, 0, nullptr, nullptr, this);
 }
 
 bool Presenter::isConnecting() const
@@ -72,4 +73,14 @@ void Presenter::setConnectionState(ConnectionState connectionState)
 Presenter::ConnectionState Presenter::state() const
 {
     return ConnectionState::Disconnected;
+}
+
+QString Presenter::defaultHost() const
+{
+    return m_settings->host();
+}
+
+QString Presenter::defaultPort() const
+{
+    return QString::number(m_settings->port());
 }

@@ -13,6 +13,8 @@
 
 int main(int argc, char *argv[])
 {
+    qDebug() << "Make sure debug logs are working";
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);

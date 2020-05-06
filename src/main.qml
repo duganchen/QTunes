@@ -394,6 +394,17 @@ ApplicationWindow {
 
     Component.onCompleted: {
         console.log('Completed')
+        console.log('default host is ' + controller.defaultHost)
+
+        if (controller.defaultHost)
+        {
+            hostText.text = controller.defaultHost
+        }
+
+        if (controller.defaultPort)
+        {
+            portText.text = controller.defaultPort
+        }
     }
 }
 
