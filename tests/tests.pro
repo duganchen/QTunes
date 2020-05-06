@@ -10,13 +10,13 @@ SOURCES +=  \
     ../src/abstractmpdconnectionfactory.cpp \
     ../src/abstractmpdsettings.cpp \
     ../src/abstractmpdsettingsfactory.cpp \
-    ../src/controller.cpp \
+    ../src/presenter.cpp \
     mockhostinfo.cpp \
     mockmpdconnection.cpp \
     mockmpdconnectionfactory.cpp \
     mockmpdsettings.cpp \
     mockmpdsettingsfactory.cpp \
-    tst_testcontroller.cpp
+    tst_testpresenter.cpp
 
 HEADERS += \
     ../src/abstracthostinfo.h \
@@ -24,7 +24,7 @@ HEADERS += \
     ../src/abstractmpdconnectionfactory.h \
     ../src/abstractmpdsettings.h \
     ../src/abstractmpdsettingsfactory.h \
-    ../src/controller.h \
+    ../src/presenter.h \
     mockhostinfo.h \
     mockmpdconnection.h \
     mockmpdconnectionfactory.h \

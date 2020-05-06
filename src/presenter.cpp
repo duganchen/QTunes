@@ -1,8 +1,8 @@
-#include "controller.h"
+#include "presenter.h"
 #include <QDebug>
 
-Controller::Controller(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory,
-                       AbstractMPDConnectionFactory *mpdConnectionFactory, QObject *parent)
+Presenter::Presenter(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory,
+                     AbstractMPDConnectionFactory *mpdConnectionFactory, QObject *parent)
     : QObject(parent), m_host("localhost"), m_port("6600"), m_isConnecting(false), m_hostInfo(hostInfo),
       m_hostErrorString(""), m_portErrorString(""), m_connectionState(ConnectionState::Disconnected),
       m_mpdSettingsFactory(mpdSettingsFactory), m_mpdConnectionFactory(mpdConnectionFactory)
@@ -11,12 +11,12 @@ Controller::Controller(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *m
     connect(hostInfo, &AbstractHostInfo::errorString, [=](QString errorString) { setHostErrorString(errorString); });
 }
 
-QString Controller::host() const
+QString Presenter::host() const
 {
     return m_host;
 }
 
-void Controller::setHost(QString value)
+void Presenter::setHost(QString value)
 {
     if (m_host != value)
     {
@@ -25,12 +25,12 @@ void Controller::setHost(QString value)
     }
 }
 
-QString Controller::port() const
+QString Presenter::port() const
 {
     return m_port;
 }
 
-void Controller::setPort(QString value)
+void Presenter::setPort(QString value)
 {
     if (m_port != value)
     {
@@ -39,27 +39,27 @@ void Controller::setPort(QString value)
     }
 }
 
-bool Controller::isConnecting() const
+bool Presenter::isConnecting() const
 {
     return m_isConnecting;
 }
 
-QString Controller::hostErrorString() const
+QString Presenter::hostErrorString() const
 {
     return m_hostErrorString;
 }
 
-QString Controller::portErrorString() const
+QString Presenter::portErrorString() const
 {
     return m_portErrorString;
 }
 
-Controller::ConnectionState Controller::connectionState() const
+Presenter::ConnectionState Presenter::connectionState() const
 {
     return m_connectionState;
 }
 
-void Controller::connectToMPD(QString host, QString port)
+void Presenter::connectToMPD(QString host, QString port)
 {
     Q_UNUSED(port);
 
@@ -69,7 +69,7 @@ void Controller::connectToMPD(QString host, QString port)
     }
 }
 
-void Controller::setConnecting(bool value)
+void Presenter::setConnecting(bool value)
 {
     if (m_isConnecting != value)
     {
@@ -78,7 +78,7 @@ void Controller::setConnecting(bool value)
     }
 }
 
-void Controller::setHostErrorString(QString value)
+void Presenter::setHostErrorString(QString value)
 {
     if (m_hostErrorString != value)
     {
@@ -87,7 +87,7 @@ void Controller::setHostErrorString(QString value)
     }
 }
 
-void Controller::setPortErrorString(QString value)
+void Presenter::setPortErrorString(QString value)
 {
     if (m_portErrorString != value)
     {
@@ -96,7 +96,7 @@ void Controller::setPortErrorString(QString value)
     }
 }
 
-void Controller::setConnectionState(ConnectionState connectionState)
+void Presenter::setConnectionState(ConnectionState connectionState)
 {
     if (connectionState != m_connectionState)
     {
@@ -105,7 +105,7 @@ void Controller::setConnectionState(ConnectionState connectionState)
     }
 }
 
-Controller::ConnectionState Controller::state() const
+Presenter::ConnectionState Presenter::state() const
 {
     return ConnectionState::Disconnected;
 }

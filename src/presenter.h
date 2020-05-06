@@ -1,12 +1,12 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#ifndef PRESENTER_H
+#define PRESENTER_H
 
 #include "abstracthostinfo.h"
 #include "abstractmpdconnectionfactory.h"
 #include "abstractmpdsettingsfactory.h"
 #include <QObject>
 
-class Controller : public QObject
+class Presenter : public QObject
 {
     Q_OBJECT
 
@@ -30,8 +30,8 @@ public:
     };
     Q_ENUM(ConnectionState)
 
-    explicit Controller(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory,
-                        AbstractMPDConnectionFactory *connectionFactory, QObject *parent = nullptr);
+    explicit Presenter(AbstractHostInfo *hostInfo, AbstractMPDSettingsFactory *mpdSettingsFactory,
+                       AbstractMPDConnectionFactory *connectionFactory, QObject *parent = nullptr);
     QString host() const;
     QString port() const;
     bool isConnecting() const;
@@ -67,4 +67,4 @@ private:
     AbstractMPDConnectionFactory *m_mpdConnectionFactory;
 };
 
-#endif // VIEWMODEL_H
+#endif // PRESENTER_H

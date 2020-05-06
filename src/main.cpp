@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "controller.h"
+#include "presenter.h"
 #include "hostinfo.h"
 #include "mpdconnectionfactory.h"
 #include "mpdsettingsfactory.h"
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    qmlRegisterUncreatableType<Controller>("QTunes", 1, 0, "ConnectionState", "You can't create a Controller sorry");
+    qmlRegisterUncreatableType<Presenter>("QTunes", 1, 0, "ConnectionState", "You can't create a Controller sorry");
 
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     HostInfo hostInfo;
     MPDSettingsFactory mpdSettingsFactory;
     MPDConnectionFactory mpdConnectionFactory;
-    Controller controller(&hostInfo, &mpdSettingsFactory, &mpdConnectionFactory);
+    Presenter controller(&hostInfo, &mpdSettingsFactory, &mpdConnectionFactory);
 
     QQmlApplicationEngine engine;
 

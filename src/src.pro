@@ -21,14 +21,14 @@ SOURCES += \
         abstractmpdconnectionfactory.cpp \
         abstractmpdsettings.cpp \
         abstractmpdsettingsfactory.cpp \
-        controller.cpp \
         hostinfo.cpp \
         main.cpp \
         mpdconnection.cpp \
         mpdconnectionfactory.cpp \
         mpdsettings.cpp \
         mpdsettingsfactory.cpp \
-        panemodel.cpp
+        panemodel.cpp \
+        presenter.cpp
 
 RESOURCES += qml.qrc
 
@@ -49,13 +49,13 @@ HEADERS += \
     abstractmpdconnectionfactory.h \
     abstractmpdsettings.h \
     abstractmpdsettingsfactory.h \
-    controller.h \
     hostinfo.h \
     mpdconnection.h \
     mpdconnectionfactory.h \
     mpdsettings.h \
     mpdsettingsfactory.h \
-    panemodel.h
+    panemodel.h \
+    presenter.h
 
 DISTFILES += \
     ListDelegate.qml

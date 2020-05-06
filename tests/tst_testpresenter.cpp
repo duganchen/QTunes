@@ -1,4 +1,4 @@
-#include "../src/controller.h"
+#include "../src/presenter.h"
 #include "mockhostinfo.h"
 #include "mockmpdconnectionfactory.h"
 #include "mockmpdsettings.h"
@@ -12,13 +12,13 @@
 // The error message from MPD the connection is lost is:
 // Connection closed by the server
 
-class TestController : public QObject
+class TestPresenter : public QObject
 {
     Q_OBJECT
 
 public:
-    TestController();
-    ~TestController();
+    TestPresenter();
+    ~TestPresenter();
 
 private slots:
     void initTestCase();
@@ -28,29 +28,29 @@ private slots:
     void test_mockSettingsFactory();
 };
 
-TestController::TestController()
+TestPresenter::TestPresenter()
 {
 }
 
-TestController::~TestController()
+TestPresenter::~TestPresenter()
 {
 }
 
-void TestController::initTestCase()
+void TestPresenter::initTestCase()
 {
 }
 
-void TestController::cleanupTestCase()
+void TestPresenter::cleanupTestCase()
 {
 }
 
-void TestController::test_mockSettings()
+void TestPresenter::test_mockSettings()
 {
     MockMPDSettings settings(nullptr, 0, 0, nullptr, nullptr);
     QCOMPARE("localhost", settings.host());
 }
 
-void TestController::test_mockSettingsFactory()
+void TestPresenter::test_mockSettingsFactory()
 {
     MockMPDSettingsFactory settingsFactory;
     auto settings = settingsFactory.createSettings(nullptr, 0, 0, nullptr, nullptr, nullptr);
@@ -58,15 +58,15 @@ void TestController::test_mockSettingsFactory()
     delete settings;
 }
 
-void TestController::test_controller()
+void TestPresenter::test_controller()
 {
     MockHostInfo hostInfo;
     MockMPDSettingsFactory settingsFactory;
     MockMPDConnectionFactory connectionFactory;
-    Controller controller(&hostInfo, &settingsFactory, &connectionFactory);
+    Presenter controller(&hostInfo, &settingsFactory, &connectionFactory);
     QVERIFY(true);
 }
 
-QTEST_MAIN(TestController)
+QTEST_MAIN(TestPresenter)
 
-#include "tst_testcontroller.moc"
+#include "tst_testpresenter.moc"
