@@ -94,7 +94,7 @@ ApplicationWindow {
         id: connectDrawer
         height: window.height - header.height
         width: window.width / 3
-        visible: presenter.connectionState === Presenter.Disconnected
+        visible: presenter.connectionState !== Presenter.Connected
         Rectangle {
             anchors.fill: parent;
 
@@ -162,7 +162,7 @@ ApplicationWindow {
                         enabled: presenter.connectionState === Presenter.Disconnected
 
                         onClicked: {
-                            presenter.connectToMPD(hostText.text, portText.text)
+                            presenter.connectToMPD()
                         }
                     }
 

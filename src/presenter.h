@@ -46,7 +46,7 @@ public:
 
 public slots:
     ConnectionState state() const;
-    void connectToMPD(QString, QString);
+    void connectToMPD();
     void setConnecting(bool);
     void setHostErrorString(QString);
     void setPortErrorString(QString);

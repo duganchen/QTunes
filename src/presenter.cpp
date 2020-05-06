@@ -28,10 +28,14 @@ Presenter::ConnectionState Presenter::connectionState() const
     return m_connectionState;
 }
 
-void Presenter::connectToMPD(QString host, QString port)
+void Presenter::connectToMPD()
 {
-    Q_UNUSED(port);
-    Q_UNUSED(host);
+    qDebug() << "host is " << host();
+    qDebug() << "port is " << port();
+    qDebug() << "timeout_ms is " << timeout_ms();
+    qDebug() << "password is " << password();
+
+    setConnectionState(ConnectionState::Connecting);
 }
 
 void Presenter::setConnecting(bool value)
