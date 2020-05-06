@@ -15,8 +15,10 @@ class Presenter : public QObject
     Q_PROPERTY(QString hostErrorString READ hostErrorString WRITE setHostErrorString NOTIFY hostErrorStringChanged)
     Q_PROPERTY(QString portErrorString READ portErrorString WRITE setPortErrorString NOTIFY portErrorStringChanged)
 
-    Q_PROPERTY(QString defaultHost READ defaultHost);
-    Q_PROPERTY(QString defaultPort READ defaultPort);
+    Q_PROPERTY(QString host READ host);
+    Q_PROPERTY(unsigned port READ port);
+    Q_PROPERTY(unsigned timeout_ms READ timeout_ms);
+    Q_PROPERTY(QString password READ password);
 
     Q_PROPERTY(
         ConnectionState connectionState READ connectionState WRITE setConnectionState NOTIFY connectionStateChanged);
@@ -37,8 +39,11 @@ public:
     QString portErrorString() const;
     ConnectionState connectionState() const;
 
-    QString defaultHost() const;
-    QString defaultPort() const;
+    QString host() const;
+    unsigned port() const;
+    unsigned timeout_ms() const;
+    QString password() const;
+
 public slots:
     ConnectionState state() const;
     void connectToMPD(QString, QString);

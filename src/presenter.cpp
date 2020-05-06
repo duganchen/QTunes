@@ -75,12 +75,22 @@ Presenter::ConnectionState Presenter::state() const
     return ConnectionState::Disconnected;
 }
 
-QString Presenter::defaultHost() const
+QString Presenter::host() const
 {
     return m_settings->host();
 }
 
-QString Presenter::defaultPort() const
+unsigned Presenter::port() const
 {
-    return QString::number(m_settings->port());
+    return m_settings->port();
+}
+
+unsigned Presenter::timeout_ms() const
+{
+    return m_settings->timeout_ms();
+}
+
+QString Presenter::password() const
+{
+    return m_settings->password();
 }
