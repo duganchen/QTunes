@@ -340,15 +340,6 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        console.log('Completed')
-        console.log(controller.host)
-        console.log(controller.port)
-        console.log(controller.timeout_ms)
-        console.log(controller.password)
-
-        console.log(controller.connectionState)
-        console.log(Controller.Connected)
-
         controller.connectToMPD()
     }
 }
