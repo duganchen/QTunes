@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+#include "connectionmanager.h"
 #include "controller.h"
 #include "mockmpdsettings.h"
 #include "model.h"
@@ -28,6 +29,12 @@ int main(int argc, char *argv[])
 	MockMPDSettings mpd_settings("localhost", 6600, 200, nullptr, nullptr);
 
 	Controller controller(&mpd_settings);
+
+	ConnectionManager connectionManager;
+
+	QObject::connect(&controller, &Controller::requestConnection, &connectionManager,
+					 &ConnectionManager::createConnection);
+	QObject::connect(&connectionManager, &ConnectionManager::mpd, &controller, &Controller::setMPD);
 
 	Model model;
 	QObject::connect(&controller, &Controller::btnClicked, &model, &Model::printStuff);

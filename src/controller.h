@@ -51,6 +51,9 @@ public slots:
     void setPortErrorString(QString);
     void setConnectionState(ConnectionState);
 	void handleBtnClick();
+
+	void setMPD(AbstractMPDConnection *);
+
 signals:
     void connectingChanged(bool);
     void portErrorStringChanged(QString);
@@ -59,6 +62,8 @@ signals:
 
 	void btnClicked();
 
+	void requestConnection(AbstractMPDSettings *);
+
 private:
     bool m_isConnecting;
     QString m_hostErrorString;
@@ -66,6 +71,8 @@ private:
     ConnectionState m_connectionState;
     AbstractMPDConnection *m_mpd;
     AbstractMPDSettings *m_settings;
+
+	void handleIdle(mpd_idle);
 };
 
 #endif // CONTROLLER_H

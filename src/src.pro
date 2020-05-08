@@ -18,11 +18,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         abstractmpdconnection.cpp \
         abstractmpdsettings.cpp \
+        connectionmanager.cpp \
         controller.cpp \
         main.cpp \
         mockmpdsettings.cpp \
         model.cpp \
         mpdconnection.cpp \
+        mpdconnectionfactory.cpp \
         mpdsettings.cpp \
         panemodel.cpp
 
@@ -42,10 +44,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     abstractmpdconnection.h \
     abstractmpdsettings.h \
+    connectionmanager.h \
     controller.h \
     mockmpdsettings.h \
     model.h \
     mpdconnection.h \
+    mpdconnectionfactory.h \
     mpdsettings.h \
     panemodel.h
 
