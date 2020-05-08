@@ -95,8 +95,6 @@ ApplicationWindow {
 
 
     Drawer {
-        modal: false
-        interactive: false
         y: header.height
         id: connectDrawer
         height: window.height - header.height
@@ -109,53 +107,6 @@ ApplicationWindow {
                 id: connectionColumn
                 anchors.fill: parent
                 opacity: 1
-
-                Label {
-                    id: hostLabel
-                    text: qsTr("Host")
-                    Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
-                }
-
-
-                TextField {
-                    id: hostText
-                    text: "localhost"
-                    validator: RegExpValidator {
-                        // My attempt at a hostname regex. Probably not perfect, but still helpful.
-                        regExp: /^[^\s!\\@#$%^&*()+={}\[\]|/:;"';<,>,?-][^\s!\\@#$%^&*()+={}\[\]|/:;"';<,>,?]+$/
-                    }
-
-                    Layout.fillWidth: true
-                }
-
-
-                Label {
-                    id: hostValidationLabel
-                    text: controller.hostErrorString
-                }
-
-                Label {
-                    id: portLabel
-                    text: qsTr("Port")
-                }
-
-                TextField {
-                    id: portText
-                    text: "6600"
-                    Layout.fillWidth: true
-                    validator: IntValidator {
-                        bottom: 1024
-                        top: 65535
-
-                    }
-                }
-
-
-                Label {
-                    id: portValidationLabel
-                    text: controller.portErrorString
-                }
-
 
                 RowLayout {
                     id: connectRow
@@ -177,6 +128,11 @@ ApplicationWindow {
                         id: connectBusy
                         visible: controller.connectionState === Controller.Connecting;
                     }
+                }
+
+                Label {
+                    Layout.fillWidth: true
+                    text: controller.connectionErrorMessage
                 }
 
             }
