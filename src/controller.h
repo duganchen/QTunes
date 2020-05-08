@@ -32,7 +32,7 @@ public:
     };
     Q_ENUM(ConnectionState)
 
-	explicit Controller(AbstractMPDSettings *mpdSettings, AbstractMPDConnection *mpd, QObject *parent = nullptr);
+	explicit Controller(AbstractMPDSettings *mpdSettings, QObject *parent = nullptr);
     bool isConnecting() const;
     QString hostErrorString() const;
     QString portErrorString() const;

@@ -25,11 +25,9 @@ int main(int argc, char *argv[])
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
 
-    MPDConnection mpd;
-
 	MockMPDSettings mpd_settings("localhost", 6600, 200, nullptr, nullptr);
 
-	Controller controller(&mpd_settings, &mpd);
+	Controller controller(&mpd_settings);
 
 	Model model;
 	QObject::connect(&controller, &Controller::btnClicked, &model, &Model::printStuff);

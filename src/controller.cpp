@@ -1,9 +1,9 @@
 #include "controller.h"
 #include <QDebug>
 
-Controller::Controller(AbstractMPDSettings *mpdSettings, AbstractMPDConnection *mpd, QObject *parent)
+Controller::Controller(AbstractMPDSettings *mpdSettings, QObject *parent)
     : QObject(parent), m_isConnecting(false), m_hostErrorString(""), m_portErrorString(""),
-	  m_connectionState(ConnectionState::Disconnected), m_mpd(mpd), m_settings(mpdSettings)
+	  m_connectionState(ConnectionState::Disconnected), m_mpd(nullptr), m_settings(mpdSettings)
 {
 }
 
