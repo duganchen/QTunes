@@ -15,6 +15,7 @@ ApplicationWindow {
     }
 
     header: ToolBar {
+        enabled: controller.connectionState === Controller.Connected
 
         ColumnLayout {
             anchors.fill: parent
@@ -158,6 +159,7 @@ ApplicationWindow {
                         anchors.fill: parent
                         model: artistModel
                         delegate: dlg
+                        enabled: controller.connectionState === Controller.Connected
 
                         header: ToolBar {
                             anchors.left: parent.left
@@ -190,6 +192,8 @@ ApplicationWindow {
                         model: albumModel
                         delegate: dlg
 
+                        enabled: controller.connectionState === Controller.Connected
+
                         header: ToolBar {
                             anchors.left: parent.left
                             anchors.right: parent.right
@@ -202,6 +206,7 @@ ApplicationWindow {
                         anchors.fill: parent
                         model: songModel
                         delegate: dlg
+                        enabled: controller.connectionState === Controller.Connected
 
                         header: ToolBar {
                             anchors.left: parent.left
@@ -240,6 +245,7 @@ ApplicationWindow {
                         anchors.fill: parent
                         model: playlistModel
                         delegate: dlg
+                        enabled: controller.connectionState === Controller.Connected
 
                         header: ToolBar {
                             anchors.left: parent.left
@@ -274,6 +280,7 @@ ApplicationWindow {
                         anchors.fill: parent
                         model: queueModel
                         delegate: dlg
+                        enabled: controller.connectionState === Controller.Connected
 
                         header: ToolBar {
                             anchors.left: parent.left
