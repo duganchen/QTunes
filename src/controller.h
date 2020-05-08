@@ -38,8 +38,6 @@ public slots:
 signals:
     void connectionStateChanged(ConnectionState);
 
-    void btnClicked();
-
     void connectionError(QString);
     void requestConnection(AbstractMPDSettings *);
 

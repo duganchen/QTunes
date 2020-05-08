@@ -33,8 +33,10 @@ Controller::ConnectionState Controller::state() const
 
 void Controller::handleBtnClick()
 {
-    qDebug() << "Presenter is handling the button click";
-    emit btnClicked();
+    for (const char *tag : m_mpd->search_db_tags(MPD_TAG_ALBUM))
+    {
+        qDebug() << tag;
+    }
 }
 
 void Controller::setMPD(AbstractMPDConnection *mpd)
