@@ -132,7 +132,7 @@ ApplicationWindow {
 
                 Label {
                     Layout.fillWidth: true
-                    text: controller.connectionErrorMessage
+                    text: controller.connectionError
                 }
 
             }

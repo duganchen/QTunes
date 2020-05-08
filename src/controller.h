@@ -22,6 +22,7 @@ class Controller : public QObject
 
     Q_PROPERTY(
         ConnectionState connectionState READ connectionState WRITE setConnectionState NOTIFY connectionStateChanged);
+    Q_PROPERTY(QString connectionError READ connectionError NOTIFY connectionErrorChanged);
 
 public:
     enum ConnectionState
@@ -32,7 +33,7 @@ public:
     };
     Q_ENUM(ConnectionState)
 
-	explicit Controller(AbstractMPDSettings *mpdSettings, QObject *parent = nullptr);
+    explicit Controller(AbstractMPDSettings *mpdSettings, QObject *parent = nullptr);
     bool isConnecting() const;
     QString hostErrorString() const;
     QString portErrorString() const;
@@ -43,6 +44,8 @@ public:
     unsigned timeout_ms() const;
     QString password() const;
 
+    QString connectionErrorMessage() const;
+
 public slots:
     ConnectionState state() const;
     void connectToMPD();
@@ -50,9 +53,10 @@ public slots:
     void setHostErrorString(QString);
     void setPortErrorString(QString);
     void setConnectionState(ConnectionState);
-	void handleBtnClick();
+    void handleBtnClick();
 
-	void setMPD(AbstractMPDConnection *);
+    void setMPD(AbstractMPDConnection *);
+    QString connectionError() const;
 
 signals:
     void connectingChanged(bool);
@@ -60,9 +64,12 @@ signals:
     void hostErrorStringChanged(QString);
     void connectionStateChanged(ConnectionState);
 
-	void btnClicked();
+    void btnClicked();
 
-	void requestConnection(AbstractMPDSettings *);
+    void connectionError(QString);
+    void requestConnection(AbstractMPDSettings *);
+
+    void connectionErrorChanged(QString);
 
 private:
     bool m_isConnecting;
@@ -72,7 +79,9 @@ private:
     AbstractMPDConnection *m_mpd;
     AbstractMPDSettings *m_settings;
 
-	void handleIdle(mpd_idle);
+    void handleIdle(mpd_idle);
+    QString m_connectionError;
+    void setConnectionError(QString);
 };
 
 #endif // CONTROLLER_H
