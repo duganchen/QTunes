@@ -1,7 +1,3 @@
-#include "../src/presenter.h"
-#include "mockmpdconnection.h"
-#include "mockmpdsettings.h"
-#include "mockmpdsettingsfactory.h"
 #include <QCoreApplication>
 #include <QtTest>
 
@@ -22,9 +18,7 @@ public:
 private slots:
     void initTestCase();
     void cleanupTestCase();
-    void test_controller();
-    void test_mockSettings();
-    void test_mockSettingsFactory();
+	void test_case1();
 };
 
 TestPresenter::TestPresenter()
@@ -43,26 +37,9 @@ void TestPresenter::cleanupTestCase()
 {
 }
 
-void TestPresenter::test_mockSettings()
+void TestPresenter::test_case1()
 {
-    MockMPDSettings settings(nullptr, 0, 0, nullptr, nullptr);
-    QCOMPARE("localhost", settings.host());
-}
-
-void TestPresenter::test_mockSettingsFactory()
-{
-    MockMPDSettingsFactory settingsFactory;
-    auto settings = settingsFactory.createSettings(nullptr, 0, 0, nullptr, nullptr, nullptr);
-    QCOMPARE(settings->host(), "localhost");
-    delete settings;
-}
-
-void TestPresenter::test_controller()
-{
-    MockMPDSettingsFactory settingsFactory;
-    MockMPDConnection mpd;
-    Presenter controller(&settingsFactory, &mpd);
-    QVERIFY(true);
+	QCOMPARE(1, 1);
 }
 
 QTEST_MAIN(TestPresenter)
