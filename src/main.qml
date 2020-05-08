@@ -95,6 +95,8 @@ ApplicationWindow {
 
 
     Drawer {
+        modal: false
+        interactive: false
         y: header.height
         id: connectDrawer
         height: window.height - header.height
