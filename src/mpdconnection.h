@@ -21,6 +21,7 @@ public:
     virtual bool send_idle();
     virtual mpd_idle run_noidle();
     virtual QVector<const char *> search_db_tags(mpd_tag_type);
+    virtual QVector<AbstractMPDSong *> list_queue_meta();
 
 private:
     mpd_connection *m_mpd;

@@ -2,6 +2,7 @@
 #define ABSTRACTMPDCONNECTION_H
 
 #include "abstractmpdsettings.h"
+#include "abstractmpdsong.h"
 #include <QObject>
 #include <mpd/client.h>
 
@@ -19,6 +20,7 @@ public:
     virtual mpd_idle run_noidle();
 
     virtual QVector<const char *> search_db_tags(mpd_tag_type);
+    virtual QVector<AbstractMPDSong *> list_queue_meta();
 signals:
     void idle(mpd_idle);
 };

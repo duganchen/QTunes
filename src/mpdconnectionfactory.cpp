@@ -9,10 +9,8 @@ MPDConnectionFactory::MPDConnectionFactory(QObject *parent) : QObject(parent)
 
 void MPDConnectionFactory::createConnection(AbstractMPDSettings *settings)
 {
-    qDebug() << "Factory is creating connection";
-
     auto mpdConnection = new MPDConnection(settings);
     mpdConnection->setParent(nullptr);
-	mpdConnection->moveToThread(QGuiApplication::instance()->thread());
+    mpdConnection->moveToThread(QGuiApplication::instance()->thread());
     emit mpd(mpdConnection);
 }

@@ -41,8 +41,6 @@ void Controller::handleBtnClick()
 
 void Controller::setMPD(AbstractMPDConnection *mpd)
 {
-    qDebug() << "Setting it in the controller";
-
     if (!mpd || mpd->isNull())
     {
         // The first condition should never happens. The second means we're out of memory.

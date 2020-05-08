@@ -23,12 +23,10 @@ ConnectionManager::~ConnectionManager()
 
 void ConnectionManager::createConnection(AbstractMPDSettings *settings)
 {
-    qDebug() << "Requesting connection from factory";
     emit requestConnectionFromFactory(settings);
 }
 
 void ConnectionManager::setMPD(AbstractMPDConnection *conn)
 {
-    qDebug() << "Connection manager has received an instance";
     emit mpd(conn);
 }

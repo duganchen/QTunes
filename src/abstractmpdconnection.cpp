@@ -44,3 +44,9 @@ QVector<const char *> AbstractMPDConnection::search_db_tags(mpd_tag_type)
     QVector<const char *> tags;
     return tags;
 }
+
+QVector<AbstractMPDSong *> AbstractMPDConnection::list_queue_meta()
+{
+    QVector<AbstractMPDSong *> songs;
+    return songs;
+}

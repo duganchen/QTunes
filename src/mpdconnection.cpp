@@ -6,28 +6,22 @@
 MPDConnection::MPDConnection(AbstractMPDSettings *settings, QObject *parent)
     : AbstractMPDConnection(settings, parent), m_notifier(nullptr)
 {
-    // Note: This DOES block long enough to become a problem!
-
-    qDebug() << "Host is " << settings->host();
-    qDebug() << "Port is " << settings->port();
-    qDebug() << "Timeout is " << settings->timeout_ms();
-
+    // If you're connecting to a host that can't be resolved, then this takes
+    // around a second. No matter how low you set the timeout.
     m_mpd = mpd_connection_new(settings->host(), settings->port(), settings->timeout_ms());
-
-    qDebug() << "mpd_connection_new is done";
 
     if (mpd_connection_get_error(m_mpd) == MPD_ERROR_SUCCESS)
     {
-        qDebug() << "Creating the socket notifier";
         m_notifier = new QSocketNotifier(mpd_connection_get_fd(m_mpd), QSocketNotifier::Read, this);
         connect(m_notifier, &QSocketNotifier::activated, this, &MPDConnection::handleActivation);
         mpd_send_idle(m_mpd);
     }
+
+    // Error handling is done in the Controller, in setMPD.
 }
 
 MPDConnection::~MPDConnection()
 {
-    qDebug() << "Deleting the connection";
     if (m_mpd)
     {
         mpd_connection_free(m_mpd);
@@ -103,4 +97,13 @@ QVector<const char *> MPDConnection::search_db_tags(mpd_tag_type type)
 void MPDConnection::handleActivation()
 {
     emit idle(mpd_recv_idle(m_mpd, false));
+}
+
+QVector<AbstractMPDSong *> MPDConnection::list_queue_meta()
+{
+    // Implementation will come from here.
+    // https://www.reddit.com/r/C_Programming/comments/3hl1xt/anyone_have_experience_with_libmpdclient/cu8qb6u?utm_source=share&utm_medium=web2x
+
+    QVector<AbstractMPDSong *> songs;
+    return songs;
 }
