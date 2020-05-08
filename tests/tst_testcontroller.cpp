@@ -7,13 +7,13 @@
 // The error message from MPD the connection is lost is:
 // Connection closed by the server
 
-class TestPresenter : public QObject
+class TestController : public QObject
 {
     Q_OBJECT
 
 public:
-    TestPresenter();
-    ~TestPresenter();
+	TestController();
+	~TestController();
 
 private slots:
     void initTestCase();
@@ -21,27 +21,27 @@ private slots:
 	void test_case1();
 };
 
-TestPresenter::TestPresenter()
+TestController::TestController()
 {
 }
 
-TestPresenter::~TestPresenter()
+TestController::~TestController()
 {
 }
 
-void TestPresenter::initTestCase()
+void TestController::initTestCase()
 {
 }
 
-void TestPresenter::cleanupTestCase()
+void TestController::cleanupTestCase()
 {
 }
 
-void TestPresenter::test_case1()
+void TestController::test_case1()
 {
 	QCOMPARE(1, 1);
 }
 
-QTEST_MAIN(TestPresenter)
+QTEST_MAIN(TestController)
 
-#include "tst_testpresenter.moc"
+#include "tst_testcontroller.moc"
