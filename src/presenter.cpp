@@ -98,3 +98,9 @@ QString Presenter::password() const
 {
     return m_settings->password();
 }
+
+void Presenter::handleBtnClick()
+{
+	qDebug() << "Presenter is handling the button click";
+	emit btnClicked();
+}

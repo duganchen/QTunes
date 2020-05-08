@@ -51,11 +51,14 @@ public slots:
     void setHostErrorString(QString);
     void setPortErrorString(QString);
     void setConnectionState(ConnectionState);
+	void handleBtnClick();
 signals:
     void connectingChanged(bool);
     void portErrorStringChanged(QString);
     void hostErrorStringChanged(QString);
     void connectionStateChanged(ConnectionState);
+
+	void btnClicked();
 
 private:
     bool m_isConnecting;

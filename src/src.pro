@@ -20,6 +20,7 @@ SOURCES += \
         abstractmpdsettings.cpp \
         abstractmpdsettingsfactory.cpp \
         main.cpp \
+        model.cpp \
         mpdconnection.cpp \
         mpdsettings.cpp \
         mpdsettingsfactory.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     abstractmpdconnection.h \
     abstractmpdsettings.h \
     abstractmpdsettingsfactory.h \
+    model.h \
     mpdconnection.h \
     mpdsettings.h \
     mpdsettingsfactory.h \

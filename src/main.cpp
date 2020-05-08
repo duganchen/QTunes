@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+#include "model.h"
 #include "mpdconnection.h"
 #include "mpdsettingsfactory.h"
 #include "panemodel.h"
@@ -27,6 +28,9 @@ int main(int argc, char *argv[])
     MPDSettingsFactory mpdSettingsFactory;
     MPDConnection mpd;
     Presenter presenter(&mpdSettingsFactory, &mpd);
+
+	Model model;
+	QObject::connect(&presenter, &Presenter::btnClicked, &model, &Model::printStuff);
 
     QQmlApplicationEngine engine;
 

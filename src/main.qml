@@ -28,7 +28,14 @@ ApplicationWindow {
                     hoverEnabled: true
                     ToolTip.text: qsTr("Play")
                     ToolTip.visible: hovered
+
+                    onClicked: {
+                        presenter.handleBtnClick()
+                    }
+
                 }
+
+
 
                 ToolButton {
                     id: pauseButton
