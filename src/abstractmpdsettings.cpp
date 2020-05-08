@@ -10,3 +10,26 @@ AbstractMPDSettings::AbstractMPDSettings(const char *host, unsigned port, unsign
     Q_UNUSED(reserved)
     Q_UNUSED(password)
 }
+
+// Add some stub implementations so that mocks aren't as painful.
+
+const char *AbstractMPDSettings::host()
+{
+    return "localhost";
+}
+
+unsigned AbstractMPDSettings::port()
+{
+    return 6600;
+}
+
+unsigned AbstractMPDSettings::timeout_ms()
+{
+    return 0;
+}
+
+const char *AbstractMPDSettings::password()
+{
+    // Note: this isn't currently used by QTunes.
+    return "";
+}
