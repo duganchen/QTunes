@@ -18,13 +18,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         abstractmpdconnection.cpp \
         abstractmpdsettings.cpp \
-        abstractmpdsettingsfactory.cpp \
         controller.cpp \
         main.cpp \
+        mockmpdsettings.cpp \
         model.cpp \
         mpdconnection.cpp \
         mpdsettings.cpp \
-        mpdsettingsfactory.cpp \
         panemodel.cpp
 
 RESOURCES += qml.qrc
@@ -43,12 +42,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     abstractmpdconnection.h \
     abstractmpdsettings.h \
-    abstractmpdsettingsfactory.h \
     controller.h \
+    mockmpdsettings.h \
     model.h \
     mpdconnection.h \
     mpdsettings.h \
-    mpdsettingsfactory.h \
     panemodel.h
 
 DISTFILES += \

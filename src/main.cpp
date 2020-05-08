@@ -3,9 +3,9 @@
 #include <QQmlContext>
 
 #include "controller.h"
+#include "mockmpdsettings.h"
 #include "model.h"
 #include "mpdconnection.h"
-#include "mpdsettingsfactory.h"
 #include "panemodel.h"
 
 #include <mpd/client.h>
@@ -25,9 +25,11 @@ int main(int argc, char *argv[])
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
 
-    MPDSettingsFactory mpdSettingsFactory;
     MPDConnection mpd;
-	Controller controller(&mpdSettingsFactory, &mpd);
+
+	MockMPDSettings mpd_settings("localhost", 6600, 200, nullptr, nullptr);
+
+	Controller controller(&mpd_settings, &mpd);
 
 	Model model;
 	QObject::connect(&controller, &Controller::btnClicked, &model, &Model::printStuff);

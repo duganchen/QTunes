@@ -2,7 +2,7 @@
 #define CONTROLLER_H
 
 #include "abstractmpdconnection.h"
-#include "abstractmpdsettingsfactory.h"
+#include "abstractmpdsettings.h"
 #include "mpdsettings.h"
 #include <QObject>
 
@@ -32,8 +32,7 @@ public:
     };
     Q_ENUM(ConnectionState)
 
-	explicit Controller(AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnection *mpd,
-						QObject *parent = nullptr);
+	explicit Controller(AbstractMPDSettings *mpdSettings, AbstractMPDConnection *mpd, QObject *parent = nullptr);
     bool isConnecting() const;
     QString hostErrorString() const;
     QString portErrorString() const;
