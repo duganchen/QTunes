@@ -1,5 +1,5 @@
-#ifndef PRESENTER_H
-#define PRESENTER_H
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
 
 #include "abstractmpdconnection.h"
 #include "abstractmpdsettingsfactory.h"
@@ -69,4 +69,4 @@ private:
     AbstractMPDSettings *m_settings;
 };
 
-#endif // PRESENTER_H
+#endif // CONTROLLER_H
