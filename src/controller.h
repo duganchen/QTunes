@@ -25,7 +25,7 @@ public:
     explicit Controller(AbstractMPDSettings *mpdSettings, QObject *parent = nullptr);
     ConnectionState connectionState() const;
 
-    QString connectionErrorMessage() const;
+    QString connectionError() const;
 
 public slots:
     ConnectionState state() const;
@@ -34,7 +34,6 @@ public slots:
     void handleBtnClick();
 
     void setMPD(AbstractMPDConnection *);
-    QString connectionError() const;
 
 signals:
     void connectionStateChanged(ConnectionState);

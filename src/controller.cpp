@@ -14,6 +14,7 @@ Controller::ConnectionState Controller::connectionState() const
 void Controller::connectToMPD()
 {
     setConnectionState(ConnectionState::Connecting);
+    emit requestConnection(m_settings);
 }
 
 void Controller::setConnectionState(ConnectionState connectionState)
@@ -38,6 +39,8 @@ void Controller::handleBtnClick()
 
 void Controller::setMPD(AbstractMPDConnection *mpd)
 {
+    qDebug() << "Setting it in the controller";
+
     if (!mpd || mpd->isNull())
     {
         // The first condition should never happens. The second means we're out of memory.
@@ -59,7 +62,7 @@ void Controller::setMPD(AbstractMPDConnection *mpd)
     }
     else
     {
-        qDebug() << m_mpd->error_message();
+        setConnectionError(m_mpd->error_message());
         setConnectionState(ConnectionState::Disconnected);
     }
 }
@@ -79,7 +82,7 @@ void Controller::handleIdle(mpd_idle idle)
     if (!idle && m_mpd->error() != MPD_ERROR_SUCCESS)
     {
         // This means we lost the connection.
-        qDebug() << m_mpd->error_message();
+        setConnectionError(m_mpd->error_message());
         delete m_mpd;
         m_mpd = nullptr;
         setConnectionState(ConnectionState::Disconnected);
