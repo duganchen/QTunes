@@ -2,6 +2,8 @@
 #define MPDCONNECTION_H
 
 #include "abstractmpdconnection.h"
+#include "abstractmpdsettings.h"
+#include <QObject>
 #include <QSocketNotifier>
 #include <mpd/client.h>
 
@@ -9,25 +11,22 @@ class MPDConnection : public AbstractMPDConnection
 {
     Q_OBJECT
 public:
-    explicit MPDConnection(QObject *parent = nullptr);
+    explicit MPDConnection(AbstractMPDSettings *, QObject *parent = nullptr);
     ~MPDConnection();
 
-    virtual void connectToMPD(const char *host, unsigned port, unsigned timeout_ms);
-
     virtual mpd_error error();
-    virtual QString errorString();
-
+    virtual const char *error_message();
     virtual bool isNull() const;
+    virtual int fd();
+    virtual bool send_idle();
+    virtual mpd_idle run_noidle();
+    virtual QVector<const char *> search_db_tags(mpd_tag_type);
 
 private:
-    struct mpd_connection *m_mpd_connection;
-    QSocketNotifier *m_socketNotifier;
-
-    void disableNotifications();
-    void enableNotifications();
-
+    mpd_connection *m_mpd;
+    QSocketNotifier *m_notifier;
 private slots:
-    void recvIdle();
+    void handleActivation();
 };
 
 #endif // MPDCONNECTION_H

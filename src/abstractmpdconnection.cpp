@@ -1,5 +1,6 @@
 #include "abstractmpdconnection.h"
 
-AbstractMPDConnection::AbstractMPDConnection(QObject *parent) : QObject(parent), m_state(ConnectionState::Disconnected)
+AbstractMPDConnection::AbstractMPDConnection(AbstractMPDSettings *settings, QObject *parent) : QObject(parent)
 {
+    Q_UNUSED(settings)
 }

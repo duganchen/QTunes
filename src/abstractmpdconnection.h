@@ -1,6 +1,7 @@
 #ifndef ABSTRACTMPDCONNECTION_H
 #define ABSTRACTMPDCONNECTION_H
 
+#include "abstractmpdsettings.h"
 #include <QObject>
 #include <mpd/client.h>
 
@@ -8,33 +9,18 @@ class AbstractMPDConnection : public QObject
 {
     Q_OBJECT
 public:
-    explicit AbstractMPDConnection(QObject *parent = nullptr);
-
-    virtual void connectToMPD(const char *host, unsigned port, unsigned timeout_ms) = 0;
+    explicit AbstractMPDConnection(AbstractMPDSettings *settings, QObject *parent = nullptr);
 
     virtual mpd_error error() = 0;
-    virtual QString errorString() = 0;
-
+    virtual const char *error_message() = 0;
     virtual bool isNull() const = 0;
+    virtual int fd() = 0;
+    virtual bool send_idle() = 0;
+    virtual mpd_idle run_noidle() = 0;
 
-    enum ConnectionState
-    {
-        Disconnected,
-        Connecting,
-        Connected
-    };
-    Q_ENUM(ConnectionState)
-
-    ConnectionState state() const;
-
+    virtual QVector<const char *> search_db_tags(mpd_tag_type) = 0;
 signals:
-    void connected();
-    void disconnected();
-
     void idle(mpd_idle);
-
-protected:
-    ConnectionState m_state;
 };
 
 #endif // ABSTRACTMPDCONNECTION_H

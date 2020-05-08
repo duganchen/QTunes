@@ -1,104 +1,106 @@
 #include "mpdconnection.h"
+#include <QDebug>
+#include <QSocketNotifier>
+#include <mpd/client.h>
 
-MPDConnection::MPDConnection(QObject *parent)
-    : AbstractMPDConnection(parent), m_mpd_connection(nullptr), m_socketNotifier(nullptr)
+MPDConnection::MPDConnection(AbstractMPDSettings *settings, QObject *parent)
+    : AbstractMPDConnection(settings, parent), m_notifier(nullptr)
 {
-}
+    // Note: This DOES block long enough to become a problem!
 
-void MPDConnection::connectToMPD(const char *host, unsigned int port, unsigned int timeout_ms)
-{
-    if (m_mpd_connection)
+    qDebug() << "Host is " << settings->host();
+    qDebug() << "Port is " << settings->port();
+    qDebug() << "Timeout is " << settings->timeout_ms();
+
+    m_mpd = mpd_connection_new(settings->host(), settings->port(), settings->timeout_ms());
+
+    qDebug() << "mpd_connection_new is done";
+
+    if (mpd_connection_get_error(m_mpd) == MPD_ERROR_SUCCESS)
     {
-        mpd_connection_free(m_mpd_connection);
-        m_mpd_connection = nullptr;
-    }
-
-    if (m_socketNotifier)
-    {
-        delete m_socketNotifier;
-        m_socketNotifier = nullptr;
-    }
-
-    m_state = ConnectionState::Connecting;
-
-    m_mpd_connection = mpd_connection_new(host, port, timeout_ms);
-
-    if (m_mpd_connection != nullptr && mpd_connection_get_error(m_mpd_connection) == MPD_ERROR_SUCCESS)
-    {
-        m_socketNotifier = new QSocketNotifier(mpd_connection_get_fd(m_mpd_connection), QSocketNotifier::Read, this);
-        connect(m_socketNotifier, &QSocketNotifier::activated, this, &MPDConnection::recvIdle);
-
-        m_state = ConnectionState::Connected;
-        emit connected();
-    }
-    else
-    {
-        m_state = ConnectionState::Disconnected;
+        qDebug() << "Creating the socket notifier";
+        m_notifier = new QSocketNotifier(mpd_connection_get_fd(m_mpd), QSocketNotifier::Read, this);
+        connect(m_notifier, &QSocketNotifier::activated, this, &MPDConnection::handleActivation);
+        mpd_send_idle(m_mpd);
     }
 }
 
 MPDConnection::~MPDConnection()
 {
-    if (m_mpd_connection)
+    qDebug() << "Deleting the connection";
+    if (m_mpd)
     {
-        mpd_connection_free(m_mpd_connection);
+        mpd_connection_free(m_mpd);
     }
 }
 
 mpd_error MPDConnection::error()
 {
-    return mpd_connection_get_error(m_mpd_connection);
+    return mpd_connection_get_error(m_mpd);
 }
 
-QString MPDConnection::errorString()
+const char *MPDConnection::error_message()
 {
-    return mpd_connection_get_error_message(m_mpd_connection);
+    return mpd_connection_get_error_message(m_mpd);
 }
 
 bool MPDConnection::isNull() const
 {
-    return nullptr == m_mpd_connection;
+    return nullptr == m_mpd;
 }
 
-void MPDConnection::disableNotifications()
+int MPDConnection::fd()
 {
-    if (!m_socketNotifier)
-    {
-        return;
-    }
-
-    m_socketNotifier->setEnabled(false);
-    recvIdle();
+    return mpd_connection_get_fd(m_mpd);
 }
 
-void MPDConnection::enableNotifications()
+bool MPDConnection::send_idle()
 {
-    if (!m_socketNotifier)
-    {
-        return;
-    }
-
-    m_socketNotifier->setEnabled(true);
-    mpd_send_idle(m_mpd_connection);
+    return mpd_send_idle(m_mpd);
 }
 
-void MPDConnection::recvIdle()
+mpd_idle MPDConnection::run_noidle()
 {
-    if (!m_mpd_connection)
+    return mpd_run_noidle(m_mpd);
+}
+
+QVector<const char *> MPDConnection::search_db_tags(mpd_tag_type type)
+{
+    QVector<const char *> tags;
+    if (!m_mpd || !m_notifier)
     {
-        return;
+        return tags;
     }
 
-    auto changed_systems = mpd_recv_idle(m_mpd_connection, false);
+    m_notifier->setEnabled(false);
+    emit idle(mpd_run_noidle(m_mpd));
 
-    if (changed_systems == 0)
+    if (!mpd_search_db_tags(m_mpd, type))
     {
-        m_state = ConnectionState::Disconnected;
-        emit disconnected();
-        m_socketNotifier->deleteLater();
-        // Note: m_mpd_connection is left alone so that we can retrieve error message from it.
-        return;
+        qDebug() << mpd_connection_get_error_message(m_mpd);
+        return tags;
     }
 
-    emit idle(changed_systems);
+    if (!mpd_search_commit(m_mpd))
+    {
+        qDebug() << mpd_connection_get_error_message(m_mpd);
+        return tags;
+    }
+
+    struct mpd_pair *pair = nullptr;
+    while ((pair = mpd_recv_pair_tag(m_mpd, type)) != nullptr)
+    {
+        tags.push_back(pair->value);
+        mpd_return_pair(m_mpd, pair);
+    }
+
+    m_notifier->setEnabled(true);
+    mpd_send_idle(m_mpd);
+
+    return tags;
+}
+
+void MPDConnection::handleActivation()
+{
+    emit idle(mpd_recv_idle(m_mpd, false));
 }
