@@ -101,6 +101,8 @@ ApplicationWindow {
         height: window.height - header.height
         width: window.width / 3
         visible: controller.connectionState !== Controller.Connected
+        modal: false
+        interactive: false
         Rectangle {
             anchors.fill: parent;
 
