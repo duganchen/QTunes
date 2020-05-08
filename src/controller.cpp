@@ -1,34 +1,34 @@
-#include "presenter.h"
+#include "controller.h"
 #include <QDebug>
 
-Presenter::Presenter(AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnection *mpd, QObject *parent)
+Controller::Controller(AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnection *mpd, QObject *parent)
     : QObject(parent), m_isConnecting(false), m_hostErrorString(""), m_portErrorString(""),
       m_connectionState(ConnectionState::Disconnected), m_mpd(mpd), m_settings(nullptr)
 {
     m_settings = mpdSettingsFactory->createSettings(nullptr, 0, 0, nullptr, nullptr, this);
 }
 
-bool Presenter::isConnecting() const
+bool Controller::isConnecting() const
 {
     return m_isConnecting;
 }
 
-QString Presenter::hostErrorString() const
+QString Controller::hostErrorString() const
 {
     return m_hostErrorString;
 }
 
-QString Presenter::portErrorString() const
+QString Controller::portErrorString() const
 {
     return m_portErrorString;
 }
 
-Presenter::ConnectionState Presenter::connectionState() const
+Controller::ConnectionState Controller::connectionState() const
 {
     return m_connectionState;
 }
 
-void Presenter::connectToMPD()
+void Controller::connectToMPD()
 {
     qDebug() << "host is " << host();
     qDebug() << "port is " << port();
@@ -38,7 +38,7 @@ void Presenter::connectToMPD()
     setConnectionState(ConnectionState::Connecting);
 }
 
-void Presenter::setConnecting(bool value)
+void Controller::setConnecting(bool value)
 {
     if (m_isConnecting != value)
     {
@@ -47,7 +47,7 @@ void Presenter::setConnecting(bool value)
     }
 }
 
-void Presenter::setHostErrorString(QString value)
+void Controller::setHostErrorString(QString value)
 {
     if (m_hostErrorString != value)
     {
@@ -56,7 +56,7 @@ void Presenter::setHostErrorString(QString value)
     }
 }
 
-void Presenter::setPortErrorString(QString value)
+void Controller::setPortErrorString(QString value)
 {
     if (m_portErrorString != value)
     {
@@ -65,7 +65,7 @@ void Presenter::setPortErrorString(QString value)
     }
 }
 
-void Presenter::setConnectionState(ConnectionState connectionState)
+void Controller::setConnectionState(ConnectionState connectionState)
 {
     if (connectionState != m_connectionState)
     {
@@ -74,32 +74,32 @@ void Presenter::setConnectionState(ConnectionState connectionState)
     }
 }
 
-Presenter::ConnectionState Presenter::state() const
+Controller::ConnectionState Controller::state() const
 {
     return ConnectionState::Disconnected;
 }
 
-QString Presenter::host() const
+QString Controller::host() const
 {
     return m_settings->host();
 }
 
-unsigned Presenter::port() const
+unsigned Controller::port() const
 {
     return m_settings->port();
 }
 
-unsigned Presenter::timeout_ms() const
+unsigned Controller::timeout_ms() const
 {
     return m_settings->timeout_ms();
 }
 
-QString Presenter::password() const
+QString Controller::password() const
 {
     return m_settings->password();
 }
 
-void Presenter::handleBtnClick()
+void Controller::handleBtnClick()
 {
 	qDebug() << "Presenter is handling the button click";
 	emit btnClicked();

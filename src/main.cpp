@@ -2,11 +2,11 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+#include "controller.h"
 #include "model.h"
 #include "mpdconnection.h"
 #include "mpdsettingsfactory.h"
 #include "panemodel.h"
-#include "presenter.h"
 
 #include <mpd/client.h>
 
@@ -20,17 +20,17 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    qmlRegisterUncreatableType<Presenter>("QTunes", 1, 0, "Presenter", "You can't create a Controller sorry");
+	qmlRegisterUncreatableType<Controller>("QTunes", 1, 0, "Controller", "You can't create a Controller sorry");
 
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
 
     MPDSettingsFactory mpdSettingsFactory;
     MPDConnection mpd;
-    Presenter presenter(&mpdSettingsFactory, &mpd);
+	Controller controller(&mpdSettingsFactory, &mpd);
 
 	Model model;
-	QObject::connect(&presenter, &Presenter::btnClicked, &model, &Model::printStuff);
+	QObject::connect(&controller, &Controller::btnClicked, &model, &Model::printStuff);
 
     QQmlApplicationEngine engine;
 
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     queueModel.setList(queue);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
 
-    engine.rootContext()->setContextProperty("presenter", &presenter);
+	engine.rootContext()->setContextProperty("controller", &controller);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(

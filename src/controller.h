@@ -6,7 +6,7 @@
 #include "mpdsettings.h"
 #include <QObject>
 
-class Presenter : public QObject
+class Controller : public QObject
 {
     Q_OBJECT
 
@@ -32,8 +32,8 @@ public:
     };
     Q_ENUM(ConnectionState)
 
-    explicit Presenter(AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnection *mpd,
-                       QObject *parent = nullptr);
+	explicit Controller(AbstractMPDSettingsFactory *mpdSettingsFactory, AbstractMPDConnection *mpd,
+						QObject *parent = nullptr);
     bool isConnecting() const;
     QString hostErrorString() const;
     QString portErrorString() const;

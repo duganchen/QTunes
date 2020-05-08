@@ -30,12 +30,10 @@ ApplicationWindow {
                     ToolTip.visible: hovered
 
                     onClicked: {
-                        presenter.handleBtnClick()
+                        controller.handleBtnClick()
                     }
 
                 }
-
-
 
                 ToolButton {
                     id: pauseButton
@@ -101,7 +99,7 @@ ApplicationWindow {
         id: connectDrawer
         height: window.height - header.height
         width: window.width / 3
-        visible: presenter.connectionState !== Presenter.Connected
+        visible: controller.connectionState !== Controller.Connected
         Rectangle {
             anchors.fill: parent;
 
@@ -131,7 +129,7 @@ ApplicationWindow {
 
                 Label {
                     id: hostValidationLabel
-                    text: presenter.hostErrorString
+                    text: controller.hostErrorString
                 }
 
                 Label {
@@ -153,7 +151,7 @@ ApplicationWindow {
 
                 Label {
                     id: portValidationLabel
-                    text: presenter.portErrorString
+                    text: controller.portErrorString
                 }
 
 
@@ -166,16 +164,16 @@ ApplicationWindow {
                     Button {
                         id: connectButton
                         text: qsTr("Connect")
-                        enabled: presenter.connectionState === Presenter.Disconnected
+                        enabled: controller.connectionState === Controller.Disconnected
 
                         onClicked: {
-                            presenter.connectToMPD()
+                            controller.connectToMPD()
                         }
                     }
 
                     BusyIndicator {
                         id: connectBusy
-                        visible: presenter.connectionState === Presenter.Connecting;
+                        visible: controller.connectionState === Controller.Connecting;
                     }
                 }
 
@@ -385,15 +383,15 @@ ApplicationWindow {
 
     Component.onCompleted: {
         console.log('Completed')
-        console.log(presenter.host)
-        console.log(presenter.port)
-        console.log(presenter.timeout_ms)
-        console.log(presenter.password)
+        console.log(controller.host)
+        console.log(controller.port)
+        console.log(controller.timeout_ms)
+        console.log(controller.password)
 
-        console.log(presenter.connectionState)
-        console.log(Presenter.Connected)
+        console.log(controller.connectionState)
+        console.log(Controller.Connected)
 
-        presenter.connectToMPD()
+        controller.connectToMPD()
     }
 }
 
