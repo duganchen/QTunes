@@ -31,12 +31,12 @@ QVariant PaneModel::data(const QModelIndex &index, int role) const
     return m_list[index.row()];
 }
 
-QVector<QString> PaneModel::list() const
+QVector<const char *> PaneModel::list() const
 {
     return m_list;
 }
 
-void PaneModel::setList(QVector<QString> list)
+void PaneModel::setList(QVector<const char *> list)
 {
     m_list = list;
 }
