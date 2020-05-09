@@ -283,10 +283,19 @@ ApplicationWindow {
                         model: queueModel
                         delegate: dlg
                         enabled: controller.connectionState === Controller.Connected
+                        clip: true
+                        ScrollBar.vertical: ScrollBar {}
+                        headerPositioning: ListView.OverlayHeader
 
-                        header: ToolBar {
+                        header:
+                            ToolBar {
                             anchors.left: parent.left
                             anchors.right: parent.right
+                            opacity: 1
+
+                            // https://stackoverflow.com/a/39383505/240515
+                            z: 2
+
                             RowLayout {
                                 ToolButton {
                                     id: saveButton
@@ -341,6 +350,7 @@ ApplicationWindow {
                                     ToolTip.visible: hovered
                                 }
                             }
+
                         }
                     }
                 }
