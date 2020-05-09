@@ -162,10 +162,14 @@ ApplicationWindow {
                         model: artistModel
                         delegate: dlg
                         enabled: controller.connectionState === Controller.Connected
+                        clip: true
+                        headerPositioning: ListView.OverlayHeader
+                        ScrollBar.vertical: ScrollBar {}
 
                         header: ToolBar {
                             anchors.left: parent.left
                             anchors.right: parent.right
+                            z: 2
                             RowLayout {
                                 ComboBox {
                                     model: ListModel {
@@ -196,9 +200,14 @@ ApplicationWindow {
 
                         enabled: controller.connectionState === Controller.Connected
 
+                        clip: true
+                        headerPositioning: ListView.OverlayHeader
+                        ScrollBar.vertical: ScrollBar {}
+
                         header: ToolBar {
                             anchors.left: parent.left
                             anchors.right: parent.right
+                            z: 2
                         }
                     }
                 }
@@ -209,10 +218,14 @@ ApplicationWindow {
                         model: songModel
                         delegate: dlg
                         enabled: controller.connectionState === Controller.Connected
+                        clip: true
+                        headerPositioning: ListView.OverlayHeader
+                        ScrollBar.vertical: ScrollBar {}
 
                         header: ToolBar {
                             anchors.left: parent.left
                             anchors.right: parent.right
+                            z: 2
                             RowLayout {
                                 ToolButton {
                                     id: addButton
@@ -249,9 +262,14 @@ ApplicationWindow {
                         delegate: dlg
                         enabled: controller.connectionState === Controller.Connected
 
+                        clip: true
+                        headerPositioning: ListView.OverlayHeader
+                        ScrollBar.vertical: ScrollBar {}
+
                         header: ToolBar {
                             anchors.left: parent.left
                             anchors.right: parent.right
+                            z: 2
 
                             RowLayout {
                                 ToolButton {
@@ -291,7 +309,6 @@ ApplicationWindow {
                             ToolBar {
                             anchors.left: parent.left
                             anchors.right: parent.right
-                            opacity: 1
 
                             // https://stackoverflow.com/a/39383505/240515
                             z: 2
