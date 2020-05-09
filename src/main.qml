@@ -166,6 +166,12 @@ ApplicationWindow {
                         headerPositioning: ListView.OverlayHeader
                         ScrollBar.vertical: ScrollBar {}
 
+                        onCurrentItemChanged: {
+                            console.log(dbView.currentIndex)
+                        }
+
+                        interactive: true
+
                         header: ToolBar {
                             anchors.left: parent.left
                             anchors.right: parent.right

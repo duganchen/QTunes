@@ -7,5 +7,11 @@ Component {
             text: value
         }
         width: parent.width
+
+        highlighted: ListView.isCurrentItem
+
+        onClicked: {
+            ListView.view.currentIndex = index
+        }
     }
 }
