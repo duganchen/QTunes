@@ -28,15 +28,15 @@ QVariant PaneModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    return m_list[index.row()];
+    return m_list[index.row()]->data();
 }
 
-QVector<const char *> PaneModel::list() const
+QVector<AbstractItem *> PaneModel::list() const
 {
     return m_list;
 }
 
-void PaneModel::setList(QVector<const char *> list)
+void PaneModel::setList(QVector<AbstractItem *> list)
 {
     m_list = list;
 }

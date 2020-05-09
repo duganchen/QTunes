@@ -1,13 +1,14 @@
 #ifndef PANEMODEL_H
 #define PANEMODEL_H
 
+#include "abstractitem.h"
 #include <QAbstractListModel>
 
 class PaneModel : public QAbstractListModel
 {
     Q_OBJECT
 
-	Q_PROPERTY(QVector<const char *> items READ list WRITE setList NOTIFY listChanged)
+    Q_PROPERTY(QVector<AbstractItem *> items READ list WRITE setList NOTIFY listChanged)
 
 public:
     explicit PaneModel(QObject *parent = nullptr);
@@ -17,8 +18,8 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-	QVector<const char *> list() const;
-	void setList(QVector<const char *>);
+    QVector<AbstractItem *> list() const;
+    void setList(QVector<AbstractItem *>);
 
     virtual QHash<int, QByteArray> roleNames() const override;
 
@@ -26,7 +27,7 @@ signals:
     void listChanged();
 
 private:
-	QVector<const char *> m_list;
+    QVector<AbstractItem *> m_list;
 };
 
 #endif // PANEMODEL_H

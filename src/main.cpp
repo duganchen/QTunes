@@ -8,6 +8,7 @@
 #include "mpdconnection.h"
 #include "panemodel.h"
 
+#include "tagitem.h"
 #include <mpd/client.h>
 
 #include <QDebug>
@@ -37,27 +38,33 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    QVector<const char *> artists{"artist 1", "artist 2", "artist 3"};
+    TagItem artist{"artist"};
+    QVector<AbstractItem *> artists;
+    artists.push_back(&artist);
     PaneModel artistModel;
     artistModel.setList(artists);
     engine.rootContext()->setContextProperty("artistModel", &artistModel);
 
-    QVector<const char *> albums{"album 1", "album 2", "album 3"};
+    QVector<AbstractItem *> albums;
+    albums.push_back(&artist);
     PaneModel albumModel;
-    albumModel.setList(albums);
+    albumModel.setList(artists);
     engine.rootContext()->setContextProperty("albumModel", &albumModel);
 
-    QVector<const char *> songs{"song 1", "song 2", "song 3"};
+    QVector<AbstractItem *> songs;
+    songs.push_back(&artist);
     PaneModel songModel;
     songModel.setList(songs);
     engine.rootContext()->setContextProperty("songModel", &songModel);
 
-    QVector<const char *> playlists{"playlist 1", "playlist 2", "playlist 3"};
+    QVector<AbstractItem *> playlists;
+    playlists.push_back(&artist);
     PaneModel playlistModel;
     playlistModel.setList(playlists);
     engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
 
-    QVector<const char *> queue{"queued song 1", "queued song 2", "queued song 3"};
+    QVector<AbstractItem *> queue;
+    queue.push_back(&artist);
     PaneModel queueModel;
     queueModel.setList(queue);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
