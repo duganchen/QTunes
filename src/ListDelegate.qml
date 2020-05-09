@@ -6,5 +6,6 @@ Component {
         Text {
             text: value
         }
+        width: parent.width
     }
 }
