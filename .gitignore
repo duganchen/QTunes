@@ -9,3 +9,4 @@ moc_*
 target_wrapper.sh
 qrc_qml.cpp
 tests/tests
+*.autosave
