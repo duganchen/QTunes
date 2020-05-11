@@ -10,7 +10,13 @@ class MPDSong : public AbstractMPDSong
     Q_OBJECT
 public:
     explicit MPDSong(mpd_song *song, QObject *parent = nullptr);
-    ~MPDSong();
+    bool isNull() override;
+
+    MPDSong(const MPDSong &);
+    MPDSong(MPDSong &&);
+    MPDSong &operator=(const MPDSong &);
+    MPDSong &operator=(MPDSong &&);
+    ~MPDSong() override;
 
 private:
     mpd_song *m_song;

@@ -8,9 +8,8 @@ class AbstractMPDSong : public QObject
     Q_OBJECT
 public:
     explicit AbstractMPDSong(QObject *parent = nullptr);
-
-signals:
-
+    virtual ~AbstractMPDSong(){};
+    virtual bool isNull() = 0;
 };
 
 #endif // ABSTRACTMPDSONG_H
