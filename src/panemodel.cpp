@@ -1,7 +1,14 @@
 #include "panemodel.h"
+#include <QtAlgorithms>
 
 PaneModel::PaneModel(QObject *parent) : QAbstractListModel(parent)
 {
+}
+
+PaneModel::~PaneModel()
+{
+    qDeleteAll(m_list.begin(), m_list.end());
+    m_list.clear();
 }
 
 int PaneModel::rowCount(const QModelIndex &parent) const
@@ -38,7 +45,16 @@ QVector<AbstractItem *> PaneModel::list() const
 
 void PaneModel::setList(QVector<AbstractItem *> list)
 {
-    m_list = list;
+    for (auto item : m_list)
+    {
+        delete item;
+    }
+    m_list.clear();
+
+    for (auto item : list)
+    {
+        m_list.push_back(item);
+    }
 }
 
 QHash<int, QByteArray> PaneModel::roleNames() const

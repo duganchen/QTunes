@@ -12,6 +12,7 @@ class PaneModel : public QAbstractListModel
 
 public:
     explicit PaneModel(QObject *parent = nullptr);
+    ~PaneModel();
 
     // Basic functionality:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

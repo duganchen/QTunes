@@ -37,38 +37,32 @@ int main(int argc, char *argv[])
     QObject::connect(&connectionManager, &ConnectionManager::mpd, &controller, &Controller::setMPD);
 
     QQmlApplicationEngine engine;
-
-    TagItem artist{"artist"};
     QVector<AbstractItem *> artists;
-    artists.push_back(&artist);
+    artists.push_back(new TagItem("artist"));
     PaneModel artistModel;
     artistModel.setList(artists);
     engine.rootContext()->setContextProperty("artistModel", &artistModel);
 
     QVector<AbstractItem *> albums;
-    TagItem album{"album"};
-    albums.push_back(&album);
+    albums.push_back(new TagItem("album"));
     PaneModel albumModel;
-    albumModel.setList(artists);
+    albumModel.setList(albums);
     engine.rootContext()->setContextProperty("albumModel", &albumModel);
 
     QVector<AbstractItem *> songs;
-    TagItem song{"song"};
-    songs.push_back(&song);
+    songs.push_back(new TagItem("song"));
     PaneModel songModel;
     songModel.setList(songs);
     engine.rootContext()->setContextProperty("songModel", &songModel);
 
     QVector<AbstractItem *> playlists;
-    TagItem playlist{"playlist"};
-    playlists.push_back(&playlist);
+    playlists.push_back(new TagItem("playlist"));
     PaneModel playlistModel;
     playlistModel.setList(playlists);
     engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
 
     QVector<AbstractItem *> queue;
-    TagItem queued{"queued song"};
-    queue.push_back(&queued);
+    queue.push_back(new TagItem("queued song"));
     PaneModel queueModel;
     queueModel.setList(queue);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);

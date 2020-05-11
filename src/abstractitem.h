@@ -5,6 +5,9 @@ class AbstractItem
 {
 public:
     virtual const char *data() = 0;
+    virtual ~AbstractItem()
+    {
+    }
 };
 
 #endif // ABSTRACTITEM_H

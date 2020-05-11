@@ -9,7 +9,7 @@ bool MPDSong::isNull()
     return m_song == nullptr;
 }
 
-MPDSong::MPDSong(const MPDSong &other)
+MPDSong::MPDSong(const MPDSong &other) : AbstractMPDSong(other.parent())
 {
     m_song = mpd_song_dup(other.m_song);
 }
