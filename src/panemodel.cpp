@@ -45,10 +45,7 @@ QVector<AbstractItem *> PaneModel::list() const
 
 void PaneModel::setList(QVector<AbstractItem *> list)
 {
-    for (auto item : m_list)
-    {
-        delete item;
-    }
+    qDeleteAll(m_list.begin(), m_list.end());
     m_list.clear();
 
     for (auto item : list)
