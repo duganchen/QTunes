@@ -40,31 +40,31 @@ int main(int argc, char *argv[])
     QVector<AbstractItem *> artists;
     artists.push_back(new TagItem("artist"));
     PaneModel artistModel;
-    artistModel.setList(artists);
+    artistModel.setList(&artists);
     engine.rootContext()->setContextProperty("artistModel", &artistModel);
 
     QVector<AbstractItem *> albums;
     albums.push_back(new TagItem("album"));
     PaneModel albumModel;
-    albumModel.setList(albums);
+    albumModel.setList(&albums);
     engine.rootContext()->setContextProperty("albumModel", &albumModel);
 
     QVector<AbstractItem *> songs;
     songs.push_back(new TagItem("song"));
     PaneModel songModel;
-    songModel.setList(songs);
+    songModel.setList(&songs);
     engine.rootContext()->setContextProperty("songModel", &songModel);
 
     QVector<AbstractItem *> playlists;
     playlists.push_back(new TagItem("playlist"));
     PaneModel playlistModel;
-    playlistModel.setList(playlists);
+    playlistModel.setList(&playlists);
     engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
 
     QVector<AbstractItem *> queue;
     queue.push_back(new TagItem("queued song"));
     PaneModel queueModel;
-    queueModel.setList(queue);
+    queueModel.setList(&queue);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
 
     engine.rootContext()->setContextProperty("controller", &controller);
