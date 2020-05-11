@@ -7,6 +7,7 @@ class TagItem : public AbstractItem
 {
 public:
     TagItem(const char *);
+    virtual ~TagItem(){};
     virtual const char *data();
 
 private:
