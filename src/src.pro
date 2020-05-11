@@ -27,7 +27,8 @@ SOURCES += \
         mpdconnectionfactory.cpp \
         mpdsettings.cpp \
         mpdsong.cpp \
-        tagmodel.cpp
+        panemodel.cpp \
+        tagitem.cpp
 
 RESOURCES += qml.qrc
 
@@ -43,6 +44,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    abstractitem.h \
     abstractmpdconnection.h \
     abstractmpdsettings.h \
     abstractmpdsong.h \
@@ -53,7 +55,8 @@ HEADERS += \
     mpdconnectionfactory.h \
     mpdsettings.h \
     mpdsong.h \
-    tagmodel.h
+    panemodel.h \
+    tagitem.h
 
 DISTFILES += \
     ListDelegate.qml

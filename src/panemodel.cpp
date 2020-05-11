@@ -1,10 +1,10 @@
-#include "tagmodel.h"
+#include "panemodel.h"
 
-TagModel::TagModel(QObject *parent) : QAbstractListModel(parent)
+PaneModel::PaneModel(QObject *parent) : QAbstractListModel(parent)
 {
 }
 
-int TagModel::rowCount(const QModelIndex &parent) const
+int PaneModel::rowCount(const QModelIndex &parent) const
 {
     // For list models only the root node (an invalid parent) should return the list's size. For all
     // other (valid) parents, rowCount() should return 0 so that it does not become a tree model.
@@ -14,7 +14,7 @@ int TagModel::rowCount(const QModelIndex &parent) const
     return m_list.size();
 }
 
-QVariant TagModel::data(const QModelIndex &index, int role) const
+QVariant PaneModel::data(const QModelIndex &index, int role) const
 {
     Q_UNUSED(role)
 
@@ -28,20 +28,20 @@ QVariant TagModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    return m_list[index.row()];
+    return m_list[index.row()]->data();
 }
 
-QVector<const char *> TagModel::list() const
+QVector<AbstractItem *> PaneModel::list() const
 {
     return m_list;
 }
 
-void TagModel::setList(QVector<const char *> list)
+void PaneModel::setList(QVector<AbstractItem *> list)
 {
     m_list = list;
 }
 
-QHash<int, QByteArray> TagModel::roleNames() const
+QHash<int, QByteArray> PaneModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[Qt::DisplayRole] = "value";
