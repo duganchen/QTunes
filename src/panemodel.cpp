@@ -1,8 +1,12 @@
 #include "panemodel.h"
 #include <QtAlgorithms>
 
-PaneModel::PaneModel(const QVector<AbstractItem *> &list, QObject *parent) : QAbstractListModel(parent), m_list(list)
+PaneModel::PaneModel(const QVector<AbstractItem *> &list, ItemModelController *controller, QObject *parent)
+	: QAbstractListModel(parent), m_list(list)
 {
+	controller->setParent(this);
+	QObject::connect(controller, &ItemModelController::beginReset, this, &PaneModel::beginResetModel);
+	QObject::connect(controller, &ItemModelController::reset, this, &PaneModel::endResetModel);
 }
 
 int PaneModel::rowCount(const QModelIndex &parent) const

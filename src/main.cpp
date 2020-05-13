@@ -38,28 +38,33 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     QVector<AbstractItem *> artists;
-    artists.push_back(new TagItem("artist"));
-	PaneModel artistModel(artists);
+	artists.push_back(new TagItem("artist"));
+	auto artistsController = new ItemModelController;
+	PaneModel artistModel(artists, artistsController);
     engine.rootContext()->setContextProperty("artistModel", &artistModel);
 
     QVector<AbstractItem *> albums;
     albums.push_back(new TagItem("album"));
-	PaneModel albumModel(albums);
+	auto albumController = new ItemModelController();
+	PaneModel albumModel(albums, albumController);
     engine.rootContext()->setContextProperty("albumModel", &albumModel);
 
     QVector<AbstractItem *> songs;
     songs.push_back(new TagItem("song"));
-	PaneModel songModel(songs);
+	auto songsController = new ItemModelController();
+	PaneModel songModel(songs, songsController);
     engine.rootContext()->setContextProperty("songModel", &songModel);
 
     QVector<AbstractItem *> playlists;
     playlists.push_back(new TagItem("playlist"));
-	PaneModel playlistModel(playlists);
+	auto playlistsController = new ItemModelController();
+	PaneModel playlistModel(playlists, playlistsController);
     engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
 
     QVector<AbstractItem *> queue;
     queue.push_back(new TagItem("queued song"));
-	PaneModel queueModel(queue);
+	auto queueController = new ItemModelController;
+	PaneModel queueModel(queue, queueController);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
 
     engine.rootContext()->setContextProperty("controller", &controller);

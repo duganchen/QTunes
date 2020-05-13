@@ -2,6 +2,7 @@
 #define PANEMODEL_H
 
 #include "abstractitem.h"
+#include "itemmodelcontroller.h"
 #include <QAbstractListModel>
 
 class PaneModel : public QAbstractListModel
@@ -9,7 +10,7 @@ class PaneModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-	explicit PaneModel(const QVector<AbstractItem *> &, QObject *parent = nullptr);
+	explicit PaneModel(const QVector<AbstractItem *> &, ItemModelController *, QObject *parent = nullptr);
 
     // Basic functionality:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
