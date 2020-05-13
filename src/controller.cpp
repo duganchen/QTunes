@@ -1,8 +1,56 @@
 #include "controller.h"
 #include <QDebug>
 
-Controller::Controller(AbstractMPDSettings *mpdSettings, QObject *parent)
-    : QObject(parent), m_connectionState(ConnectionState::Disconnected), m_mpd(nullptr), m_settings(mpdSettings)
+#if 0
+Controller::Controller(AbstractMPDSettings *mpdSettings, const QVector<AbstractItem *> &artists,
+					   ItemModelController *artistsController, const QVector<AbstractItem *> &albums,
+					   ItemModelController *albumsController, const QVector<AbstractItem *> &songs,
+					   ItemModelController *songsController, const QVector<AbstractItem *> &storedPlaylists,
+					   ItemModelController *storedPlaylistsController, const QVector<AbstractItem *> queue,
+					   ItemModelController *queueController, QObject *parent)
+	: QObject(parent), m_connectionState(ConnectionState::Disconnected), m_mpd(nullptr), m_settings(mpdSettings),
+	  m_artists(artists), m_artistsController(artistsController), m_albums(albums),
+	  m_albumsController(albumsController), m_songs(songs), m_songsController(songsController),
+	  m_storedPlaylists(storedPlaylists), m_storedPlaylistsController(storedPlaylistsController), m_queue(queue),
+	  m_queueController(queueController)
+{
+}
+
+#endif
+
+Controller::Controller(
+	// settings
+	AbstractMPDSettings *mpdSettings,
+	// artists
+	const QVector<AbstractItem *> &artists, ItemModelController *artistsController,
+	// albums
+	const QVector<AbstractItem *> &albums, ItemModelController *albumsController,
+	// songs
+	const QVector<AbstractItem *> &songs, ItemModelController *songsController,
+	// stored playlists
+	const QVector<AbstractItem *> &storedPlaylists, ItemModelController *storedPlaylistsController,
+	// queue
+	const QVector<AbstractItem *> &queue, ItemModelController *queueController,
+	// and the parent
+	QObject *parent)
+	: // parent
+	  QObject(parent),
+	  // state
+	  m_connectionState(ConnectionState::Disconnected),
+	  // connection
+	  m_mpd(nullptr),
+	  // connection settings
+	  m_settings(mpdSettings),
+	  // artists
+	  m_artists(artists), m_artistsController(artistsController),
+	  // albums
+	  m_albums(albums), m_albumsController(albumsController),
+	  // songs
+	  m_songs(songs), m_songsController(songsController),
+	  // stored playlists
+	  m_storedPlaylists(storedPlaylists), m_storedPlaylistsController(storedPlaylistsController),
+	  // queue
+	  m_queue(queue), m_queueController(queueController)
 {
 }
 
