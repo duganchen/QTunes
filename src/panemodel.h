@@ -9,22 +9,17 @@ class PaneModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    explicit PaneModel(QObject *parent = nullptr);
+	explicit PaneModel(const QVector<AbstractItem *> &, QObject *parent = nullptr);
 
     // Basic functionality:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    void setList(QVector<AbstractItem *> *);
-
     virtual QHash<int, QByteArray> roleNames() const override;
 
-signals:
-    void listChanged();
-
 private:
-    QVector<AbstractItem *> *m_list;
+	const QVector<AbstractItem *> &m_list;
 };
 
 #endif // PANEMODEL_H
