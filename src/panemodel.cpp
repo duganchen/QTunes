@@ -5,7 +5,7 @@ PaneModel::PaneModel(const QVector<AbstractItem *> &list, ItemModelController *c
 	: QAbstractListModel(parent), m_list(list)
 {
 	controller->setParent(this);
-	QObject::connect(controller, &ItemModelController::beginReset, this, &PaneModel::beginResetModel);
+	QObject::connect(controller, &ItemModelController::aboutToBeReset, this, &PaneModel::beginResetModel);
 	QObject::connect(controller, &ItemModelController::reset, this, &PaneModel::endResetModel);
 }
 
