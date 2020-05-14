@@ -1,15 +1,16 @@
 #include "itemmodelcontroller.h"
+#include <QModelIndex>
 
 ItemModelController::ItemModelController(QObject *parent) : QObject(parent)
 {
 }
 
-void ItemModelController::beginReset()
+void ItemModelController::beginRemoveRows(int first, int last)
 {
-	emit aboutToBeReset();
+	emit rowsAboutToBeRemoved(QModelIndex(), first, last);
 }
 
-void ItemModelController::endReset()
+void ItemModelController::endRemoveRows()
 {
-	emit reset();
+	emit rowsRemoved();
 }

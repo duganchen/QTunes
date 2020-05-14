@@ -1,4 +1,5 @@
 #include "panemodel.h"
+#include <QDebug>
 #include <QtAlgorithms>
 
 PaneModel::PaneModel(const QVector<AbstractItem *> &list, ItemModelController *controller, QObject *parent)
@@ -7,10 +8,13 @@ PaneModel::PaneModel(const QVector<AbstractItem *> &list, ItemModelController *c
 	controller->setParent(this);
 	QObject::connect(controller, &ItemModelController::aboutToBeReset, this, &PaneModel::beginResetModel);
 	QObject::connect(controller, &ItemModelController::reset, this, &PaneModel::endResetModel);
+	QObject::connect(controller, &ItemModelController::rowsAboutToBeRemoved, this, &PaneModel::beginRemoveRows);
+	QObject::connect(controller, &ItemModelController::rowsRemoved, this, &PaneModel::endRemoveRows);
 }
 
 int PaneModel::rowCount(const QModelIndex &parent) const
 {
+	qDebug() << "Calling rowCount";
     // For list models only the root node (an invalid parent) should return the list's size. For all
     // other (valid) parents, rowCount() should return 0 so that it does not become a tree model.
 	if (parent.isValid())
@@ -40,5 +44,5 @@ QHash<int, QByteArray> PaneModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[Qt::DisplayRole] = "value";
-    return roles;
+	return roles;
 }

@@ -29,15 +29,15 @@ public:
 
 		AbstractMPDSettings *,
 		// artists
-		const QVector<AbstractItem *> &, ItemModelController *,
+		QVector<AbstractItem *> &, ItemModelController *,
 		// albums
-		const QVector<AbstractItem *> &, ItemModelController *,
+		QVector<AbstractItem *> &, ItemModelController *,
 		// songs
-		const QVector<AbstractItem *> &, ItemModelController *,
+		QVector<AbstractItem *> &, ItemModelController *,
 		// stored playlists
-		const QVector<AbstractItem *> &, ItemModelController *,
+		QVector<AbstractItem *> &, ItemModelController *,
 		// queue
-		const QVector<AbstractItem *> &, ItemModelController *,
+		QVector<AbstractItem *> &, ItemModelController *,
 
 		QObject *parent = nullptr);
     ConnectionState connectionState() const;
@@ -69,15 +69,15 @@ private:
     QString m_connectionError;
     void setConnectionError(QString);
 
-	const QVector<AbstractItem *> &m_artists;
+	QVector<AbstractItem *> &m_artists;
 	ItemModelController *m_artistsController;
-	const QVector<AbstractItem *> &m_albums;
+	QVector<AbstractItem *> &m_albums;
 	ItemModelController *m_albumsController;
-	const QVector<AbstractItem *> &m_songs;
+	QVector<AbstractItem *> &m_songs;
 	ItemModelController *m_songsController;
-	const QVector<AbstractItem *> &m_storedPlaylists;
+	QVector<AbstractItem *> &m_storedPlaylists;
 	ItemModelController *m_storedPlaylistsController;
-	const QVector<AbstractItem *> &m_queue;
+	QVector<AbstractItem *> &m_queue;
 	ItemModelController *m_queueController;
 };
 

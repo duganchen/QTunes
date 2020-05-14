@@ -1,36 +1,19 @@
 #include "controller.h"
 #include <QDebug>
 
-#if 0
-Controller::Controller(AbstractMPDSettings *mpdSettings, const QVector<AbstractItem *> &artists,
-					   ItemModelController *artistsController, const QVector<AbstractItem *> &albums,
-					   ItemModelController *albumsController, const QVector<AbstractItem *> &songs,
-					   ItemModelController *songsController, const QVector<AbstractItem *> &storedPlaylists,
-					   ItemModelController *storedPlaylistsController, const QVector<AbstractItem *> queue,
-					   ItemModelController *queueController, QObject *parent)
-	: QObject(parent), m_connectionState(ConnectionState::Disconnected), m_mpd(nullptr), m_settings(mpdSettings),
-	  m_artists(artists), m_artistsController(artistsController), m_albums(albums),
-	  m_albumsController(albumsController), m_songs(songs), m_songsController(songsController),
-	  m_storedPlaylists(storedPlaylists), m_storedPlaylistsController(storedPlaylistsController), m_queue(queue),
-	  m_queueController(queueController)
-{
-}
-
-#endif
-
 Controller::Controller(
 	// settings
 	AbstractMPDSettings *mpdSettings,
 	// artists
-	const QVector<AbstractItem *> &artists, ItemModelController *artistsController,
+	QVector<AbstractItem *> &artists, ItemModelController *artistsController,
 	// albums
-	const QVector<AbstractItem *> &albums, ItemModelController *albumsController,
+	QVector<AbstractItem *> &albums, ItemModelController *albumsController,
 	// songs
-	const QVector<AbstractItem *> &songs, ItemModelController *songsController,
+	QVector<AbstractItem *> &songs, ItemModelController *songsController,
 	// stored playlists
-	const QVector<AbstractItem *> &storedPlaylists, ItemModelController *storedPlaylistsController,
+	QVector<AbstractItem *> &storedPlaylists, ItemModelController *storedPlaylistsController,
 	// queue
-	const QVector<AbstractItem *> &queue, ItemModelController *queueController,
+	QVector<AbstractItem *> &queue, ItemModelController *queueController,
 	// and the parent
 	QObject *parent)
 	: // parent
@@ -67,81 +50,127 @@ void Controller::connectToMPD()
 
 void Controller::setConnectionState(ConnectionState connectionState)
 {
-    if (connectionState != m_connectionState)
-    {
-        m_connectionState = connectionState;
-        emit connectionStateChanged(connectionState);
-    }
+	if (connectionState == m_connectionState)
+	{
+		return;
+	}
+
+	if (ConnectionState::Disconnected == connectionState)
+	{
+		m_artistsController->beginRemoveRows(0, m_artists.size() - 1);
+		for (auto item : m_artists)
+		{
+			delete item;
+		}
+		m_artists.clear();
+		m_artistsController->endRemoveRows();
+
+		m_albumsController->beginRemoveRows(0, m_albums.size() - 1);
+		for (auto item : m_albums)
+		{
+			delete item;
+		}
+		m_albums.clear();
+		m_albumsController->endRemoveRows();
+
+		m_songsController->beginRemoveRows(0, m_songs.size() - 1);
+		for (auto item : m_songs)
+		{
+			delete item;
+		}
+		m_songs.clear();
+		m_songsController->endRemoveRows();
+
+		m_storedPlaylistsController->beginRemoveRows(0, m_storedPlaylists.size() - 1);
+		for (auto item : m_storedPlaylists)
+		{
+			delete item;
+		}
+		m_storedPlaylists.clear();
+		m_storedPlaylistsController->endRemoveRows();
+
+		m_queueController->beginRemoveRows(0, m_queue.size() - 1);
+		for (auto item : m_queue)
+		{
+			delete item;
+		}
+		m_queue.clear();
+		m_queueController->endRemoveRows();
+	}
+
+	m_connectionState = connectionState;
+	emit connectionStateChanged(connectionState);
 }
 
 Controller::ConnectionState Controller::state() const
 {
-    return ConnectionState::Disconnected;
+	return ConnectionState::Disconnected;
 }
 
 void Controller::handleBtnClick()
 {
-    for (const char *tag : m_mpd->search_db_tags(MPD_TAG_ALBUM))
+	for (const char *tag : m_mpd->search_db_tags(MPD_TAG_ALBUM))
     {
-        qDebug() << tag;
+		qDebug() << tag;
     }
 }
 
 void Controller::setMPD(AbstractMPDConnection *mpd)
 {
-    if (!mpd || mpd->isNull())
+	if (!mpd || mpd->isNull())
     {
-        // The first condition should never happens. The second means we're out of memory.
-        qDebug() << "Unrecoverable error";
+		// The first condition should never happens. The second means we're out of memory.
+		qDebug() << "Unrecoverable error";
     }
 
-    if (m_mpd)
+	if (m_mpd)
     {
-        delete m_mpd;
-    }
+		delete m_mpd;
+	}
 
-    m_mpd = mpd;
+	m_mpd = mpd;
 
-    if (m_mpd->error() == MPD_ERROR_SUCCESS)
-    {
-        setConnectionState(ConnectionState::Connected);
+	if (m_mpd->error() == MPD_ERROR_SUCCESS)
+	{
+		setConnectionState(ConnectionState::Connected);
 
-        connect(mpd, &AbstractMPDConnection::idle, this, &Controller::handleIdle);
-    }
-    else
-    {
-        setConnectionError(m_mpd->error_message());
-        setConnectionState(ConnectionState::Disconnected);
-    }
+		connect(mpd, &AbstractMPDConnection::idle, this, &Controller::handleIdle);
+	}
+	else
+	{
+		qDebug() << "Disconnected";
+		setConnectionError(m_mpd->error_message());
+		setConnectionState(ConnectionState::Disconnected);
+	}
 }
 
 QString Controller::connectionError() const
 {
-    return m_connectionError;
+	return m_connectionError;
 }
 
 void Controller::handleIdle(mpd_idle idle)
 {
-    if (!m_mpd || m_mpd->isNull())
+	if (!m_mpd || m_mpd->isNull())
     {
-        return;
+		return;
     }
 
-    if (!idle && m_mpd->error() != MPD_ERROR_SUCCESS)
+	if (!idle && m_mpd->error() != MPD_ERROR_SUCCESS)
     {
-        // This means we lost the connection.
-        setConnectionError(m_mpd->error_message());
-        delete m_mpd;
-        m_mpd = nullptr;
-        setConnectionState(ConnectionState::Disconnected);
+		// This means we lost the connection.
+		setConnectionError(m_mpd->error_message());
+		delete m_mpd;
+		m_mpd = nullptr;
+		setConnectionState(ConnectionState::Disconnected);
     }
 }
 
 void Controller::setConnectionError(QString message)
 {
-    if (m_connectionError != message)
+	if (m_connectionError != message)
     {
-        m_connectionError = message;
-        emit connectionErrorChanged(message);
-    }
+		m_connectionError = message;
+		emit connectionErrorChanged(message);
+	}
 }
