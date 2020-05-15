@@ -4,7 +4,6 @@
 
 #include "connectionmanager.h"
 #include "controller.h"
-#include "itemmodeldata.h"
 #include "mockmpdsettings.h"
 #include "mpdconnection.h"
 #include "panemodel.h"
@@ -29,52 +28,41 @@ int main(int argc, char *argv[])
 
     MockMPDSettings mpd_settings("localhost", 6600, 200, nullptr, nullptr);
 
-	ConnectionManager connectionManager;
+    ConnectionManager connectionManager;
 
-    QVector<AbstractItem *> artists;
-	artists.push_back(new TagItem("artist"));
-	auto artistsController = new ItemModelController;
-	PaneModel artistModel(artists, artistsController);
+    ItemModelController artists;
+    artists.items.push_back(new TagItem("artist"));
+    PaneModel artistModel(&artists);
 
-    QVector<AbstractItem *> albums;
-    albums.push_back(new TagItem("album"));
-	auto albumController = new ItemModelController();
-	PaneModel albumModel(albums, albumController);
+    ItemModelController albums;
+    albums.items.push_back(new TagItem("album"));
+    PaneModel albumModel(&albums);
 
-    QVector<AbstractItem *> songs;
-    songs.push_back(new TagItem("song"));
-	auto songsController = new ItemModelController();
-	PaneModel songModel(songs, songsController);
+    ItemModelController songs;
+    songs.items.push_back(new TagItem("song"));
+    PaneModel songModel(&songs);
 
-    QVector<AbstractItem *> playlists;
-    playlists.push_back(new TagItem("playlist"));
-	auto playlistsController = new ItemModelController();
-	PaneModel playlistModel(playlists, playlistsController);
+    ItemModelController playlists;
+    playlists.items.push_back(new TagItem("playlist"));
+    PaneModel playlistModel(&playlists);
 
-    QVector<AbstractItem *> queue;
-    queue.push_back(new TagItem("queued song"));
-	auto queueController = new ItemModelController;
-	PaneModel queueModel(queue, queueController);
+    ItemModelController queue;
+    queue.items.push_back(new TagItem("queued song"));
+    PaneModel queueModel(&queue);
 
-	ItemModelData artistData(artists, artistsController);
-	ItemModelData albumData(albums, albumController);
-	ItemModelData songData(songs, songsController);
-	ItemModelData playlistData(playlists, playlistsController);
-	ItemModelData queueData(queue, queueController);
+    Controller controller(&mpd_settings, &artists, &albums, &songs, &playlists, &queue);
 
-	Controller controller(&mpd_settings, artistData, albumData, songData, playlistData, queueData);
+    QObject::connect(&controller, &Controller::requestConnection, &connectionManager,
+                     &ConnectionManager::createConnection);
+    QObject::connect(&connectionManager, &ConnectionManager::mpd, &controller, &Controller::setMPD);
 
-	QObject::connect(&controller, &Controller::requestConnection, &connectionManager,
-					 &ConnectionManager::createConnection);
-	QObject::connect(&connectionManager, &ConnectionManager::mpd, &controller, &Controller::setMPD);
-
-	QQmlApplicationEngine engine;
+    QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("controller", &controller);
-	engine.rootContext()->setContextProperty("artistModel", &artistModel);
-	engine.rootContext()->setContextProperty("albumModel", &albumModel);
-	engine.rootContext()->setContextProperty("songModel", &songModel);
-	engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
-	engine.rootContext()->setContextProperty("queueModel", &queueModel);
+    engine.rootContext()->setContextProperty("artistModel", &artistModel);
+    engine.rootContext()->setContextProperty("albumModel", &albumModel);
+    engine.rootContext()->setContextProperty("songModel", &songModel);
+    engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
+    engine.rootContext()->setContextProperty("queueModel", &queueModel);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(

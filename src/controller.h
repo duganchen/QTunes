@@ -3,7 +3,7 @@
 
 #include "abstractmpdconnection.h"
 #include "abstractmpdsettings.h"
-#include "itemmodeldata.h"
+#include "itemmodelcontroller.h"
 #include "mpdsettings.h"
 #include <QObject>
 #include <QVector>
@@ -24,15 +24,15 @@ public:
     };
     Q_ENUM(ConnectionState)
 
-	explicit Controller(
-		// connection settings
-		AbstractMPDSettings *,
+    explicit Controller(
+        // connection settings
+        AbstractMPDSettings *,
 
-		const ItemModelData &artists, const ItemModelData &albums, const ItemModelData &songs,
-		const ItemModelData &playlists, const ItemModelData &queue,
+        ItemModelController *artists, ItemModelController *albums, ItemModelController *songs,
+        ItemModelController *playlists, ItemModelController *queue,
 
-		// and the parent
-		QObject *parent = nullptr);
+        // and the parent
+        QObject *parent = nullptr);
     ConnectionState connectionState() const;
 
     QString connectionError() const;
@@ -62,11 +62,11 @@ private:
     QString m_connectionError;
     void setConnectionError(QString);
 
-	const ItemModelData &m_artists;
-	const ItemModelData &m_albums;
-	const ItemModelData &m_songs;
-	const ItemModelData &m_playlists;
-	const ItemModelData &m_queue;
+    ItemModelController *m_artists;
+    ItemModelController *m_albums;
+    ItemModelController *m_songs;
+    ItemModelController *m_playlists;
+    ItemModelController *m_queue;
 };
 
 #endif // CONTROLLER_H

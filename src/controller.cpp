@@ -3,8 +3,8 @@
 
 Controller::Controller(AbstractMPDSettings *mpdSettings,
 
-                       const ItemModelData &artists, const ItemModelData &albums, const ItemModelData &songs,
-                       const ItemModelData &playlists, const ItemModelData &queue, QObject *parent)
+                       ItemModelController *artists, ItemModelController *albums, ItemModelController *songs,
+                       ItemModelController *playlists, ItemModelController *queue, QObject *parent)
     : QObject(parent), m_connectionState(ConnectionState::Disconnected), m_mpd(nullptr), m_settings(mpdSettings),
       m_artists(artists), m_albums(albums), m_songs(songs), m_playlists(playlists), m_queue(queue)
 {
@@ -30,45 +30,45 @@ void Controller::setConnectionState(ConnectionState connectionState)
 
     if (ConnectionState::Disconnected == connectionState)
     {
-        m_artists.controller->beginRemoveRows(0, m_artists.items.size() - 1);
-        for (auto item : m_artists.items)
+        m_artists->beginRemoveRows(0, m_artists->items.size() - 1);
+        for (auto item : m_artists->items)
         {
             delete item;
         }
-        m_artists.items.clear();
-        m_artists.controller->endRemoveRows();
+        m_artists->items.clear();
+        m_artists->endRemoveRows();
 
-        m_albums.controller->beginRemoveRows(0, m_albums.items.size() - 1);
-        for (auto item : m_albums.items)
+        m_albums->beginRemoveRows(0, m_albums->items.size() - 1);
+        for (auto item : m_albums->items)
         {
             delete item;
         }
-        m_albums.items.clear();
-        m_albums.controller->endRemoveRows();
+        m_albums->items.clear();
+        m_albums->endRemoveRows();
 
-        m_songs.controller->beginRemoveRows(0, m_songs.items.size() - 1);
-        for (auto item : m_songs.items)
+        m_songs->beginRemoveRows(0, m_songs->items.size() - 1);
+        for (auto item : m_songs->items)
         {
             delete item;
         }
-        m_songs.items.clear();
-        m_songs.controller->endRemoveRows();
+        m_songs->items.clear();
+        m_songs->endRemoveRows();
 
-        m_playlists.controller->beginRemoveRows(0, m_playlists.items.size() - 1);
-        for (auto item : m_playlists.items)
+        m_playlists->beginRemoveRows(0, m_playlists->items.size() - 1);
+        for (auto item : m_playlists->items)
         {
             delete item;
         }
-        m_playlists.items.clear();
-        m_playlists.controller->endRemoveRows();
+        m_playlists->items.clear();
+        m_playlists->endRemoveRows();
 
-        m_queue.controller->beginRemoveRows(0, m_queue.items.size() - 1);
-        for (auto item : m_queue.items)
+        m_queue->beginRemoveRows(0, m_queue->items.size() - 1);
+        for (auto item : m_queue->items)
         {
             delete item;
         }
-        m_queue.items.clear();
-        m_queue.controller->endRemoveRows();
+        m_queue->items.clear();
+        m_queue->endRemoveRows();
     }
 
     m_connectionState = connectionState;

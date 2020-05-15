@@ -21,7 +21,6 @@ SOURCES += \
         connectionmanager.cpp \
         controller.cpp \
         itemmodelcontroller.cpp \
-        itemmodeldata.cpp \
         main.cpp \
         mockmpdsettings.cpp \
         mpdconnection.cpp \
@@ -52,7 +51,6 @@ HEADERS += \
     connectionmanager.h \
     controller.h \
     itemmodelcontroller.h \
-    itemmodeldata.h \
     mockmpdsettings.h \
     mpdconnection.h \
     mpdconnectionfactory.h \

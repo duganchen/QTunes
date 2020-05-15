@@ -2,10 +2,9 @@
 #include <QDebug>
 #include <QtAlgorithms>
 
-PaneModel::PaneModel(const QVector<AbstractItem *> &list, ItemModelController *controller, QObject *parent)
-    : QAbstractListModel(parent), m_list(list)
+PaneModel::PaneModel(ItemModelController *controller, QObject *parent)
+    : QAbstractListModel(parent), m_controller(controller)
 {
-    controller->setParent(this);
     QObject::connect(controller, &ItemModelController::aboutToBeReset, this, &PaneModel::beginResetModel);
     QObject::connect(controller, &ItemModelController::reset, this, &PaneModel::endResetModel);
     QObject::connect(controller, &ItemModelController::rowsAboutToBeRemoved, this, &PaneModel::beginRemoveRows);
@@ -19,7 +18,7 @@ int PaneModel::rowCount(const QModelIndex &parent) const
     if (parent.isValid())
         return 0;
 
-    return m_list.size();
+    return m_controller->items.size();
 }
 
 QVariant PaneModel::data(const QModelIndex &index, int role) const
@@ -31,12 +30,12 @@ QVariant PaneModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    if (m_list.size() - 1 < index.row())
+    if (m_controller->items.size() - 1 < index.row())
     {
         return QVariant();
     }
 
-    return m_list.at(index.row())->data();
+    return m_controller->items.at(index.row())->data();
 }
 
 QHash<int, QByteArray> PaneModel::roleNames() const
