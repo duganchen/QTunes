@@ -1,39 +1,12 @@
 #include "controller.h"
 #include <QDebug>
 
-Controller::Controller(
-	// settings
-	AbstractMPDSettings *mpdSettings,
-	// artists
-	QVector<AbstractItem *> &artists, ItemModelController *artistsController,
-	// albums
-	QVector<AbstractItem *> &albums, ItemModelController *albumsController,
-	// songs
-	QVector<AbstractItem *> &songs, ItemModelController *songsController,
-	// stored playlists
-	QVector<AbstractItem *> &storedPlaylists, ItemModelController *storedPlaylistsController,
-	// queue
-	QVector<AbstractItem *> &queue, ItemModelController *queueController,
-	// and the parent
-	QObject *parent)
-	: // parent
-	  QObject(parent),
-	  // state
-	  m_connectionState(ConnectionState::Disconnected),
-	  // connection
-	  m_mpd(nullptr),
-	  // connection settings
-	  m_settings(mpdSettings),
-	  // artists
-	  m_artists(artists), m_artistsController(artistsController),
-	  // albums
-	  m_albums(albums), m_albumsController(albumsController),
-	  // songs
-	  m_songs(songs), m_songsController(songsController),
-	  // stored playlists
-	  m_storedPlaylists(storedPlaylists), m_storedPlaylistsController(storedPlaylistsController),
-	  // queue
-	  m_queue(queue), m_queueController(queueController)
+Controller::Controller(AbstractMPDSettings *mpdSettings,
+
+					   const ItemModelData &artists, const ItemModelData &albums, const ItemModelData &songs,
+					   const ItemModelData &playlists, const ItemModelData &queue, QObject *parent)
+	: QObject(parent), m_connectionState(ConnectionState::Disconnected), m_mpd(nullptr), m_settings(mpdSettings),
+	  m_artists(artists), m_albums(albums), m_songs(songs), m_playlists(playlists), m_queue(queue)
 {
 }
 
@@ -57,45 +30,45 @@ void Controller::setConnectionState(ConnectionState connectionState)
 
 	if (ConnectionState::Disconnected == connectionState)
 	{
-		m_artistsController->beginRemoveRows(0, m_artists.size() - 1);
-		for (auto item : m_artists)
+		m_artists.controller->beginRemoveRows(0, m_artists.items.size() - 1);
+		for (auto item : m_artists.items)
 		{
 			delete item;
 		}
-		m_artists.clear();
-		m_artistsController->endRemoveRows();
+		m_artists.items.clear();
+		m_artists.controller->endRemoveRows();
 
-		m_albumsController->beginRemoveRows(0, m_albums.size() - 1);
-		for (auto item : m_albums)
+		m_albums.controller->beginRemoveRows(0, m_albums.items.size() - 1);
+		for (auto item : m_albums.items)
 		{
 			delete item;
 		}
-		m_albums.clear();
-		m_albumsController->endRemoveRows();
+		m_albums.items.clear();
+		m_albums.controller->endRemoveRows();
 
-		m_songsController->beginRemoveRows(0, m_songs.size() - 1);
-		for (auto item : m_songs)
+		m_songs.controller->beginRemoveRows(0, m_songs.items.size() - 1);
+		for (auto item : m_songs.items)
 		{
 			delete item;
 		}
-		m_songs.clear();
-		m_songsController->endRemoveRows();
+		m_songs.items.clear();
+		m_songs.controller->endRemoveRows();
 
-		m_storedPlaylistsController->beginRemoveRows(0, m_storedPlaylists.size() - 1);
-		for (auto item : m_storedPlaylists)
+		m_playlists.controller->beginRemoveRows(0, m_playlists.items.size() - 1);
+		for (auto item : m_playlists.items)
 		{
 			delete item;
 		}
-		m_storedPlaylists.clear();
-		m_storedPlaylistsController->endRemoveRows();
+		m_playlists.items.clear();
+		m_playlists.controller->endRemoveRows();
 
-		m_queueController->beginRemoveRows(0, m_queue.size() - 1);
-		for (auto item : m_queue)
+		m_queue.controller->beginRemoveRows(0, m_queue.items.size() - 1);
+		for (auto item : m_queue.items)
 		{
 			delete item;
 		}
-		m_queue.clear();
-		m_queueController->endRemoveRows();
+		m_queue.items.clear();
+		m_queue.controller->endRemoveRows();
 	}
 
 	m_connectionState = connectionState;
@@ -132,13 +105,14 @@ void Controller::setMPD(AbstractMPDConnection *mpd)
 
 	if (m_mpd->error() == MPD_ERROR_SUCCESS)
 	{
+
+		// Trigger setConnectionState slot
 		setConnectionState(ConnectionState::Connected);
 
 		connect(mpd, &AbstractMPDConnection::idle, this, &Controller::handleIdle);
 	}
 	else
 	{
-		qDebug() << "Disconnected";
 		setConnectionError(m_mpd->error_message());
 		setConnectionState(ConnectionState::Disconnected);
 	}

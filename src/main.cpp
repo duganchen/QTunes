@@ -4,6 +4,7 @@
 
 #include "connectionmanager.h"
 #include "controller.h"
+#include "itemmodeldata.h"
 #include "mockmpdsettings.h"
 #include "mpdconnection.h"
 #include "panemodel.h"
@@ -55,8 +56,14 @@ int main(int argc, char *argv[])
 	auto queueController = new ItemModelController;
 	PaneModel queueModel(queue, queueController);
 
-	Controller controller(&mpd_settings, artists, artistsController, albums, albumController, songs, songsController,
-						  playlists, playlistsController, queue, queueController);
+	ItemModelData artistData(artists, artistsController);
+	ItemModelData albumData(albums, albumController);
+	ItemModelData songData(songs, songsController);
+	ItemModelData playlistData(playlists, playlistsController);
+	ItemModelData queueData(queue, queueController);
+
+	Controller controller(&mpd_settings, artistData, albumData, songData, playlistData, queueData);
+
 	QObject::connect(&controller, &Controller::requestConnection, &connectionManager,
 					 &ConnectionManager::createConnection);
 	QObject::connect(&connectionManager, &ConnectionManager::mpd, &controller, &Controller::setMPD);

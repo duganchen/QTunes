@@ -1,10 +1,9 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include "abstractitem.h"
 #include "abstractmpdconnection.h"
 #include "abstractmpdsettings.h"
-#include "itemmodelcontroller.h"
+#include "itemmodeldata.h"
 #include "mpdsettings.h"
 #include <QObject>
 #include <QVector>
@@ -26,19 +25,13 @@ public:
     Q_ENUM(ConnectionState)
 
 	explicit Controller(
-
+		// connection settings
 		AbstractMPDSettings *,
-		// artists
-		QVector<AbstractItem *> &, ItemModelController *,
-		// albums
-		QVector<AbstractItem *> &, ItemModelController *,
-		// songs
-		QVector<AbstractItem *> &, ItemModelController *,
-		// stored playlists
-		QVector<AbstractItem *> &, ItemModelController *,
-		// queue
-		QVector<AbstractItem *> &, ItemModelController *,
 
+		const ItemModelData &artists, const ItemModelData &albums, const ItemModelData &songs,
+		const ItemModelData &playlists, const ItemModelData &queue,
+
+		// and the parent
 		QObject *parent = nullptr);
     ConnectionState connectionState() const;
 
@@ -69,16 +62,11 @@ private:
     QString m_connectionError;
     void setConnectionError(QString);
 
-	QVector<AbstractItem *> &m_artists;
-	ItemModelController *m_artistsController;
-	QVector<AbstractItem *> &m_albums;
-	ItemModelController *m_albumsController;
-	QVector<AbstractItem *> &m_songs;
-	ItemModelController *m_songsController;
-	QVector<AbstractItem *> &m_storedPlaylists;
-	ItemModelController *m_storedPlaylistsController;
-	QVector<AbstractItem *> &m_queue;
-	ItemModelController *m_queueController;
+	const ItemModelData &m_artists;
+	const ItemModelData &m_albums;
+	const ItemModelData &m_songs;
+	const ItemModelData &m_playlists;
+	const ItemModelData &m_queue;
 };
 
 #endif // CONTROLLER_H
