@@ -2,14 +2,12 @@
 #define MPDSONG_H
 
 #include "abstractmpdsong.h"
-#include <QObject>
 #include <mpd/client.h>
 
 class MPDSong : public AbstractMPDSong
 {
-    Q_OBJECT
 public:
-    explicit MPDSong(mpd_song *song, QObject *parent = nullptr);
+    explicit MPDSong(mpd_song *song);
     bool isNull() override;
 
     MPDSong(const MPDSong &);

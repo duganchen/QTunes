@@ -18,7 +18,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         abstractmpdconnection.cpp \
         abstractmpdsettings.cpp \
-        abstractmpdsong.cpp \
         connectionmanager.cpp \
         controller.cpp \
         itemmodelcontroller.cpp \

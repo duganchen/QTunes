@@ -1,6 +1,6 @@
 #include "mpdsong.h"
 
-MPDSong::MPDSong(mpd_song *song, QObject *parent) : AbstractMPDSong(parent), m_song(song)
+MPDSong::MPDSong(mpd_song *song) : m_song(song)
 {
 }
 
@@ -9,7 +9,7 @@ bool MPDSong::isNull()
     return m_song == nullptr;
 }
 
-MPDSong::MPDSong(const MPDSong &other) : AbstractMPDSong(other.parent())
+MPDSong::MPDSong(const MPDSong &other) : AbstractMPDSong()
 {
     m_song = mpd_song_dup(other.m_song);
 }
