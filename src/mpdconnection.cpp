@@ -1,4 +1,5 @@
 #include "mpdconnection.h"
+#include "mpdsong.h"
 #include <QDebug>
 #include <QSocketNotifier>
 #include <mpd/client.h>
@@ -102,8 +103,27 @@ void MPDConnection::handleActivation()
 QVector<AbstractMPDSong *> MPDConnection::list_queue_meta()
 {
     // Implementation will come from here.
-    // https://www.reddit.com/r/C_Programming/comments/3hl1xt/anyone_have_experience_with_libmpdclient/cu8qb6u?utm_source=share&utm_medium=web2x
+    // https://www.reddit.com/r/C_Programming/comments/3hl1xt/anyone_have_experience_with_libmpdclient/cu8qb6u
 
     QVector<AbstractMPDSong *> songs;
+
+    m_notifier->setEnabled(false);
+
+    emit idle(mpd_run_noidle(m_mpd));
+
+    if (!mpd_send_list_queue_meta(m_mpd))
+    {
+        qDebug() << mpd_connection_get_error_message(m_mpd);
+    }
+
+    struct mpd_song *song = nullptr;
+    while ((song = mpd_recv_song(m_mpd)) != nullptr)
+    {
+        songs.push_back(new MPDSong(song));
+    };
+
+    m_notifier->setEnabled(true);
+    mpd_send_idle(m_mpd);
+
     return songs;
 }
