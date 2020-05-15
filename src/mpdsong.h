@@ -10,6 +10,7 @@ public:
     explicit MPDSong(mpd_song *song);
     bool isNull() override;
 
+    // No, these aren't used. QTunes passes MPDSongs by pointer. But whatever.
     MPDSong(const MPDSong &);
     MPDSong(MPDSong &&);
     MPDSong &operator=(const MPDSong &);
