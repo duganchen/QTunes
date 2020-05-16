@@ -9,6 +9,7 @@
 #include "panemodel.h"
 
 #include "tagitem.h"
+#include <QTimer>
 #include <mpd/client.h>
 
 #include <QDebug>
@@ -63,6 +64,10 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("songModel", &songModel);
     engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
+
+	QTimer timer;
+	QObject::connect(&timer, &QTimer::timeout, &controller, &Controller::onTicked);
+	timer.start(1000);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(
