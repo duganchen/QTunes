@@ -176,13 +176,13 @@ ApplicationWindow {
                                 ComboBox {
                                     model: ListModel {
                                         ListElement {
-                                            text: "artist"
+                                            text: "Artist"
                                         }
                                         ListElement {
-                                            text: "albumartist"
+                                            text: "Album artist"
                                         }
                                         ListElement {
-                                            text: "composer"
+                                            text: "Composer"
                                         }
                                     }
                                 }
