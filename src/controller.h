@@ -45,6 +45,8 @@ public slots:
 
     void setMPD(AbstractMPDConnection *);
 
+	void onTicked();
+
 signals:
     void connectionStateChanged(ConnectionState);
 

@@ -116,7 +116,11 @@ void Controller::setMPD(AbstractMPDConnection *mpd)
     {
         setConnectionError(m_mpd->error_message());
         setConnectionState(ConnectionState::Disconnected);
-    }
+	}
+}
+
+void Controller::onTicked()
+{
 }
 
 QString Controller::connectionError() const
