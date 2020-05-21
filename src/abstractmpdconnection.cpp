@@ -2,7 +2,8 @@
 
 // Have stub implementations so that mocking isn't as painful.
 
-AbstractMPDConnection::AbstractMPDConnection(AbstractMPDSettings *settings, QObject *parent) : QObject(parent)
+AbstractMPDConnection::AbstractMPDConnection(AbstractMPDSettings *settings, QObject *parent)
+    : QObject(parent)
 {
     Q_UNUSED(settings)
 }

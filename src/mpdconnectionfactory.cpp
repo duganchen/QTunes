@@ -3,9 +3,9 @@
 #include <QDebug>
 #include <QGuiApplication>
 
-MPDConnectionFactory::MPDConnectionFactory(QObject *parent) : QObject(parent)
-{
-}
+MPDConnectionFactory::MPDConnectionFactory(QObject *parent)
+    : QObject(parent)
+{}
 
 void MPDConnectionFactory::createConnection(AbstractMPDSettings *settings)
 {

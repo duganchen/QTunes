@@ -7,8 +7,12 @@ class MockMPDSettings : public AbstractMPDSettings
 {
     Q_OBJECT
 public:
-    explicit MockMPDSettings(const char *host, unsigned port, unsigned timeout_ms, const char *reserved,
-                             const char *password, QObject *parent = nullptr);
+    explicit MockMPDSettings(const char *host,
+                             unsigned port,
+                             unsigned timeout_ms,
+                             const char *reserved,
+                             const char *password,
+                             QObject *parent = nullptr);
     virtual const char *host();
     virtual unsigned port();
     virtual unsigned timeout_ms();

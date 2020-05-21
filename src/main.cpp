@@ -9,8 +9,8 @@
 #include "panemodel.h"
 
 #include "tagitem.h"
-#include <QTimer>
 #include <mpd/client.h>
+#include <QTimer>
 
 #include <QDebug>
 
@@ -22,7 +22,11 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    qmlRegisterUncreatableType<Controller>("QTunes", 1, 0, "Controller", "You can't create a Controller sorry");
+    qmlRegisterUncreatableType<Controller>("QTunes",
+                                           1,
+                                           0,
+                                           "Controller",
+                                           "You can't create a Controller sorry");
 
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
@@ -53,7 +57,9 @@ int main(int argc, char *argv[])
 
     Controller controller(&mpd_settings, &artists, &albums, &songs, &playlists, &queue);
 
-    QObject::connect(&controller, &Controller::requestConnection, &connectionManager,
+    QObject::connect(&controller,
+                     &Controller::requestConnection,
+                     &connectionManager,
                      &ConnectionManager::createConnection);
     QObject::connect(&connectionManager, &ConnectionManager::mpd, &controller, &Controller::setMPD);
 
@@ -65,13 +71,15 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
 
-	QTimer timer;
-	QObject::connect(&timer, &QTimer::timeout, &controller, &Controller::onTicked);
-	timer.start(1000);
+    QTimer timer;
+    QObject::connect(&timer, &QTimer::timeout, &controller, &Controller::onTicked);
+    timer.start(1000);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(
-        &engine, &QQmlApplicationEngine::objectCreated, &app,
+        &engine,
+        &QQmlApplicationEngine::objectCreated,
+        &app,
         [url](QObject *obj, const QUrl &objUrl) {
             if (!obj && url == objUrl)
                 QCoreApplication::exit(-1);

@@ -3,9 +3,9 @@
 
 #include "abstractmpdconnection.h"
 #include "abstractmpdsettings.h"
+#include <mpd/client.h>
 #include <QObject>
 #include <QSocketNotifier>
-#include <mpd/client.h>
 
 class MPDConnection : public AbstractMPDConnection
 {

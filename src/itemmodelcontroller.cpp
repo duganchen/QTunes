@@ -2,9 +2,9 @@
 #include <QModelIndex>
 #include <QtAlgorithms>
 
-ItemModelController::ItemModelController(QObject *parent) : QObject(parent)
-{
-}
+ItemModelController::ItemModelController(QObject *parent)
+    : QObject(parent)
+{}
 
 void ItemModelController::beginRemoveRows(int first, int last)
 {

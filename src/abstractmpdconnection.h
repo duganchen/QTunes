@@ -3,8 +3,8 @@
 
 #include "abstractmpdsettings.h"
 #include "abstractmpdsong.h"
-#include <QObject>
 #include <mpd/client.h>
+#include <QObject>
 
 class AbstractMPDConnection : public QObject
 {

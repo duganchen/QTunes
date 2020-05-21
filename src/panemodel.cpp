@@ -3,11 +3,18 @@
 #include <QtAlgorithms>
 
 PaneModel::PaneModel(ItemModelController *controller, QObject *parent)
-    : QAbstractListModel(parent), m_controller(controller)
+    : QAbstractListModel(parent)
+    , m_controller(controller)
 {
-    QObject::connect(controller, &ItemModelController::aboutToBeReset, this, &PaneModel::beginResetModel);
+    QObject::connect(controller,
+                     &ItemModelController::aboutToBeReset,
+                     this,
+                     &PaneModel::beginResetModel);
     QObject::connect(controller, &ItemModelController::reset, this, &PaneModel::endResetModel);
-    QObject::connect(controller, &ItemModelController::rowsAboutToBeRemoved, this, &PaneModel::beginRemoveRows);
+    QObject::connect(controller,
+                     &ItemModelController::rowsAboutToBeRemoved,
+                     this,
+                     &PaneModel::beginRemoveRows);
     QObject::connect(controller, &ItemModelController::rowsRemoved, this, &PaneModel::endRemoveRows);
 }
 
@@ -25,13 +32,11 @@ QVariant PaneModel::data(const QModelIndex &index, int role) const
 {
     Q_UNUSED(role)
 
-    if (!index.isValid())
-    {
+    if (!index.isValid()) {
         return QVariant();
     }
 
-    if (m_controller->items.size() - 1 < index.row())
-    {
+    if (m_controller->items.size() - 1 < index.row()) {
         return QVariant();
     }
 

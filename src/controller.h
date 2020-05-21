@@ -11,25 +11,23 @@
 class Controller : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(
-        ConnectionState connectionState READ connectionState WRITE setConnectionState NOTIFY connectionStateChanged);
+    Q_PROPERTY(ConnectionState connectionState READ connectionState WRITE setConnectionState NOTIFY
+                   connectionStateChanged);
     Q_PROPERTY(QString connectionError READ connectionError NOTIFY connectionErrorChanged);
 
 public:
-    enum ConnectionState
-    {
-        Disconnected,
-        Connecting,
-        Connected
-    };
+    enum ConnectionState { Disconnected, Connecting, Connected };
     Q_ENUM(ConnectionState)
 
     explicit Controller(
         // connection settings
         AbstractMPDSettings *,
 
-        ItemModelController *artists, ItemModelController *albums, ItemModelController *songs,
-        ItemModelController *playlists, ItemModelController *queue,
+        ItemModelController *artists,
+        ItemModelController *albums,
+        ItemModelController *songs,
+        ItemModelController *playlists,
+        ItemModelController *queue,
 
         // and the parent
         QObject *parent = nullptr);
@@ -45,7 +43,7 @@ public slots:
 
     void setMPD(AbstractMPDConnection *);
 
-	void onTicked();
+    void onTicked();
 
 signals:
     void connectionStateChanged(ConnectionState);
