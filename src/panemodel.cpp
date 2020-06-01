@@ -16,6 +16,19 @@ PaneModel::PaneModel(ItemModelController *controller, QObject *parent)
                      this,
                      &PaneModel::beginRemoveRows);
     QObject::connect(controller, &ItemModelController::rowsRemoved, this, &PaneModel::endRemoveRows);
+    QObject::connect(controller,
+                     &ItemModelController::rowsAboutToBeInserted,
+                     this,
+                     &PaneModel::beginInsertRows);
+    QObject::connect(controller,
+                     &ItemModelController::rowsInserted,
+                     this,
+                     &PaneModel::endInsertRows);
+    QObject::connect(controller,
+                     &ItemModelController::rowsAboutToBeMoved,
+                     this,
+                     &PaneModel::beginMoveRows);
+    QObject::connect(controller, &ItemModelController::rowsMoved, this, &PaneModel::endMoveRows);
 }
 
 int PaneModel::rowCount(const QModelIndex &parent) const
