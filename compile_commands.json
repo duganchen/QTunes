@@ -1,0 +1,57 @@
+[
+{
+  "directory": "/home/dugan/Documents/QTunes/build/Controller",
+  "command": "/usr/bin/c++  -DCONTROLLER_LIBRARY -DController_EXPORTS -DQT_CORE_LIB -DQT_NETWORK_LIB -I/home/dugan/Documents/QTunes/build/Controller -I/home/dugan/Documents/QTunes/Controller -I/home/dugan/Documents/QTunes/build/Controller/Controller_autogen/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtNetwork -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g -fPIC   -fPIC -std=gnu++11 -o CMakeFiles/Controller.dir/Controller_autogen/mocs_compilation.cpp.o -c /home/dugan/Documents/QTunes/build/Controller/Controller_autogen/mocs_compilation.cpp",
+  "file": "/home/dugan/Documents/QTunes/build/Controller/Controller_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/dugan/Documents/QTunes/build/Controller",
+  "command": "/usr/bin/c++  -DCONTROLLER_LIBRARY -DController_EXPORTS -DQT_CORE_LIB -DQT_NETWORK_LIB -I/home/dugan/Documents/QTunes/build/Controller -I/home/dugan/Documents/QTunes/Controller -I/home/dugan/Documents/QTunes/build/Controller/Controller_autogen/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtNetwork -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g -fPIC   -fPIC -std=gnu++11 -o CMakeFiles/Controller.dir/controller.cpp.o -c /home/dugan/Documents/QTunes/Controller/controller.cpp",
+  "file": "/home/dugan/Documents/QTunes/Controller/controller.cpp"
+},
+{
+  "directory": "/home/dugan/Documents/QTunes/build/app",
+  "command": "/usr/bin/c++  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/dugan/Documents/QTunes/build/app -I/home/dugan/Documents/QTunes/app -I/home/dugan/Documents/QTunes/build/app/qt_mpd_client_demo_autogen/include -I/home/dugan/Documents/QTunes/app/../Controller -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtWidgets -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtGui -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g   -fPIC -std=gnu++11 -o CMakeFiles/qt_mpd_client_demo.dir/qt_mpd_client_demo_autogen/mocs_compilation.cpp.o -c /home/dugan/Documents/QTunes/build/app/qt_mpd_client_demo_autogen/mocs_compilation.cpp",
+  "file": "/home/dugan/Documents/QTunes/build/app/qt_mpd_client_demo_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/dugan/Documents/QTunes/build/app",
+  "command": "/usr/bin/c++  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/dugan/Documents/QTunes/build/app -I/home/dugan/Documents/QTunes/app -I/home/dugan/Documents/QTunes/build/app/qt_mpd_client_demo_autogen/include -I/home/dugan/Documents/QTunes/app/../Controller -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtWidgets -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtGui -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g   -fPIC -std=gnu++11 -o CMakeFiles/qt_mpd_client_demo.dir/main.cpp.o -c /home/dugan/Documents/QTunes/app/main.cpp",
+  "file": "/home/dugan/Documents/QTunes/app/main.cpp"
+},
+{
+  "directory": "/home/dugan/Documents/QTunes/build/app",
+  "command": "/usr/bin/c++  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/dugan/Documents/QTunes/build/app -I/home/dugan/Documents/QTunes/app -I/home/dugan/Documents/QTunes/build/app/qt_mpd_client_demo_autogen/include -I/home/dugan/Documents/QTunes/app/../Controller -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtWidgets -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtGui -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g   -fPIC -std=gnu++11 -o CMakeFiles/qt_mpd_client_demo.dir/mainwindow.cpp.o -c /home/dugan/Documents/QTunes/app/mainwindow.cpp",
+  "file": "/home/dugan/Documents/QTunes/app/mainwindow.cpp"
+},
+{
+  "directory": "/home/dugan/Documents/QTunes/build/tests",
+  "command": "/usr/bin/c++  -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"/home/dugan/Documents/QTunes/build\\\" -DQT_TESTLIB_LIB -I/home/dugan/Documents/QTunes/build/tests -I/home/dugan/Documents/QTunes/tests -I/home/dugan/Documents/QTunes/build/tests/controllerTest_autogen/include -I/home/dugan/Documents/QTunes/tests/Qt5::Test -I/home/dugan/Documents/QTunes/Controller -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtTest -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g   -fPIC -std=gnu++11 -o CMakeFiles/controllerTest.dir/controllerTest_autogen/mocs_compilation.cpp.o -c /home/dugan/Documents/QTunes/build/tests/controllerTest_autogen/mocs_compilation.cpp",
+  "file": "/home/dugan/Documents/QTunes/build/tests/controllerTest_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/dugan/Documents/QTunes/build/tests",
+  "command": "/usr/bin/c++  -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"/home/dugan/Documents/QTunes/build\\\" -DQT_TESTLIB_LIB -I/home/dugan/Documents/QTunes/build/tests -I/home/dugan/Documents/QTunes/tests -I/home/dugan/Documents/QTunes/build/tests/controllerTest_autogen/include -I/home/dugan/Documents/QTunes/tests/Qt5::Test -I/home/dugan/Documents/QTunes/Controller -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtTest -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g   -fPIC -std=gnu++11 -o CMakeFiles/controllerTest.dir/tst_testcontroller.cpp.o -c /home/dugan/Documents/QTunes/tests/tst_testcontroller.cpp",
+  "file": "/home/dugan/Documents/QTunes/tests/tst_testcontroller.cpp"
+},
+{
+  "directory": "/home/dugan/Documents/QTunes/build/tests",
+  "command": "/usr/bin/c++  -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"/home/dugan/Documents/QTunes/build\\\" -DQT_TESTLIB_LIB -I/home/dugan/Documents/QTunes/build/tests -I/home/dugan/Documents/QTunes/tests -I/home/dugan/Documents/QTunes/build/tests/controllerTest_autogen/include -I/home/dugan/Documents/QTunes/tests/Qt5::Test -I/home/dugan/Documents/QTunes/Controller -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtTest -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g   -fPIC -std=gnu++11 -o CMakeFiles/controllerTest.dir/mpdprocess.cpp.o -c /home/dugan/Documents/QTunes/tests/mpdprocess.cpp",
+  "file": "/home/dugan/Documents/QTunes/tests/mpdprocess.cpp"
+},
+{
+  "directory": "/home/dugan/Documents/QTunes/build/tests",
+  "command": "/usr/bin/c++  -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"/home/dugan/Documents/QTunes/build\\\" -DQT_TESTLIB_LIB -I/home/dugan/Documents/QTunes/build/tests -I/home/dugan/Documents/QTunes/tests -I/home/dugan/Documents/QTunes/build/tests/connectionTest_autogen/include -I/home/dugan/Documents/QTunes/tests/Qt5::Test -I/home/dugan/Documents/QTunes/Controller -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtTest -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g   -fPIC -std=gnu++11 -o CMakeFiles/connectionTest.dir/connectionTest_autogen/mocs_compilation.cpp.o -c /home/dugan/Documents/QTunes/build/tests/connectionTest_autogen/mocs_compilation.cpp",
+  "file": "/home/dugan/Documents/QTunes/build/tests/connectionTest_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/dugan/Documents/QTunes/build/tests",
+  "command": "/usr/bin/c++  -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"/home/dugan/Documents/QTunes/build\\\" -DQT_TESTLIB_LIB -I/home/dugan/Documents/QTunes/build/tests -I/home/dugan/Documents/QTunes/tests -I/home/dugan/Documents/QTunes/build/tests/connectionTest_autogen/include -I/home/dugan/Documents/QTunes/tests/Qt5::Test -I/home/dugan/Documents/QTunes/Controller -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtTest -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g   -fPIC -std=gnu++11 -o CMakeFiles/connectionTest.dir/tst_testconnection.cpp.o -c /home/dugan/Documents/QTunes/tests/tst_testconnection.cpp",
+  "file": "/home/dugan/Documents/QTunes/tests/tst_testconnection.cpp"
+},
+{
+  "directory": "/home/dugan/Documents/QTunes/build/tests",
+  "command": "/usr/bin/c++  -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\\\"/home/dugan/Documents/QTunes/build\\\" -DQT_TESTLIB_LIB -I/home/dugan/Documents/QTunes/build/tests -I/home/dugan/Documents/QTunes/tests -I/home/dugan/Documents/QTunes/build/tests/connectionTest_autogen/include -I/home/dugan/Documents/QTunes/tests/Qt5::Test -I/home/dugan/Documents/QTunes/Controller -isystem /home/dugan/Qt/5.15.0/gcc_64/include -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtTest -isystem /home/dugan/Qt/5.15.0/gcc_64/include/QtCore -isystem /home/dugan/Qt/5.15.0/gcc_64/./mkspecs/linux-g++  -g   -fPIC -std=gnu++11 -o CMakeFiles/connectionTest.dir/mpdprocess.cpp.o -c /home/dugan/Documents/QTunes/tests/mpdprocess.cpp",
+  "file": "/home/dugan/Documents/QTunes/tests/mpdprocess.cpp"
+}
+]

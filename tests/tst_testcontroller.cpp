@@ -1,45 +1,91 @@
+#include "controller.h"
+#include "mpdprocess.h"
+#include <mpd/client.h>
 #include <QCoreApplication>
+#include <QDebug>
+#include <QProcess>
+#include <QSignalSpy>
+#include <QTest>
 #include <QtTest>
-
-// Note: The error message for a host not being found is
-// Host not found
-
-// The error message from MPD the connection is lost is:
-// Connection closed by the server
 
 class TestController : public QObject
 {
     Q_OBJECT
 
 public:
-	TestController();
-	~TestController();
+    TestController();
+    ~TestController();
 
 private slots:
-    void initTestCase();
-    void cleanupTestCase();
-	void test_case1();
+    void init();
+    void cleanup();
+
+    void test_theTest();
+
+private:
+    MPDProcess *m_mpdProcess;
 };
 
 TestController::TestController()
+    : m_mpdProcess(nullptr)
+{}
+
+TestController::~TestController() {}
+
+void TestController::init()
 {
+    qDebug() << "Init";
+    m_mpdProcess = new MPDProcess(this);
 }
 
-TestController::~TestController()
+void TestController::cleanup()
 {
+    qDebug() << "Cleanup";
+    delete m_mpdProcess;
+    m_mpdProcess = nullptr;
 }
 
-void TestController::initTestCase()
+void TestController::test_theTest()
 {
-}
+    QCOMPARE(m_mpdProcess->mpdState(), QProcess::Running);
 
-void TestController::cleanupTestCase()
-{
-}
+    QCOMPARE(m_mpdProcess->mpdError(), MPD_ERROR_SUCCESS);
+    if (m_mpdProcess->mpdError() != MPD_ERROR_SUCCESS) {
+        return;
+    }
 
-void TestController::test_case1()
-{
-	QCOMPARE(1, 1);
+    Controller controller(m_mpdProcess->socketPath().toUtf8().constData(), 0, 1000);
+    QSignalSpy spy(&controller, &Controller::connectionState);
+    controller.handleConnectClick();
+    spy.wait();
+    auto albums = controller.getAlbumList();
+    QCOMPARE(albums[0], "Touhou Luna Nights - Original Soundtrack");
+
+    QSignalSpy playerSpy(&controller, &Controller::queueChanged);
+
+    auto other = mpd_connection_new(controller.host().toUtf8().constData(), 0, 0);
+    QVERIFY(other && mpd_connection_get_error(other) == MPD_ERROR_SUCCESS);
+
+    QVERIFY(mpd_search_db_songs(other, false));
+    QVERIFY(
+        mpd_search_add_tag_constraint(other, MPD_OPERATOR_DEFAULT, MPD_TAG_TITLE, "Event - 不穏"));
+    QVERIFY(mpd_search_commit(other));
+    mpd_song *song;
+    while ((song = mpd_recv_song(other)) != nullptr) {
+        qDebug() << "Queueing " << mpd_song_get_uri(song);
+        QVERIFY(mpd_run_add(other, mpd_song_get_uri(song)));
+        mpd_song_free(song);
+    }
+
+    mpd_connection_free(other);
+    other = nullptr;
+
+    playerSpy.wait();
+
+    controller.handleConnectClick();
+    spy.wait();
+    albums = controller.getAlbumList();
+    QCOMPARE(albums[0], "Touhou Luna Nights - Original Soundtrack");
 }
 
 QTEST_MAIN(TestController)
