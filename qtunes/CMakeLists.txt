@@ -15,15 +15,15 @@ pkg_check_modules(LIBMPDCLIENT REQUIRED IMPORTED_TARGET libmpdclient)
 
 add_executable(
     qtunes
-    controller.cpp
+    # controller.cpp
     panemodel.cpp
     qtunes.cpp
     qml.qrc
 )
 
-target_include_directories(qtunes PRIVATE ${LIBMPDCLIENT_INCLUDE_DIRS})
+target_include_directories(qtunes PRIVATE "../Controller" ${LIBMPDCLIENT_INCLUDE_DIRS})
 
 target_compile_definitions(qtunes
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(qtunes
-  PRIVATE Qt5::QuickControls2 Qt5::Core Qt5::Network Qt5::Quick PkgConfig::LIBMPDCLIENT)
+  PRIVATE Controller Qt5::QuickControls2 Qt5::Core Qt5::Network Qt5::Quick PkgConfig::LIBMPDCLIENT)
