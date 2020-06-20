@@ -13,7 +13,7 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(LIBMPDCLIENT REQUIRED IMPORTED_TARGET libmpdclient)
 
 add_subdirectory(Controller)
-add_subdirectory(qtunes)
+add_subdirectory(QTunes)
 enable_testing()
 add_subdirectory(tests)
 
