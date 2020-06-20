@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.13)
 project(qtunes LANGUAGES CXX)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -15,7 +17,6 @@ pkg_check_modules(LIBMPDCLIENT REQUIRED IMPORTED_TARGET libmpdclient)
 
 add_executable(
     qtunes
-    # controller.cpp
     panemodel.cpp
     qtunes.cpp
     qml.qrc
