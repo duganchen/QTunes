@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     queueModel.setList(queue);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
 
-    Controller controller;
+    Controller controller("localhost", 6000, 200);
     engine.rootContext()->setContextProperty("controller", &controller);
 
 

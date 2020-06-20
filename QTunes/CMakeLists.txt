@@ -1,5 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
-project(qtunes LANGUAGES CXX)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -15,15 +14,14 @@ pkg_check_modules(LIBMPDCLIENT REQUIRED IMPORTED_TARGET libmpdclient)
 
 add_executable(
     qtunes
-    controller.cpp
     panemodel.cpp
     qtunes.cpp
     qml.qrc
 )
 
-target_include_directories(qtunes PRIVATE ${LIBMPDCLIENT_INCLUDE_DIRS})
+target_include_directories(qtunes PRIVATE "../Controller" ${LIBMPDCLIENT_INCLUDE_DIRS})
 
 target_compile_definitions(qtunes
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(qtunes
-  PRIVATE Qt5::QuickControls2 Qt5::Core Qt5::Network Qt5::Quick PkgConfig::LIBMPDCLIENT)
+  PRIVATE Controller Qt5::QuickControls2 Qt5::Core Qt5::Network Qt5::Quick PkgConfig::LIBMPDCLIENT)
