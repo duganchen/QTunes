@@ -16,6 +16,12 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
+    qmlRegisterUncreatableType<Controller>("QTunes",
+                                           1,
+                                           0,
+                                           "Controller",
+                                           "You can't create a Controller sorry");
+
     QVector<QString> artists {"artist 1", "artist 2", "artist 3"};
     PaneModel artistModel;
     artistModel.setList(artists);
