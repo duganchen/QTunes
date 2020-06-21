@@ -16,9 +16,9 @@ Controller::Controller(QString host, unsigned port, unsigned timeout_ms, QObject
     qRegisterMetaType<Controller::ConnectionState>();
 
     m_tags = new ItemModelController(this);
-    m_tags->items.push_back(new TagItem("artist", this));
-    m_tags->items.push_back(new TagItem("albumartist", this));
-    m_tags->items.push_back(new TagItem("composer", this));
+    m_tags->items.push_back(new TagItem("artist"));
+    m_tags->items.push_back(new TagItem("albumartist"));
+    m_tags->items.push_back(new TagItem("composer"));
 
     m_artists = new ItemModelController(this);
     m_albums = new ItemModelController(this);

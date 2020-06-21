@@ -1,8 +1,8 @@
 #include "tagitem.h"
 #include <QDebug>
 
-TagItem::TagItem(QString tag, QObject * parent)
-    : AbstractItem(parent), m_tag(tag)
+TagItem::TagItem(QString tag)
+    : m_tag(tag)
 {}
 
 QString TagItem::data()

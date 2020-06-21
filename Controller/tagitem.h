@@ -6,7 +6,7 @@
 class TagItem : public AbstractItem
 {
 public:
-    explicit TagItem(QString, QObject *parent = nullptr);
+    explicit TagItem(QString);
     virtual QString data();
     virtual ~TagItem() {}
 
