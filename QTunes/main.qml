@@ -99,6 +99,7 @@ ApplicationWindow {
         y: header.height
         height: window.height - header.height
         width: window.width / 3
+        id: connectDrawer
         Rectangle {
             anchors.fill: parent;
 
