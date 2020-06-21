@@ -35,8 +35,6 @@ signals:
     void errorMessage(QString);
     void connectionState(Controller::ConnectionState connectionState);
 
-    void requestConnection(QString, unsigned, unsigned);
-
     void beginMPDCommand();
     void endMPDCommand();
 
