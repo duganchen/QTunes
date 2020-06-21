@@ -27,7 +27,7 @@ TestConnection::~TestConnection() {}
 
 void TestConnection::test_cannotConnect()
 {
-    Controller controller("localhost", 6600, 200);
+    Controller controller;
     // Note: For this to work, mpd must not be running and "locahost"
     // (note deliberate typo) must not be resolvable.
     QSignalSpy spy(&controller, &Controller::errorMessage);
@@ -53,7 +53,7 @@ void TestConnection::test_spinUpMPD()
         return;
     }
 
-    Controller controller(proc.socketPath().toUtf8().constData(), 0, 0);
+    Controller controller;
     QSignalSpy spy(&controller, &Controller::connectionState);
     controller.connectToMPD(proc.socketPath().toUtf8().constData(), 0, 0);
     spy.wait();

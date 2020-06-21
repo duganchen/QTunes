@@ -5,11 +5,8 @@
 #include <QtNetwork/QLocalSocket>
 #include <QtNetwork/QTcpSocket>
 
-Controller::Controller(QString host, unsigned port, unsigned timeout_ms, QObject *parent)
+Controller::Controller(QObject *parent)
     : QObject(parent)
-    , m_defaultHost(host)
-    , m_defaultPort(port)
-    , m_defaultTimeout(timeout_ms)
     , m_connection(nullptr)
     , m_notifier(nullptr)
 {
@@ -25,6 +22,12 @@ Controller::Controller(QString host, unsigned port, unsigned timeout_ms, QObject
     m_songs = new ItemModelController(this);
     m_playlists = new ItemModelController(this);
     m_queue = new ItemModelController(this);
+
+    auto settings = mpd_settings_new(nullptr, 0, 0, nullptr, nullptr);
+    m_defaultHost = mpd_settings_get_host(settings);
+    m_defaultPort = mpd_settings_get_port(settings);
+    m_defaultTimeout = mpd_settings_get_timeout_ms(settings);
+    mpd_settings_free(settings);
 }
 
 void Controller::connectToMPD(QString host, int port, int timeout_ms)

@@ -14,6 +14,31 @@ int main(int argc, char *argv[])
 
     QQuickStyle::setStyle("Universal");
 
+    Controller controller;
+
+    QVector<QString> artists {"artist 1", "artist 2", "artist 3"};
+    PaneModel artistModel;
+    artistModel.setList(artists);
+
+    QVector<QString> albums {"album 1", "album 2", "album 3"};
+    PaneModel albumModel;
+    albumModel.setList(albums);
+
+    QVector<QString> songs {"song 1", "song 2", "song 3"};
+    PaneModel songModel;
+    songModel.setList(songs);
+
+    QVector<QString> playlists {"playlist 1", "playlist 2", "playlist 3"};
+    PaneModel playlistModel;
+    playlistModel.setList(playlists);
+
+    QVector<QString> queue {"queued song 1", "queued song 2", "queued song 3"};
+    PaneModel queueModel;
+    queueModel.setList(queue);
+
+    // Create context property objects before the engine. See:
+    // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7
+
     QQmlApplicationEngine engine;
 
     qmlRegisterUncreatableType<Controller>("QTunes",
@@ -23,34 +48,17 @@ int main(int argc, char *argv[])
                                            "You can't create a Controller sorry");
 
 
-    QVector<QString> artists {"artist 1", "artist 2", "artist 3"};
-    PaneModel artistModel;
-    artistModel.setList(artists);
     engine.rootContext()->setContextProperty("artistModel", &artistModel);
 
-    QVector<QString> albums {"album 1", "album 2", "album 3"};
-    PaneModel albumModel;
-    albumModel.setList(albums);
     engine.rootContext()->setContextProperty("albumModel", &albumModel);
 
-    QVector<QString> songs {"song 1", "song 2", "song 3"};
-    PaneModel songModel;
-    songModel.setList(songs);
     engine.rootContext()->setContextProperty("songModel", &songModel);
 
-    QVector<QString> playlists {"playlist 1", "playlist 2", "playlist 3"};
-    PaneModel playlistModel;
-    playlistModel.setList(playlists);
     engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
 
-    QVector<QString> queue {"queued song 1", "queued song 2", "queued song 3"};
-    PaneModel queueModel;
-    queueModel.setList(queue);
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
 
-    Controller controller("localhost", 6000, 200);
     engine.rootContext()->setContextProperty("controller", &controller);
-
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

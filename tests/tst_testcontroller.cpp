@@ -52,7 +52,7 @@ void TestController::test_theTest()
         return;
     }
 
-    Controller controller(m_mpdProcess->socketPath().toUtf8().constData(), 0, 1000);
+    Controller controller;
     QSignalSpy spy(&controller, &Controller::connectionState);
     controller.connectToMPD(m_mpdProcess->socketPath().toUtf8().constData(), 0, 1000);
     spy.wait();
