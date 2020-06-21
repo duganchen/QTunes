@@ -34,13 +34,11 @@ TestController::~TestController() {}
 
 void TestController::init()
 {
-    qDebug() << "Init";
     m_mpdProcess = new MPDProcess(this);
 }
 
 void TestController::cleanup()
 {
-    qDebug() << "Cleanup";
     delete m_mpdProcess;
     m_mpdProcess = nullptr;
 }
@@ -56,7 +54,7 @@ void TestController::test_theTest()
 
     Controller controller(m_mpdProcess->socketPath().toUtf8().constData(), 0, 1000);
     QSignalSpy spy(&controller, &Controller::connectionState);
-    controller.handleConnectClick();
+    controller.connectToMPD(m_mpdProcess->socketPath().toUtf8().constData(), 0, 1000);
     spy.wait();
     auto albums = controller.getAlbumList();
     QCOMPARE(albums[0], "Touhou Luna Nights - Original Soundtrack");

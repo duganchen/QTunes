@@ -19,6 +19,7 @@ public:
 public slots:
     void handleConnectClick();
     void handleListAlbumsClick();
+    void connectToMPD(QString, int, int);
 
 public:
     QVector<QString> getAlbumList();
