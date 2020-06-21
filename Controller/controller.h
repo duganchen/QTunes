@@ -46,7 +46,7 @@ signals:
 
 private:
     void handleIdle(mpd_idle);
-    void createMPD();
+    void createMPD(QString, int, int);
 
     QString m_host;
     unsigned m_port;

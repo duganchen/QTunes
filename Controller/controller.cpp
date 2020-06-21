@@ -34,7 +34,7 @@ void Controller::connectToMPD(QString host, int port, int timeout_ms)
     // This is literally how libmpdclient determines if a host is a Unix socket,
     // at least as of 2.18.
     if (host.startsWith("/") || host.startsWith("@")) {
-        createMPD();
+        createMPD(host, port, timeout_ms);
 
     } else {
         // If it's a Tcp socket, then we first use Qt to asynchronously check if we can actually
@@ -53,7 +53,7 @@ void Controller::connectToMPD(QString host, int port, int timeout_ms)
             connect(socket, &QTcpSocket::disconnected, [=]() {
                 socket->deleteLater();
 
-                createMPD();
+                createMPD(host, port, timeout_ms);
             });
             socket->disconnectFromHost();
         });
@@ -132,9 +132,9 @@ void Controller::handleIdle(mpd_idle idle)
     }
 }
 
-void Controller::createMPD()
+void Controller::createMPD(QString host, int port, int timeout_ms)
 {
-    auto connection = mpd_connection_new(m_host.toUtf8().constData(), m_port, m_timeout_ms);
+    auto connection = mpd_connection_new(host.toUtf8().constData(), port, timeout_ms);
 
     if (!connection) {
         // OOM
