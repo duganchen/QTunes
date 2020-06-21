@@ -61,7 +61,7 @@ void TestController::test_theTest()
 
     QSignalSpy playerSpy(&controller, &Controller::queueChanged);
 
-    auto other = mpd_connection_new(controller.host().toUtf8().constData(), 0, 0);
+    auto other = mpd_connection_new(m_mpdProcess->socketPath().toUtf8().constData(), 0, 0);
     QVERIFY(other && mpd_connection_get_error(other) == MPD_ERROR_SUCCESS);
 
     QVERIFY(mpd_search_db_songs(other, false));
