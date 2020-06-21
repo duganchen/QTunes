@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.12
 ApplicationWindow {
     id: window
     visible: true
-    width: 800
+    width: 1024
     height: 480
     title: qsTr("QTunes")
 
@@ -198,98 +198,59 @@ ApplicationWindow {
     }
 
     SplitView {
-        orientation: "Vertical"
-        id: listsView
+        orientation: "Horizontal"
         anchors.fill: parent
 
         Item {
-            SplitView.preferredHeight: listsView.height / 2
+            SplitView.preferredWidth: parent.width / 2
 
             SplitView {
+                orientation: "Vertical"
                 anchors.fill: parent
-                id: dbView
 
                 Item {
-                    SplitView.preferredWidth: dbView.width / 3
+                    SplitView.preferredHeight: parent.height / 2
 
-                    ListView {
+                    SplitView {
+                        orientation: "Horizontal"
                         anchors.fill: parent
-                        model: artistModel
-                        delegate: dlg
 
-                        header: ToolBar {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            RowLayout {
-                                ComboBox {
-                                    model: ListModel {
-                                        ListElement {
-                                            text: "artist"
-                                        }
-                                        ListElement {
-                                            text: "albumartist"
-                                        }
-                                        ListElement {
-                                            text: "composer"
-                                        }
-                                    }
-                                }
+                        Item {
+                            SplitView.preferredWidth: parent.width / 3
+                            ListView {
+                                model: tagModel
+                                delegate: dlg
+                                anchors.fill: parent
+                            }
+                        }
+
+
+                        Item {
+                            SplitView.preferredWidth: parent.width / 3
+                            ListView {
+                                model: artistModel
+                                delegate: dlg
+                                anchors.fill: parent
+                            }
+                        }
+
+
+                        Item {
+                            ListView {
+                                model: albumModel
+                                delegate: dlg
+                                anchors.fill: parent
                             }
                         }
                     }
                 }
 
                 Item {
-                    SplitView.preferredWidth: dbView.width / 3
 
                     ListView {
-                        anchors.fill: parent
-
-                        model: albumModel
-                        delegate: dlg
-
-                        header: ToolBar {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                        }
-                    }
-                }
-
-                Item {
-                    ListView {
-                        anchors.fill: parent
-                        model: songModel
-                        delegate: dlg
-
-                        header: ToolBar {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            RowLayout {
-                                ToolButton {
-                                    id: addButton
-                                    icon.source: "images/add-24px.svg"
-                                    hoverEnabled: true
-                                    ToolTip.text: qsTr("Adds the selected song to the playlist")
-                                    ToolTip.visible: hovered
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        Item {
-
-            SplitView {
-                anchors.fill: parent
-                Item {
-                    SplitView.preferredWidth: dbView.width / 3
-
-                    ListView {
-                        anchors.fill: parent
                         model: playlistModel
                         delegate: dlg
+                        anchors.fill: parent
 
                         header: ToolBar {
                             anchors.left: parent.left
@@ -315,15 +276,46 @@ ApplicationWindow {
                         }
 
                     }
+                }
+            }
+        }
 
+        Item {
+            SplitView.preferredWidth: parent.width / 2
+
+            SplitView {
+                orientation: "Vertical"
+                anchors.fill: parent
+                Item {
+                    SplitView.preferredHeight: parent.height / 2
+                    ListView {
+                        model: songModel
+                        delegate: dlg
+                        anchors.fill: parent
+
+                        header: ToolBar {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            RowLayout {
+                                ToolButton {
+                                    id: addButton
+                                    icon.source: "images/add-24px.svg"
+                                    hoverEnabled: true
+                                    ToolTip.text: qsTr("Adds the selected song to the playlist")
+                                    ToolTip.visible: hovered
+                                }
+                            }
+                        }
+
+                    }
                 }
 
                 Item {
-
+                    SplitView.preferredHeight: parent.height / 2
                     ListView {
-                        anchors.fill: parent
                         model: queueModel
                         delegate: dlg
+                        anchors.fill: parent
 
                         header: ToolBar {
                             anchors.left: parent.left
@@ -379,6 +371,7 @@ ApplicationWindow {
                 }
             }
         }
+
     }
 }
 

@@ -18,13 +18,17 @@ Controller::Controller(QObject *parent)
     m_tags->items.push_back(new TagItem("composer"));
 
     m_artists = new ItemModelController(this);
-
     m_artists->items.push_back(new TagItem("an artist"));
 
     m_albums = new ItemModelController(this);
+    m_albums->items.push_back(new TagItem("An album"));
     m_songs = new ItemModelController(this);
+    m_songs->items.push_back(new TagItem("A song"));
     m_playlists = new ItemModelController(this);
+    m_playlists->items.push_back(new TagItem("A stored playlist"));
+
     m_queue = new ItemModelController(this);
+    m_queue->items.push_back(new TagItem("A queued song"));
 
     auto settings = mpd_settings_new(nullptr, 0, 0, nullptr, nullptr);
     m_defaultHost = mpd_settings_get_host(settings);

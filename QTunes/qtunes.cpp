@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
 
     Controller controller;
 
+    PaneModel tagModel(controller.tags());
     PaneModel artistModel(controller.artists());
     PaneModel albumModel(controller.albums());
     PaneModel songModel(controller.songs());
@@ -33,25 +34,24 @@ int main(int argc, char *argv[])
                                            "Controller",
                                            "You can't create a Controller sorry");
 
-
+    engine.rootContext()->setContextProperty("tagModel", &tagModel);
     engine.rootContext()->setContextProperty("artistModel", &artistModel);
-
     engine.rootContext()->setContextProperty("albumModel", &albumModel);
-
     engine.rootContext()->setContextProperty("songModel", &songModel);
-
     engine.rootContext()->setContextProperty("playlistModel", &playlistModel);
-
     engine.rootContext()->setContextProperty("queueModel", &queueModel);
-
     engine.rootContext()->setContextProperty("controller", &controller);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
+    QObject::connect(
+        &engine,
+        &QQmlApplicationEngine::objectCreated,
+        &app,
+        [url](QObject *obj, const QUrl &objUrl) {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
+        },
+        Qt::QueuedConnection);
     engine.load(url);
 
     return app.exec();
