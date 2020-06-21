@@ -27,41 +27,6 @@ Controller::Controller(QString host, unsigned port, unsigned timeout_ms, QObject
     m_queue = new ItemModelController(this);
 }
 
-void Controller::handleConnectClick()
-{
-    emit connectionState(ConnectionState::Connecting);
-
-    // This is literally how libmpdclient determines if a host is a Unix socket,
-    // at least as of 2.18.
-    if (m_host.startsWith("/") || m_host.startsWith("@")) {
-        createMPD();
-
-    } else {
-        // If it's a Tcp socket, then we first use Qt to asynchronously check if we can actually
-        // connect, because libmpdclient's internal host address resolution is blocking and
-        // can take a long time to return if it fails..
-        auto socket = new QTcpSocket();
-
-        connect(socket, &QTcpSocket::errorOccurred, [=](QTcpSocket::SocketError error) {
-            Q_UNUSED(error);
-            emit errorMessage(socket->errorString());
-            socket->deleteLater();
-            emit connectionState(ConnectionState::Disconnected);
-        });
-
-        connect(socket, &QTcpSocket::connected, [=]() {
-            connect(socket, &QTcpSocket::disconnected, [=]() {
-                socket->deleteLater();
-
-                createMPD();
-            });
-            socket->disconnectFromHost();
-        });
-
-        socket->connectToHost(m_host, m_port);
-    }
-}
-
 void Controller::connectToMPD(QString host, int port, int timeout_ms)
 {
     emit connectionState(ConnectionState::Connecting);

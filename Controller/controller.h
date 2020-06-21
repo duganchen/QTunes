@@ -17,7 +17,6 @@ public:
     enum class ConnectionState { Disconnected, Connecting, Connected };
     Q_ENUM(ConnectionState)
 public slots:
-    void handleConnectClick();
     void handleListAlbumsClick();
     void connectToMPD(QString, int, int);
 
