@@ -350,9 +350,3 @@ ApplicationWindow {
         }
     }
 }
-
-/*##^##
-Designer {
-    D{i:1;anchors_x:55;anchors_y:26}
-}
-##^##*/
