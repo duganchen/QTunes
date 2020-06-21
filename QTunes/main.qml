@@ -4,11 +4,12 @@ import QtQuick.Layouts 1.12
 
 
 ApplicationWindow {
-    id: window
     visible: true
     width: 1024
     height: 480
     title: qsTr("QTunes")
+
+    id: window
 
     ListDelegate {
         id: dlg
@@ -22,7 +23,6 @@ ApplicationWindow {
             RowLayout {
                 Layout.fillWidth: true
                 ToolButton {
-                    id: connectDrawerButton
                     icon.source: "images/menu-24px.svg"
                     onClicked: {
                         if (connectDrawer.visible) {
@@ -38,7 +38,6 @@ ApplicationWindow {
                 }
 
                 ToolButton {
-                    id: playButton
                     icon.source: "images/play_arrow-24px.svg"
                     hoverEnabled: true
                     ToolTip.text: qsTr("Play")
@@ -46,7 +45,6 @@ ApplicationWindow {
                 }
 
                 ToolButton {
-                    id: pauseButton
                     icon.source: "images/pause-24px.svg"
                     hoverEnabled: true
                     ToolTip.text: qsTr("Pause")
@@ -54,7 +52,6 @@ ApplicationWindow {
                 }
 
                 ToolButton {
-                    id: stopButton
                     icon.source: "images/stop-24px.svg"
                     hoverEnabled: true
                     ToolTip.text: qsTr("Stop")
@@ -64,7 +61,6 @@ ApplicationWindow {
 
 
                 ToolButton {
-                    id: prevButton
                     icon.source: "images/skip_previous-24px.svg"
                     hoverEnabled: true
                     ToolTip.text: qsTr("Previous")
@@ -72,7 +68,6 @@ ApplicationWindow {
                 }
 
                 ToolButton {
-                    id: nextButton
                     icon.source: "images/skip_next-24px.svg"
                     hoverEnabled: true
                     ToolTip.text: qsTr("Next")
@@ -80,24 +75,20 @@ ApplicationWindow {
                 }
 
                 CheckBox {
-                    id: randomCheck
                     text: "Random"
                 }
 
 
                 CheckBox {
-                    id: repeatCheck
                     text: "Repeat"
                 }
 
                 CheckBox {
-                    id: singleCheck
                     text: "Single"
                 }
             }
 
             Slider {
-                id: songSlider
                 Layout.fillWidth: true
             }
         }
@@ -106,26 +97,22 @@ ApplicationWindow {
 
     Drawer {
         y: header.height
-        id: connectDrawer
         height: window.height - header.height
         width: window.width / 3
         Rectangle {
             anchors.fill: parent;
 
             ColumnLayout {
-                id: connectionColumn
                 anchors.fill: parent
                 opacity: 1
 
                 Label {
-                    id: hostLabel
                     text: qsTr("Host")
                     Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
                 }
 
 
                 TextField {
-                    id: hostText
                     text: controller.host
                     validator: RegExpValidator {
                         // https://stackoverflow.com/a/106223/240515
@@ -141,17 +128,14 @@ ApplicationWindow {
 
 
                 Label {
-                    id: hostValidationLabel
                     text: qsTr("Host validation message")
                 }
 
                 Label {
-                    id: portLabel
                     text: qsTr("Port")
                 }
 
                 TextField {
-                    id: portText
                     text: controller.port
                     Layout.fillWidth: true
                     validator: IntValidator {
@@ -166,19 +150,16 @@ ApplicationWindow {
 
 
                 Label {
-                    id: portValidationLabel
                     text: qsTr("Port validation message")
                 }
 
 
                 RowLayout {
-                    id: connectRow
                     width: 100
                     height: 100
 
 
                     Button {
-                        id: connectButton
                         text: qsTr("Connect")
                         enabled: controller.connectEnabled;
 
@@ -188,7 +169,6 @@ ApplicationWindow {
                     }
 
                     BusyIndicator {
-                        id: connectBusy
                         visible: controller.isConnecting;
                     }
                 }
@@ -201,181 +181,172 @@ ApplicationWindow {
         orientation: "Horizontal"
         anchors.fill: parent
 
-        Item {
+
+        SplitView {
+            orientation: "Vertical"
+
             SplitView.preferredWidth: parent.width / 2
 
             SplitView {
-                orientation: "Vertical"
-                anchors.fill: parent
+                SplitView.preferredHeight: parent.height / 2
+                orientation: "Horizontal"
 
-                Item {
-                    SplitView.preferredHeight: parent.height / 2
-
-                    SplitView {
-                        orientation: "Horizontal"
-                        anchors.fill: parent
-
-                        Item {
-                            SplitView.preferredWidth: parent.width / 3
-                            ListView {
-                                model: tagModel
-                                delegate: dlg
-                                anchors.fill: parent
-                            }
-                        }
-
-
-                        Item {
-                            SplitView.preferredWidth: parent.width / 3
-                            ListView {
-                                model: artistModel
-                                delegate: dlg
-                                anchors.fill: parent
-                            }
-                        }
-
-
-                        Item {
-                            ListView {
-                                model: albumModel
-                                delegate: dlg
-                                anchors.fill: parent
-                            }
-                        }
+                ScrollView {
+                    clip: true
+                    SplitView.preferredWidth: parent.width / 3
+                    ListView {
+                        model: tagModel
+                        delegate: dlg
                     }
                 }
 
-                Item {
+                ScrollView {
+                    SplitView.preferredWidth: parent.width / 3
+                    ListView {
+                        model: artistModel
+                        delegate: dlg
+                    }
+                }
+
+                ScrollView {
+                    clip: true
+                    ListView {
+                        model: albumModel
+                        delegate: dlg
+                    }
+                }
+            }
+
+            ColumnLayout {
+                ToolBar {
+                    Layout.fillWidth: true
+
+                    RowLayout {
+                        ToolButton {
+                            icon.source: "images/delete-24px.svg"
+                            hoverEnabled: true
+                            ToolTip.text: qsTr("Remove selected playlist")
+                            ToolTip.visible: hovered
+                        }
+
+                        ToolButton {
+                            icon.source: "images/edit-24px.svg"
+                            hoverEnabled: true
+                            ToolTip.text: qsTr("Rename selected playlist")
+                            ToolTip.visible: hovered
+                        }
+
+                    }
+                }
+
+                ScrollView {
+                    clip: true
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
 
                     ListView {
                         model: playlistModel
                         delegate: dlg
-                        anchors.fill: parent
-
-                        header: ToolBar {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-
-                            RowLayout {
-                                ToolButton {
-                                    id: rmButton
-                                    icon.source: "images/delete-24px.svg"
-                                    hoverEnabled: true
-                                    ToolTip.text: qsTr("Remove selected playlist")
-                                    ToolTip.visible: hovered
-                                }
-
-                                ToolButton {
-                                    id: renameButton
-                                    icon.source: "images/edit-24px.svg"
-                                    hoverEnabled: true
-                                    ToolTip.text: qsTr("Rename selected playlist")
-                                    ToolTip.visible: hovered
-                                }
-                            }
-                        }
-
                     }
                 }
             }
+
         }
 
-        Item {
+        SplitView {
+            orientation: "Vertical"
+
             SplitView.preferredWidth: parent.width / 2
 
-            SplitView {
-                orientation: "Vertical"
-                anchors.fill: parent
-                Item {
-                    SplitView.preferredHeight: parent.height / 2
+
+            ColumnLayout {
+
+                SplitView.preferredHeight: parent.height / 2
+
+                ToolBar {
+                    Layout.fillWidth: true
+                    RowLayout {
+                        ToolButton {
+                            icon.source: "images/add-24px.svg"
+                            hoverEnabled: true
+                            ToolTip.text: qsTr("Adds the selected song to the playlist")
+                            ToolTip.visible: hovered
+                        }
+                    }
+                }
+
+                ScrollView {
+                    clip: true
+
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     ListView {
                         model: songModel
                         delegate: dlg
-                        anchors.fill: parent
-                        boundsBehavior: Flickable.StopAtBounds
-                        clip: true
-                        headerPositioning: ListView.OverlayHeader
+                    }
+                }
 
-                        header: ToolBar {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            z: 100
-                            RowLayout {
-                                ToolButton {
-                                    id: addButton
-                                    icon.source: "images/add-24px.svg"
-                                    hoverEnabled: true
-                                    ToolTip.text: qsTr("Adds the selected song to the playlist")
-                                    ToolTip.visible: hovered
-                                }
-                            }
+            }
+
+            ColumnLayout {
+                ToolBar {
+                    Layout.fillWidth: true
+
+                    RowLayout {
+                        ToolButton {
+                            icon.source: "images/save-24px.svg"
+                            hoverEnabled: true
+                            ToolTip.text: qsTr("Save queue")
+                            ToolTip.visible: hovered
+                        }
+                        ToolButton {
+                            icon.source: "images/shuffle-24px.svg"
+                            hoverEnabled: true
+                            ToolTip.text: qsTr("Shuffle queue")
+                            ToolTip.visible: hovered
+                        }
+                        ToolButton {
+                            icon.source: "images/clear-24px.svg"
+                            hoverEnabled: true
+                            ToolTip.text: qsTr("Clears the queue")
+                            ToolTip.visible: hovered
+                        }
+                        ToolButton {
+                            icon.source: "images/remove-24px.svg"
+                            hoverEnabled: true
+                            ToolTip.text: qsTr("Deletes the selected song from the playlist")
+                            ToolTip.visible: hovered
+                        }
+
+                        ToolButton {
+                            icon.source: "images/arrow_upward-24px.svg"
+                            hoverEnabled: true
+                            ToolTip.text: qsTr("Move the selected song up in the queue.")
+                            ToolTip.visible: hovered
+                        }
+                        ToolButton {
+                            icon.source: "images/arrow_downward-24px.svg"
+                            hoverEnabled: true
+                            ToolTip.text: qsTr("Move the selected song down in the down in the queue
+    .")
+                            ToolTip.visible: hovered
                         }
 
                     }
                 }
 
-                Item {
-                    SplitView.preferredHeight: parent.height / 2
+                ScrollView {
+                    clip: true
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
                     ListView {
                         model: queueModel
                         delegate: dlg
-                        anchors.fill: parent
-
-                        header: ToolBar {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            RowLayout {
-                                ToolButton {
-                                    id: saveButton
-                                    icon.source: "images/save-24px.svg"
-                                    hoverEnabled: true
-                                    ToolTip.text: qsTr("Save queue")
-                                    ToolTip.visible: hovered
-                                }
-                                ToolButton {
-                                    id: shuffleButton
-                                    icon.source: "images/shuffle-24px.svg"
-                                    hoverEnabled: true
-                                    ToolTip.text: qsTr("Shuffle queue")
-                                    ToolTip.visible: hovered
-                                }
-                                ToolButton {
-                                    id: clearButton
-                                    icon.source: "images/clear-24px.svg"
-                                    hoverEnabled: true
-                                    ToolTip.text: qsTr("Clears the queue")
-                                    ToolTip.visible: hovered
-                                }
-                                ToolButton {
-                                    id: removeButton
-                                    icon.source: "images/remove-24px.svg"
-                                    hoverEnabled: true
-                                    ToolTip.text: qsTr("Deletes the selected song from the playlist")
-                                    ToolTip.visible: hovered
-                                }
-
-                                ToolButton {
-                                    id: bubbleUpButton
-                                    icon.source: "images/arrow_upward-24px.svg"
-                                    hoverEnabled: true
-                                    ToolTip.text: qsTr("Move the selected song up in the queue.")
-                                    ToolTip.visible: hovered
-                                }
-                                ToolButton {
-                                    id: bubbleDownButton
-                                    icon.source: "images/arrow_downward-24px.svg"
-                                    hoverEnabled: true
-                                    ToolTip.text: qsTr("Move the selected song down in the down in the queue
-.")
-                                    ToolTip.visible: hovered
-                                }
-                            }
-                        }
                     }
                 }
             }
         }
-
     }
 }
 
