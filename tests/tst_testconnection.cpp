@@ -27,17 +27,17 @@ TestConnection::~TestConnection() {}
 
 void TestConnection::test_cannotConnect()
 {
+    Controller controller("localhost", 6600, 200);
     // Note: For this to work, mpd must not be running and "locahost"
     // (note deliberate typo) must not be resolvable.
-    auto controller = new Controller("locahost", 6600, 200);
-    QSignalSpy spy(controller, &Controller::errorMessage);
+    // auto controller = new Controller("locahost", 6600, 200);
+    QSignalSpy spy(&controller, &Controller::errorMessage);
     // controller->handleConnectClick();
 
-    controller->connectToMPD("locahost", 6600, 200);
+    controller.connectToMPD("locahost", 6600, 200);
     // On my Fedora 32 box, it takes around 7 seconds to time out.
     spy.wait(10000);
     QCOMPARE(spy.last()[0].value<QString>(), QString{"Host not found"});
-    delete controller;
 }
 
 void TestConnection::test_spinUpMPD()
