@@ -80,7 +80,7 @@ void TestController::test_theTest()
 
     playerSpy.wait();
 
-    controller.handleConnectClick();
+    controller.connectToMPD(m_mpdProcess->socketPath().toUtf8().constData(), 0, 1000);
     spy.wait();
     albums = controller.getAlbumList();
     QCOMPARE(albums[0], "Touhou Luna Nights - Original Soundtrack");
