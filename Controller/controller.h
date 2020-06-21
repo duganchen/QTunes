@@ -1,13 +1,11 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#if 0
-#include "mpdsignalcarrier.h"
-#endif
 #include "Controller_global.h"
 #include <mpd/client.h>
 #include <QObject>
 #include <QSocketNotifier>
+#include "itemmodelcontroller.h"
 
 class CONTROLLER_EXPORT Controller : public QObject
 {
@@ -26,6 +24,13 @@ public:
     QVector<QString> getAlbumList();
 
     QString host();
+
+    ItemModelController *tags() const;
+    ItemModelController *artists() const;
+    ItemModelController *albums() const;
+    ItemModelController *songs() const;
+    ItemModelController *playlists() const;
+    ItemModelController *queue() const;
 signals:
     void errorMessage(QString);
     void connectionState(Controller::ConnectionState connectionState);
@@ -49,10 +54,22 @@ private:
 
     mpd_connection *m_connection;
     QSocketNotifier *m_notifier;
+
+    // artist, albumartist, composer
+    ItemModelController *m_tags;
+
+    ItemModelController *m_artists;
+
+    ItemModelController *m_albums;
+
+    ItemModelController *m_songs;
+
+    // stored playlists
+    ItemModelController *m_playlists;
+
+    ItemModelController *m_queue;
+
 private slots:
-#if 0
-    void setMPD(MPDSignalCarrier *);
-#endif
     void handleActivation();
 };
 

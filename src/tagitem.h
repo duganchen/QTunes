@@ -1,16 +1,10 @@
-#ifndef TAGITEM_H
-#define TAGITEM_H
-
 #include "abstractitem.h"
 
-class TagItem : public AbstractItem
+TagItem::TagItem(const char *tag)
+    : m_tag(tag)
+{}
+
+const char *TagItem::data()
 {
-public:
-    TagItem(const char *);
-    const char *data() override;
-
-private:
-    const char *m_tag;
-};
-
-#endif // TAGITEM_H
+    return m_tag;
+}

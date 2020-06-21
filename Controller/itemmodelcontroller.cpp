@@ -20,11 +20,3 @@ ItemModelController::~ItemModelController()
 {
     qDeleteAll(items);
 }
-
-void ItemModelController::clear()
-{
-    beginRemoveRows(0, items.size() - 1);
-    qDeleteAll(items);
-    m_queue->items.clear();
-    m_queue->endRemoveRows();
-}

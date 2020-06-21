@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
                                            "Controller",
                                            "You can't create a Controller sorry");
 
+
     QVector<QString> artists {"artist 1", "artist 2", "artist 3"};
     PaneModel artistModel;
     artistModel.setList(artists);
