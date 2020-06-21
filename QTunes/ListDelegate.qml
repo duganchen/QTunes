@@ -6,7 +6,9 @@ Component {
         Text {
             text: value
         }
-        width: parent.width
+
+        // parent seems to be null once it's scrolled off.
+        width: parent ? parent.width : 0
 
         highlighted: ListView.isCurrentItem
 

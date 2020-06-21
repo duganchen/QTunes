@@ -292,10 +292,14 @@ ApplicationWindow {
                         model: songModel
                         delegate: dlg
                         anchors.fill: parent
+                        boundsBehavior: Flickable.StopAtBounds
+                        clip: true
+                        headerPositioning: ListView.OverlayHeader
 
                         header: ToolBar {
                             anchors.left: parent.left
                             anchors.right: parent.right
+                            z: 100
                             RowLayout {
                                 ToolButton {
                                     id: addButton
