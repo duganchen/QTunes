@@ -23,7 +23,11 @@ Controller::Controller(QObject *parent)
     m_albums = new ItemModelController(this);
     m_albums->items.push_back(new TagItem("An album"));
     m_songs = new ItemModelController(this);
-    m_songs->items.push_back(new TagItem("A song"));
+
+    for (int i = 0; i < 100; i++) {
+        QString label = "song %1";
+        m_songs->items.push_back(new TagItem(label.arg(i)));
+    }
     m_playlists = new ItemModelController(this);
     m_playlists->items.push_back(new TagItem("A stored playlist"));
 
