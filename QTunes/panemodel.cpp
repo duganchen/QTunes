@@ -1,8 +1,9 @@
 #include "panemodel.h"
 
-PaneModel::PaneModel(QObject *parent)
+PaneModel::PaneModel(ItemModelController *controller, QObject *parent)
     : QAbstractListModel(parent)
 {
+    m_controller = controller;
 }
 
 int PaneModel::rowCount(const QModelIndex &parent) const
@@ -12,7 +13,7 @@ int PaneModel::rowCount(const QModelIndex &parent) const
     if (parent.isValid())
         return 0;
 
-    return m_list.size();
+    return m_controller->items.size();
 }
 
 QVariant PaneModel::data(const QModelIndex &index, int role) const
@@ -24,25 +25,12 @@ QVariant PaneModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    if (m_list.size() - 1 < index.row())
+    if (m_controller->items.size() - 1 < index.row())
     {
         return QVariant();
     }
 
-    return m_list[index.row()];
-}
-
-
-
-QVector<QString> PaneModel::list() const
-{
-    return m_list;
-}
-
-
-void PaneModel::setList(QVector<QString> list)
-{
-    m_list = list;
+    return m_controller->items[index.row()]->data();
 }
 
 

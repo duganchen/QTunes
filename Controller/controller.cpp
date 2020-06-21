@@ -18,6 +18,9 @@ Controller::Controller(QObject *parent)
     m_tags->items.push_back(new TagItem("composer"));
 
     m_artists = new ItemModelController(this);
+
+    m_artists->items.push_back(new TagItem("an artist"));
+
     m_albums = new ItemModelController(this);
     m_songs = new ItemModelController(this);
     m_playlists = new ItemModelController(this);

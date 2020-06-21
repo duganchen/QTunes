@@ -16,25 +16,11 @@ int main(int argc, char *argv[])
 
     Controller controller;
 
-    QVector<QString> artists {"artist 1", "artist 2", "artist 3"};
-    PaneModel artistModel;
-    artistModel.setList(artists);
-
-    QVector<QString> albums {"album 1", "album 2", "album 3"};
-    PaneModel albumModel;
-    albumModel.setList(albums);
-
-    QVector<QString> songs {"song 1", "song 2", "song 3"};
-    PaneModel songModel;
-    songModel.setList(songs);
-
-    QVector<QString> playlists {"playlist 1", "playlist 2", "playlist 3"};
-    PaneModel playlistModel;
-    playlistModel.setList(playlists);
-
-    QVector<QString> queue {"queued song 1", "queued song 2", "queued song 3"};
-    PaneModel queueModel;
-    queueModel.setList(queue);
+    PaneModel artistModel(controller.artists());
+    PaneModel albumModel(controller.albums());
+    PaneModel songModel(controller.songs());
+    PaneModel playlistModel(controller.playlists());
+    PaneModel queueModel(controller.queue());
 
     // Create context property objects before the engine. See:
     // https://forum.qt.io/topic/110356/viewpiece-qml-105-typeerror-cannot-read-property-sessionname-of-null/7

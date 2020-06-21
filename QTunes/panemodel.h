@@ -2,32 +2,19 @@
 #define PANEMODEL_H
 
 #include <QAbstractListModel>
+#include "itemmodelcontroller.h"
 
 class PaneModel : public QAbstractListModel
 {
     Q_OBJECT
-
-    Q_PROPERTY(QVector<QString> items READ list WRITE setList NOTIFY listChanged)
-
 public:
-    explicit PaneModel(QObject *parent = nullptr);
-
-    // Basic functionality:
+    explicit PaneModel(ItemModelController *controller, QObject *parent = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-
-    QVector<QString> list() const;
-    void setList(QVector<QString>);
-
     virtual QHash<int, QByteArray> roleNames() const override;
 
-signals:
-    void listChanged();
-
 private:
-
-    QVector<QString> m_list;
+    ItemModelController *m_controller;
 };
 
 #endif // PANEMODEL_H
