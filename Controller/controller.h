@@ -23,7 +23,7 @@ public slots:
 public:
     QVector<QString> getAlbumList();
 
-    QString host();
+    QString defaultHost();
 
     ItemModelController *tags() const;
     ItemModelController *artists() const;
@@ -46,9 +46,9 @@ private:
     void handleIdle(mpd_idle);
     void createMPD(QString, int, int);
 
-    QString m_host;
-    unsigned m_port;
-    unsigned m_timeout_ms;
+    QString m_defaultHost;
+    unsigned m_defaultPort;
+    unsigned m_defaultTimeout;
 
     mpd_connection *m_connection;
     QSocketNotifier *m_notifier;

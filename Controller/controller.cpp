@@ -7,9 +7,9 @@
 
 Controller::Controller(QString host, unsigned port, unsigned timeout_ms, QObject *parent)
     : QObject(parent)
-    , m_host(host)
-    , m_port(port)
-    , m_timeout_ms(timeout_ms)
+    , m_defaultHost(host)
+    , m_defaultPort(port)
+    , m_defaultTimeout(timeout_ms)
     , m_connection(nullptr)
     , m_notifier(nullptr)
 {
@@ -106,9 +106,9 @@ QVector<QString> Controller::getAlbumList()
     return albums;
 }
 
-QString Controller::host()
+QString Controller::defaultHost()
 {
-    return m_host;
+    return m_defaultHost;
 }
 
 void Controller::handleIdle(mpd_idle idle)
