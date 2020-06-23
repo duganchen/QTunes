@@ -228,6 +228,7 @@ ApplicationWindow {
                             hoverEnabled: true
                             ToolTip.text: qsTr("Remove selected playlist")
                             ToolTip.visible: hovered
+                            enabled: playlistView.currentItem
                         }
 
                         TextField {
@@ -240,7 +241,16 @@ ApplicationWindow {
                             ToolTip.text: qsTr("Rename selected playlist")
                             ToolTip.visible: hovered
 
-                            enabled: playlistNewName.text
+                            enabled: playlistNewName.text && playlistView.currentItem
+                        }
+
+                        ToolButton {
+                            icon.source: "images/folder_open-24px.svg"
+                            hoverEnabled: true
+                            ToolTip.text: qsTr("Load selected playlist into queue")
+                            ToolTip.visible: hovered
+
+                            enabled: playlistView.currentItem
                         }
 
                     }
@@ -252,6 +262,7 @@ ApplicationWindow {
                     Layout.fillWidth: true
 
                     ListView {
+                        id: playlistView
                         model: playlistModel
                         delegate: dlg
                     }
@@ -278,6 +289,7 @@ ApplicationWindow {
                             hoverEnabled: true
                             ToolTip.text: qsTr("Adds the selected song to the playlist")
                             ToolTip.visible: hovered
+                            enabled: songView.currentItem
                         }
                     }
                 }
@@ -288,6 +300,7 @@ ApplicationWindow {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     ListView {
+                        id: songView
                         model: songModel
                         delegate: dlg
                     }
@@ -310,7 +323,7 @@ ApplicationWindow {
                             ToolTip.text: qsTr("Save queue")
                             ToolTip.visible: hovered
 
-                            enabled: playlistName.text
+                            enabled: playlistName.text && queueView.currentItem
                         }
                         ToolButton {
                             icon.source: "images/shuffle-24px.svg"
@@ -329,6 +342,7 @@ ApplicationWindow {
                             hoverEnabled: true
                             ToolTip.text: qsTr("Deletes the selected song from the playlist")
                             ToolTip.visible: hovered
+                            enabled: queueView.currentItem
                         }
 
                         ToolButton {
@@ -336,6 +350,7 @@ ApplicationWindow {
                             hoverEnabled: true
                             ToolTip.text: qsTr("Move the selected song up in the queue.")
                             ToolTip.visible: hovered
+                            enabled: queueView.currentItem && queueView.currentIndex > 0
                         }
                         ToolButton {
                             icon.source: "images/arrow_downward-24px.svg"
@@ -343,6 +358,7 @@ ApplicationWindow {
                             ToolTip.text: qsTr("Move the selected song down in the down in the queue
     .")
                             ToolTip.visible: hovered
+                            enabled: queueView.currentItem && queueView.currentIndex < queueModel.rowCount() - 1
                         }
 
                     }
@@ -354,6 +370,7 @@ ApplicationWindow {
                     Layout.fillHeight: true
 
                     ListView {
+                        id: queueView
                         model: queueModel
                         delegate: dlg
                     }

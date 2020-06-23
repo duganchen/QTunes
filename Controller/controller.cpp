@@ -30,6 +30,7 @@ Controller::Controller(QObject *parent)
     }
     m_playlists = new ItemModelController(this);
     m_playlists->items.push_back(new TagItem("A stored playlist"));
+    m_playlists->items.push_back(new TagItem("Another stored playlist"));
 
     m_queue = new ItemModelController(this);
     m_queue->items.push_back(new TagItem("A queued song"));
