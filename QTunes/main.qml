@@ -230,11 +230,17 @@ ApplicationWindow {
                             ToolTip.visible: hovered
                         }
 
+                        TextField {
+                            id: playlistNewName
+                        }
+
                         ToolButton {
                             icon.source: "images/edit-24px.svg"
                             hoverEnabled: true
                             ToolTip.text: qsTr("Rename selected playlist")
                             ToolTip.visible: hovered
+
+                            enabled: playlistNewName.text
                         }
 
                     }
@@ -294,11 +300,17 @@ ApplicationWindow {
                     Layout.fillWidth: true
 
                     RowLayout {
+                        TextField {
+                            id: playlistName
+                        }
+
                         ToolButton {
                             icon.source: "images/save-24px.svg"
                             hoverEnabled: true
                             ToolTip.text: qsTr("Save queue")
                             ToolTip.visible: hovered
+
+                            enabled: playlistName.text
                         }
                         ToolButton {
                             icon.source: "images/shuffle-24px.svg"
