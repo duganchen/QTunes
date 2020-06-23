@@ -192,20 +192,37 @@ ApplicationWindow {
                 SplitView.preferredHeight: parent.height / 2
                 orientation: "Horizontal"
 
-                ScrollView {
-                    clip: true
+                ColumnLayout {
                     SplitView.preferredWidth: parent.width / 3
-                    ListView {
-                        model: tagModel
-                        delegate: dlg
+
+                    ToolBar {
+                        Layout.fillWidth: true
+                    }
+                    ScrollView {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        clip: true
+
+                        ListView {
+                            model: tagModel
+                            delegate: dlg
+                        }
                     }
                 }
 
-                ScrollView {
+                ColumnLayout {
                     SplitView.preferredWidth: parent.width / 3
-                    ListView {
-                        model: artistModel
-                        delegate: dlg
+                    ToolBar {
+                        Layout.fillWidth: true
+                    }
+
+                    ScrollView {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        ListView {
+                            model: artistModel
+                            delegate: dlg
+                        }
                     }
                 }
 
