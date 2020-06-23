@@ -371,6 +371,9 @@ ApplicationWindow {
                             ToolTip.text: qsTr("Move the selected song up in the queue.")
                             ToolTip.visible: hovered
                             enabled: queueView.currentItem && queueView.currentIndex > 0
+                            onClicked: {
+                                queueView.decrementCurrentIndex()
+                            }
                         }
                         ToolButton {
                             icon.source: "images/arrow_downward-24px.svg"
@@ -379,6 +382,9 @@ ApplicationWindow {
     .")
                             ToolTip.visible: hovered
                             enabled: queueView.currentItem && queueView.currentIndex < queueModel.rowCount() - 1
+                            onClicked: {
+                                queueView.incrementCurrentIndex()
+                            }
                         }
 
                     }

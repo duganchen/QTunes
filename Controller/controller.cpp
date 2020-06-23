@@ -34,6 +34,7 @@ Controller::Controller(QObject *parent)
 
     m_queue = new ItemModelController(this);
     m_queue->items.push_back(new TagItem("A queued song"));
+    m_queue->items.push_back(new TagItem("Another queued song"));
 
     auto settings = mpd_settings_new(nullptr, 0, 0, nullptr, nullptr);
     m_defaultHost = mpd_settings_get_host(settings);
