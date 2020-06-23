@@ -7,16 +7,13 @@
         <file>images/stop-24px.svg</file>
         <file>images/pause-24px.svg</file>
         <file>images/save-24px.svg</file>
-        <file>images/delete-24px.svg</file>
         <file>images/shuffle-24px.svg</file>
         <file>images/clear-24px.svg</file>
         <file>images/add-24px.svg</file>
         <file>images/remove-24px.svg</file>
-        <file>images/edit-24px.svg</file>
         <file>ListDelegate.qml</file>
         <file>images/arrow_downward-24px.svg</file>
         <file>images/arrow_upward-24px.svg</file>
-        <file>images/folder_open-24px.svg</file>
         <file>images/playlist_add-24px.svg</file>
     </qresource>
 </RCC>
