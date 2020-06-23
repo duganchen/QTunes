@@ -23,21 +23,6 @@ ApplicationWindow {
             RowLayout {
                 Layout.fillWidth: true
                 ToolButton {
-                    icon.source: "images/menu-24px.svg"
-                    onClicked: {
-                        if (connectDrawer.visible) {
-                            connectDrawer.close()
-                        } else {
-                            connectDrawer.open()
-                        }
-                    }
-
-                    hoverEnabled: true
-                    ToolTip.text: qsTr("Connection settings")
-                    ToolTip.visible: hovered
-                }
-
-                ToolButton {
                     icon.source: "images/play_arrow-24px.svg"
                     hoverEnabled: true
                     ToolTip.text: qsTr("Play")
