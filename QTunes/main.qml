@@ -209,11 +209,29 @@ ApplicationWindow {
                     }
                 }
 
-                ScrollView {
-                    clip: true
-                    ListView {
-                        model: albumModel
-                        delegate: dlg
+                ColumnLayout {
+                    ToolBar {
+                        Layout.fillWidth: true
+                        RowLayout {
+                            ToolButton {
+                                icon.source: "images/playlist_add-24px.svg"
+                                hoverEnabled: true
+                                ToolTip.text: qsTr("Queue selected album")
+                                ToolTip.visible: hovered
+                                enabled: albumView.currentItem
+                            }
+                        }
+                    }
+
+                    ScrollView {
+                        clip: true
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        ListView {
+                            id: albumView
+                            model: albumModel
+                            delegate: dlg
+                        }
                     }
                 }
             }
